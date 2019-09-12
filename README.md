@@ -1,2 +1,1 @@
-# votacionUR
-Angular 8 
+# AngularVotacion
