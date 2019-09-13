@@ -3,24 +3,29 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './componentes/login/login.component';
+
+import { CoreModule } from './core/core.module';
 import { ConsejosComponent } from './componentes/consejos/consejos.component';
-import { FormulasConsejosComponent } from './componentes/formulas-consejos/formulas-consejos.component';
-import { RepresentantesConsejosComponent } from './componentes/representantes-consejos/representantes-consejos.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { HttpService } from './services/http.service';
+import { AuthService } from './services/auth.service';
+import { EstudianteService } from './services/estudiante.service';
+import { ConsejosService } from './services/consejos.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     ConsejosComponent,
-    FormulasConsejosComponent,
-    RepresentantesConsejosComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpService, AuthService, EstudianteService, ConsejosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
