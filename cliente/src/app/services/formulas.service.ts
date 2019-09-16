@@ -4,14 +4,22 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsejosService {
+export class FormulasService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI = 'http://localhost:3000/api/votaciones/Consejos/';
+  API_URI = 'http://localhost:3000/api/votaciones/Consejos/formulas/';
 
-  getConsejos() {
+  getFormulas() {
     return this.http.get(`${this.API_URI}`);
   }
-
+  
 }
+
+
+
+
+
+
+  
+

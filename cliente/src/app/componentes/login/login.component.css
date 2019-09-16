@@ -28,3 +28,9 @@
     color: white;
 }
 
+.bg {
+    background-image: url(../../../assets/imagenes/fondo-web.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
 //import { Subscription } from 'rxjs/Subscription';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { Router } from '@angular/router'
 
 import { AuthService } from '../../services/auth.service';
 import { EstudianteService } from '../../services/estudiante.service';
@@ -20,14 +21,15 @@ export class LoginComponent implements OnInit {
 
     titulo: string;
     session = false;
-    public ruta: string;
+    public pageName: string;
     public modToken: string;
 
     constructor(
         private authService: AuthService,
         private ref: ChangeDetectorRef,
         private http: HttpClient,
-        private estudianteService: EstudianteService
+        private estudianteService: EstudianteService,
+        private router: Router
         ) { 
         this.titulo = 'VOTACIONES';
         
@@ -104,11 +106,11 @@ export class LoginComponent implements OnInit {
                 
                     //If the user whant to go request's backned
                     if( type == "votacion" && res.token){
-                        
+                        this.pageName = 'consejo';
+                        this.router.navigate([`${this.pageName}`])
                                                 
                         localStorage.setItem('meToken',JSON.stringify(res.token));
                         
-                        this.ruta = '/Consejos';
                         this.infoEstudiante();
                     }
                     

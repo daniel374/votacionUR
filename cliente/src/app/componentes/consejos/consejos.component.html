@@ -1,1 +1,71 @@
-<p>consejos works!</p>
+<div class="conteiner-consejos">
+    <br>
+        <div class="image">
+            <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
+        </div>
+    <br>
+    <br>
+    <hr/>
+    <br>
+    <h3 class="titulo display-6">SELECCIONA EL CONSEJO PARA INICIAR LA VOTACIÓN</h3>
+        
+    <br>
+    <br>
+    
+    <div class="container">
+  
+    <!-- <h1>Radio Buttons as Cards</h1> -->
+                
+        <div class="row">
+                  
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let consejo of consejos">
+                      
+                <label>
+                    <input type="radio" name="product" class="card-input-element" />
+                    
+                
+                <div class="panel panel-default card-input">
+                    <div>
+                        <img src='{{consejo.VcFoto}}' class="card-img-top" alt="foto consejo">
+                    </div>
+                    <div class="panel-heading">Consejo Estudiantil</div>
+                <div class="panel-body">
+                    
+                    {{consejo.VcNombre}}
+                </div>
+                </div>
+              
+                    </label>
+                      
+                </div>
+                <!-- <div class="col-md-4 col-lg-4 col-sm-4">
+                      
+                    <label>
+                    <input type="radio" name="product" class="card-input-element" />
+              
+                    <div class="panel panel-default card-input">
+                    <div class="panel-heading">Consejo Estudiantil</div>
+                    <div class="panel-body">
+                        CIENCIA POLITICA Y GDU
+                    </div>
+                    </div>
+                    </label>
+                      
+                    </div> -->
+                    <!-- <div class="col-md-4 col-lg-4 col-sm-4">
+                      
+                    <label>
+                        <input type="radio" name="product" class="card-input-element" />
+              
+                        <div class="panel panel-default card-input">
+                        <div class="panel-heading">Consejo Estudiantil</div>
+                        <div class="panel-body">
+                            Matemáticas
+                        </div>
+                        </div>
+                    </label>
+                      
+                    </div> -->
+                </div>
+                
+            </div>

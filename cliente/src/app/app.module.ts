@@ -12,12 +12,18 @@ import { AuthService } from './services/auth.service';
 import { EstudianteService } from './services/estudiante.service';
 import { ConsejosService } from './services/consejos.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormulasConsejoComponent } from './componentes/formulas-consejo/formulas-consejo.component';
+import { RepresentantesConsejoComponent } from './componentes/representantes-consejo/representantes-consejo.component';
+import { RepresentantesService } from './services/representantes.service';
+import { FormulasService } from './services/formulas.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsejosComponent,
-    LoginComponent
+    LoginComponent,
+    FormulasConsejoComponent,
+    RepresentantesConsejoComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     CoreModule,
     HttpClientModule
   ],
-  providers: [HttpService, AuthService, EstudianteService, ConsejosService],
+  providers: [HttpService, AuthService, EstudianteService, ConsejosService, RepresentantesService, FormulasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

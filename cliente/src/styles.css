@@ -18,11 +18,6 @@ body, html {
     padding: 0;
 }
 
-.bg {
-    background-image: url(./assets/imagenes/fondo-web.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
