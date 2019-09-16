@@ -16,6 +16,7 @@ import { FormulasConsejoComponent } from './componentes/formulas-consejo/formula
 import { RepresentantesConsejoComponent } from './componentes/representantes-consejo/representantes-consejo.component';
 import { RepresentantesService } from './services/representantes.service';
 import { FormulasService } from './services/formulas.service';
+import { ResumenVotoComponent } from './componentes/resumen-voto/resumen-voto.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormulasService } from './services/formulas.service';
     ConsejosComponent,
     LoginComponent,
     FormulasConsejoComponent,
-    RepresentantesConsejoComponent
+    RepresentantesConsejoComponent,
+    ResumenVotoComponent
   ],
   imports: [
     BrowserModule,

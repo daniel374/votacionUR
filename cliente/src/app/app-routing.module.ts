@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'votacion/consejo', component: ConsejosComponent
   },
   {
-    path: 'votacion/formulas', component: FormulasConsejoComponent
+    path: 'votacion/formulas/:VcId', component: FormulasConsejoComponent
   },
   {
     path: 'votacion/representantes', component: RepresentantesConsejoComponent

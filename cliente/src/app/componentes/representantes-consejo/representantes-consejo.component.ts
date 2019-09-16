@@ -9,17 +9,20 @@ import { RepresentantesService } from '../../services/representantes.service';
 export class RepresentantesConsejoComponent implements OnInit {
 
   representantes: any = [];
-
+  repConsejo: string;
   constructor(private representantesService: RepresentantesService) { }
 
   ngOnInit() {
     this.representantesService.getRepresentantes().subscribe(
       res => {
-        this.representantes = res;
-        console.log(res);
+        console.log(res[0]['VcNombre']);
+        this.repConsejo = res[0]['VcNombre'];
+        this.representantes = res;        
       },
       err => console.error(err)
     );
   }
+
+  goToBackend(votacion:string){}
 
 }

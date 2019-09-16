@@ -9,8 +9,12 @@ import { ConsejosService } from '../../services/consejos.service';
 export class ConsejosComponent implements OnInit {
 
   consejos: any = [];
-
+  idConsejo: number;
   constructor(private consejosService: ConsejosService) { }
+
+  formulasConsejo(idConsejo){
+    console.log(idConsejo);
+  }
 
   ngOnInit() {
     this.consejosService.getConsejos().subscribe(

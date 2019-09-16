@@ -1,14 +1,35 @@
-.conteiner-consejos {
+.continuar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+.btn-outline-primary {
+    border: transparent;
+    background-color: #AB2328;
+    font-family: 'Nunito-Regular';
+    color: white;
+    margin-bottom: 40%;
+    border-radius: 8px;
+    max-width: 300px;    
+}
+
+.conteiner-represent {
     background-color: white;
-    height: 100%;
+    height: 55%;
     width: 100%;
 }
 
 .titulo {
     font-family: 'Nunito-Regular';
     color: #424242;
-    left: 5%;
-    position: absolute;
+    margin-left: 3%;
+}
+
+.subtitulo {
+    font-family: 'Nunito-Regular';
+    color: #424242;
+    margin-left: 3%;
 }
 
 hr {
@@ -27,11 +48,17 @@ body {
   background: #F0E5E1 ;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
+.row {
+  max-width: 950px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
+.dataRepre {
+    max-width: 200px;
+}
 
 /**
   Component
@@ -60,4 +87,9 @@ label {
 
 h4,h6 {
     color: #424242;
+}
+
+.card {
+   text-align: justifcy;
+   vertical-align: middle;
 }

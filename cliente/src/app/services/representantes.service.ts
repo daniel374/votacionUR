@@ -8,7 +8,7 @@ export class RepresentantesService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI = 'http://localhost:3000/api/votaciones/Consejos/formulas/';
+  API_URI = 'http://localhost:3000/api/votaciones/Consejos/Representantes/';
 
   getRepresentantes() {
     return this.http.get(`${this.API_URI}`);

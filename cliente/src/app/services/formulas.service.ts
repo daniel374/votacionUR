@@ -13,6 +13,10 @@ export class FormulasService {
   getFormulas() {
     return this.http.get(`${this.API_URI}`);
   }
+
+  getFormulasConse(id: number) {
+    return this.http.get(`${this.API_URI}${id}`);
+  }
   
 }
 

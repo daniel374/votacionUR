@@ -1,6 +1,6 @@
 .conteiner-consejos {
     background-color: white;
-    height: 100%;
+    height: 50%;
     width: 100%;
 }
 
@@ -27,7 +27,7 @@ body {
   background: #F0E5E1 ;
 }
 
-.container {
+.row {
   max-width: 900px;
   margin: 0 auto;
 }
