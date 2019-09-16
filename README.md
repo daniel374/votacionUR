@@ -4,3 +4,5 @@
 # tratamiento de la info.
 
 ## Posterior desarrollo del flujo consejo, formula consejo y representantes
+
+# componentes consejos, formulas y representantes, ajustanto frontend y Servicios web
