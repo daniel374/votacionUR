@@ -1,0 +1,11 @@
+{
+  "body-json": { 
+    "body": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wss=\"http://wsservicios.urosario.edu.co\"><soapenv:Header/><soapenv:Body><wss:getProgramas><wss:identification>1010202013</wss:identification></wss:getProgramas></soapenv:Body></soapenv:Envelope>"
+  },
+  "stage-variables": {
+    "url_WsRosario": "https://osb.urosario.edu.co:443/uxxi-URO/Uro_Bpm/Proxies/Uro_Bpm_Ps"
+  },
+  "context": {
+      "authorizer-principal-id": "ddddd"
+  }
+}
