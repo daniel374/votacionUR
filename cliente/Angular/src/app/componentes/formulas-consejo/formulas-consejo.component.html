@@ -1,0 +1,90 @@
+<div class="conteiner-formulas">
+    <br>
+    <div class="image" style="margin-left: 2%;">
+        <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
+    </div>
+    <hr/>
+    <br>
+    <h2 class="titulo display-6">Consejo Estudiantil</h2>
+    <h2 class="titulo display-6" style="color:#AB2328;">{{forConsejo}}</h2>
+    <br>
+    <h3 class="titulo display-6">SELECCIONA LA FÓRMULA PARA LA CUAL DESEAS VOTAR</h3>
+
+</div>
+      
+        <!-- <h1>Radio Buttons as Cards</h1> -->
+                    
+            <div class="row card-group">      
+                <div class="col-md-6 col-lg-6 col-sm-6" *ngFor="let formula of formulas">
+                          
+                    <label>
+                        <input type="radio" name="product" class="card-input-element" (click)="continuar(formula.Vfnombre_lista,formula.VfPresidenteFoto,
+                        formula.VfPresidenteNombre,formula.VfVicepresidenteFoto,formula.VfVicepresidenteNombre);"/>
+                        
+                    
+                    <div class="panel panel-default card-input">
+                        
+                       <!--  -->
+                       <div class="card">
+                            <div class="card-header" style="background: #e8e8e8; border: none;">
+                                <div id="conten-bloque-line-height" style="display: inline-block;">
+                                    <div><h4>{{formula.Vfnombre_lista}}</h4></div>
+                                    <div id="bloque-line-height" style="width: 10px; height: 10px; background: #AB2328; vertical-align: text-top;"></div>
+                                </div>
+                                
+                            </div>
+                            <div class="card-block" style="background: #e8e8e8; border: none;">
+                                <div class="row">
+                                    <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                            <img src='{{formula.VfPresidenteFoto}}' class="card-img-top" alt="foto Presidente">
+                                    </div>
+                                    <!--  -->
+                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                            <div class="text-xs-left" style="border: none;">
+                                                <h5 style="color: #AB2328; max-width: 250px;">{{formula.VfPresidenteNombre}}</h5>
+                                                <h6>Presidente</h6>
+                                                <h6>Semestre 7</h6>
+                                                <h6>Quimica</h6>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                </div>
+                            </div>
+                            <div class="card-block" style="background: #e8e8e8; border: none;">
+                                <div class="row">
+                                    <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                            <img src='{{formula.VfVicepresidenteFoto}}' class="card-img-top" alt="foto Presidente">
+                                    </div>
+                                    <!--  -->
+                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                            <div class="text-xs-left" style="border: none;">
+                                                <h5 style="color: #AB2328; max-width: 250px;">{{formula.VfVicepresidenteNombre}}</h5>
+                                                <h6>VicePresidente</h6>
+                                                <h6>Semestre 4</h6>
+                                                <h6>Biología</h6>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                </div>
+                            </div>    
+                            
+                        </div>
+                        
+                     
+                    </div>
+                  
+                        </label>
+                          
+                    </div>
+                    
+                    
+                    </div>
+                    <div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
+                        <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="iraRepresent('votacion');" 
+                        routerLink="representantes" routerLinkActive="router-link-active" [queryParams]="{vcId:vcId, noConsejo:noConsejo, dataFormula:dataFormu}" >
+                            <h1>Continuar</h1>
+                        </a>
+                    </div>
+                    

@@ -1,0 +1,95 @@
+.continuar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+.btn-outline-primary {
+    border: transparent;
+    background-color: #AB2328;
+    font-family: 'Nunito-Regular';
+    color: white;
+    margin-bottom: 40%;
+    border-radius: 8px;
+    max-width: 300px;    
+}
+
+.conteiner-represent {
+    background-color: white;
+    height: 55%;
+    width: 100%;
+}
+
+.titulo {
+    font-family: 'Nunito-Regular';
+    color: #424242;
+    margin-left: 3%;
+}
+
+.subtitulo {
+    font-family: 'Nunito-Regular';
+    color: #424242;
+    margin-left: 3%;
+}
+
+hr {
+    border-color: blue;
+    display: block;
+    margin-top: 2.5%;
+    border-style: inset;
+    border-width: 15px;
+}
+
+/**
+  Default Markup
+**/
+
+body {
+  background: #F0E5E1 ;
+}
+
+.row {
+  max-width: 950px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dataRepre {
+    max-width: 200px;
+}
+
+/**
+  Component
+**/
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+    box-shadow: 0 0 1px 1px #2ecc71;
+}
+
+h4,h6 {
+    color: #424242;
+}
+
+.card {
+   text-align: justifcy;
+   vertical-align: middle;
+}
