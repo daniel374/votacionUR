@@ -6,3 +6,4 @@
 ## Posterior desarrollo del flujo consejo, formula consejo y representantes
 
 # componentes consejos, formulas y representantes, ajustanto frontend y Servicios web
+- El proyecto clienteAWS2 cuenta con el consumo y adaptación a los servicios AWS
