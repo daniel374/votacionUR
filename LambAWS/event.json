@@ -1,0 +1,36 @@
+{
+    "body-json": {
+        "VresTipoDocumento": 1,
+        "VresNumDocumento": 1374,
+        "VesNombre": "daniel R Layton",
+        "VesEmail": "drodriguez@proximateapps.com",
+        "Consejos": {
+            "VcIdUno":1,
+            "VcIdDos":2
+        }
+    },
+    "stage-variables": {
+        "user_db": "casaur_dev",
+        "password_db": "ur0s4r1o_d3v_s3cur3",
+        "host_db": "publiccustomers.cdwhxo56hemz.us-east-1.rds.amazonaws.com",
+        "name_db": "casaur_development",
+
+        "enviroment_apns" : "dev",
+
+        "vot_consejo" : "vot_consejo",
+        "vot_estudiantes" : "vot_estudiantes",
+        "vot_log_votaciones" : "vot_log_votaciones",
+        "vot_periodo" : "vot_periodo",
+
+        "vot_resultados" : "vot_resultados",
+        
+
+        "Prox_keyAES": "0963da9e6a4b4319c71a145660a2287b",
+        "Prox_keyIV": "b72ce127917636f8",
+
+        "package": "com.proximate.casaur"
+    },
+    "context": {
+        "authorizer-principal-id": "hack"
+    }
+}

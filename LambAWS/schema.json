@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "properties": {
+        "id_section_app" : { "$ref": "#/definitions/is-number" },
+        "id_cap" : { "$ref": "#/definitions/is-number" },
+        "typeDocument": { "$ref": "#/definitions/is-number" },
+        "numberDocument": { "$ref": "#/definitions/non-empty-string" }
+  	}, 
+  	"required": ["id_section_app", "id_cap", "typeDocument", "numberDocument"],
+    "definitions": {
+        "non-empty-string": {
+            "type": "string",
+            "minLength": 1
+        },
+        "is-number": {
+            "type": "integer"
+        }
+    }
+}
