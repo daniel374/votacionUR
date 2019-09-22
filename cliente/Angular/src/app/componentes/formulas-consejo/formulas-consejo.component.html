@@ -1,9 +1,10 @@
+<app-navegacion></app-navegacion>
 <div class="conteiner-formulas">
-    <br>
+    <!-- <br>
     <div class="image" style="margin-left: 2%;">
         <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
     </div>
-    <hr/>
+    <hr/> -->
     <br>
     <h2 class="titulo display-6">Consejo Estudiantil</h2>
     <h2 class="titulo display-6" style="color:#AB2328;">{{forConsejo}}</h2>
@@ -83,7 +84,7 @@
                     </div>
                     <div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
                         <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="iraRepresent('votacion');" 
-                        routerLink="representantes" routerLinkActive="router-link-active" [queryParams]="{vcId:vcId, noConsejo:noConsejo, dataFormula:dataFormu}" >
+                        routerLink="representantes" routerLinkActive="router-link-active">
                             <h1>Continuar</h1>
                         </a>
                     </div>

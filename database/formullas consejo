@@ -1,0 +1,14 @@
+formullas consejo
+SELECT * FROM vot_formula_consejo left join vot_consejo on VfConsejo=VcId WHERE VfConsejo= ?
+
+lista representantes
+SELECT * FROM vot_representantes left join vot_plan on VrepPlan = VplId left join vot_consejo on VplConsejo = VcId
+
+lista representantes consejo
+SELECT * FROM vot_representantes left join vot_plan on VrepPlan = VplId WHERE VplConsejo = ?
+
+
+11:21:53	ALTER TABLE vot_log_votaciones ADD CONSTRAINT `fk_vot_log_votaciones_vot_estudiantes` FOREIGN KEY (VlgEstudiante) REFERENCES vot_estudiantes (VesId)  ON DELETE NO ACTION  ON UPDATE NO ACTION	Error Code: 1825. Failed to add the foreign key constraint on table 'vot_log_votaciones'. Incorrect options in FOREIGN KEY constraint 'casaur_development/fk_vot_log_votaciones_vot_estudiantes'	0.105 sec
+
+core.js:38789 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
+Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?

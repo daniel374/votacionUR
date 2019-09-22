@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RepresentantesService } from '../../services/representantes.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { DatosComponentService } from '../../services/datos-component.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-representantes-consejo',
@@ -24,54 +25,57 @@ export class RepresentantesConsejoComponent implements OnInit {
   repConsejo: string;
 
   public isButtonVisible: boolean;
-  constructor(private representantesService: RepresentantesService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private representantesService: RepresentantesService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private datosComponentService: DatosComponentService
+  ) { }
 
   ngOnInit() {
     /* trae los representantes del consejo */
-    this.route.queryParams.subscribe((p: ParamMap) => {
-      this.dataFormula = p['dataFormula'];//JSON.stringify(p);
-      console.log("data formula  "+this.dataFormula);
-      this.vcId = +p['vcId'] || 0;
-      this.nomFormula = this.dataFormula[0];
-      this.forPresiFoto = this.dataFormula[1];
-      this.nomforPresi = this.dataFormula[2];
-      this.forVipreFoto = this.dataFormula[3];
-      this.nomforVipre = this.dataFormula[4];
-      if(this.vcId !=0){
-        console.log(this.vcId);
+    
+    //console.log("datos res WS "+this.datosComponentService.resDatos);
 
-        console.log("nombre formula  "+this.nomFormula);
+    this.infoRepre();
+  }
+
+  infoRepre(){
+    
+      this.dataFormula = this.datosComponentService.resDatos[2];//JSON.stringify(p);
+      console.log("data formula  "+this.dataFormula);
+      this.vcId = this.datosComponentService.resDatos[0] || 0;
+      this.nomFormula = this.datosComponentService.resDatos[2];
+      this.forPresiFoto = this.datosComponentService.resDatos[3];
+      this.nomforPresi = this.datosComponentService.resDatos[4];
+      this.forVipreFoto = this.datosComponentService.resDatos[5];
+      this.nomforVipre = this.datosComponentService.resDatos[6];
+      if(this.vcId !=0){
+        //console.log(this.vcId);
+
+        /* console.log("nombre formula  "+this.nomFormula);
         console.log("foto presidente  "+this.forPresiFoto);
         console.log("nombre presidente  "+this.nomforPresi);
         console.log("foto vicepresidente  "+this.forVipreFoto);
-        console.log("nombre vicepresidente  "+this.nomforVipre);
-        
-        this.representantesService.getRepresentConse(this.vcId).subscribe(
+        console.log("nombre vicepresidente  "+this.nomforVipre); */
+        this.representantesService.representConse(this.vcId).subscribe(
           res => {
-            this.representantes = res;
-            console.log(res[0]['VcNombre']);
-            this.repConsejo = res[0]['VcNombre'];
-            if(this.repConsejo!=""){
-              this.repConsejo = res[0]['VcNombre'];
+            console.log("status del servicio: "+JSON.stringify(res.success));
+            console.log("data representantes servicio: "+JSON.stringify(res.data));
+            this.representantes = res.data;
+            console.log("representantes "+this.representantes)            
+            if(this.representantes!=''){
+              this.repConsejo = res.data[0]['VplNombre'];
+              console.log("repConsejo "+this.repConsejo);
             }else{
-              this.repConsejo = "";
+              this.repConsejo = this.datosComponentService.resDatos[1];
+              console.log(this.repConsejo);
             }
-            this.representantes = res; 
           },
           err => console.error(err)
-        );
-      }
-    });
-
-    /* trae todos los representantes */
-    /* this.representantesService.getRepresentantes().subscribe(
-      res => {
-        console.log(res[0]['VcNombre']);
-        this.repConsejo = res[0]['VcNombre'];
-        this.representantes = res;        
-      },
-      err => console.error(err)
-    ); */
+          );
+        }
+     
   }
 
   continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string){
@@ -83,14 +87,8 @@ export class RepresentantesConsejoComponent implements OnInit {
       semestRepre,
       planRepre,
     ]
-    //data formu para envio
-    this.dataFormula = [
-      this.nomFormula,
-      this.forPresiFoto,
-      this.nomforPresi,
-      this.forVipreFoto,
-      this.nomforVipre,
-    ]
+
+    this.datosComponentService.guarDatosRepre(this.dataRepre);
 
   }
 

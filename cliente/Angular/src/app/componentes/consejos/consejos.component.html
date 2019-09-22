@@ -1,10 +1,11 @@
+<app-navegacion></app-navegacion>
 <div class="conteiner-consejos">
-    <br>
+<!--     <br>
         <div class="image" style="margin-left: 2%;">
             <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
         </div>
-    <hr/>
-    <br>
+    <hr/> 
+    <br> -->
     <h3 class="titulo display-6">SELECCIONA EL CONSEJO PARA INICIAR LA VOTACIÓN</h3>
 </div>    
         
@@ -13,7 +14,7 @@
             <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let consejo of consejos">
                       
                 <label>
-                    <input type="radio" name="product" class="card-input-element" routerLink="formulas" [queryParams]="{vcId:consejo.VcId, noConsejo:consejo.VcNombre}"/>
+                    <input type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre)"/>
                     
                 
                 <div class="panel panel-default card-input">

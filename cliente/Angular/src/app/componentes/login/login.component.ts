@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 //import { Subscription } from 'rxjs/Subscription';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router'
@@ -161,5 +161,14 @@ export class LoginComponent implements OnInit {
             this.ref.detectChanges();
         }
     }
+    /* Data para validar desde el Frontend si es correcta se consume el servicio
+				tipoest,
+				bloqueado,
+				cerrado,
+				retirado
+				nombreFacultad para obtener el VcId'S de los consejos
+				programa, //es el codigo del programa
+				nombreprograma,
+				semestre, */
 
 }

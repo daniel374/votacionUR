@@ -19,6 +19,7 @@ import { RepresentantesService } from './services/representantes.service';
 import { FormulasService } from './services/formulas.service';
 import { ResumenVotoComponent } from './componentes/resumen-voto/resumen-voto.component';
 import { NavegacionComponent } from './componentes/navegacion/navegacion.component';
+import { DatosComponentService } from './services/datos-component.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,15 @@ import { NavegacionComponent } from './componentes/navegacion/navegacion.compone
     HttpClientModule,
     RouterModule
   ],
-  providers: [HttpService, AuthService, EstudianteService, ConsejosService, RepresentantesService, FormulasService],
+  providers: [
+    HttpService,
+    AuthService,
+    EstudianteService,
+    ConsejosService,
+    RepresentantesService,
+    FormulasService,
+    DatosComponentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

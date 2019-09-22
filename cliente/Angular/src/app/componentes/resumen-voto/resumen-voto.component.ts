@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { DatosComponentService } from '../../services/datos-component.service';
 
 @Component({
   selector: 'app-resumen-voto',
@@ -8,8 +9,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class ResumenVotoComponent implements OnInit {
 
+  vcId: any;
+
+  /* data formu y repre */
+  public dataForRepre: any;
   /* variables data formula */
-  public datosFormula: any;//array con data
+  //public datosFormula: any;//array con data formula
   public nomFormula: any;
   public forPresiFoto: any;
   public nomforPresi: any;
@@ -17,55 +22,64 @@ export class ResumenVotoComponent implements OnInit {
   public nomforVipre: any;
   
   /* variables data Representante */
+  /* **************************** */
+  
+  //public datosRepre: any;
   public repreFoto: any;
   public nomRepre: any;
   public semestRepre: any;
   public planRepre: any;
   /*  */
-  public datosRepre: any;
+  
 
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute,
+    private datosComponentService: DatosComponentService
+  ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((p: ParamMap) => {
-      console.log("data p  "+JSON.stringify(p));
+
+    console.log("datos res WS "+this.datosComponentService.resDatos);
+    this.resumenVoto();
+  }
+
+  resumenVoto(){
+    this.dataForRepre = this.datosComponentService.resDatos;
+      console.log("data formula y repre  "+this.dataForRepre);
       
-      this.datosFormula = p['datosFormu'];//JSON.stringify(p);
-      console.log("data formula  "+this.datosFormula);
-      
-      this.nomFormula = this.datosFormula[0];
-      this.forPresiFoto = this.datosFormula[1];
-      this.nomforPresi = this.datosFormula[2];
-      this.forVipreFoto = this.datosFormula[3];
-      this.nomforVipre = this.datosFormula[4];
+    this.vcId = this.dataForRepre[0] || 0;
+    this.nomFormula = this.dataForRepre[2];
+    this.forPresiFoto = this.dataForRepre[3];
+    this.nomforPresi = this.dataForRepre[4];
+    this.forVipreFoto = this.dataForRepre[5];
+    this.nomforVipre = this.dataForRepre[6];
       
 
-      console.log("nombre formula  "+this.nomFormula);
-      console.log("foto presidente  "+this.forPresiFoto);
-      console.log("nombre presidente  "+this.nomforPresi);
-      console.log("foto vicepresidente  "+this.forVipreFoto);
-      console.log("nombre vicepresidente  "+this.nomforVipre);
+    console.log("nombre formula  "+this.nomFormula);
+    console.log("foto presidente  "+this.forPresiFoto);
+    console.log("nombre presidente  "+this.nomforPresi);
+    console.log("foto vicepresidente  "+this.forVipreFoto);
+    console.log("nombre vicepresidente  "+this.nomforVipre);
         
-        /* datos Representante */
-      this.datosRepre = p['datosRepre'];
-      console.log("datos Representante  "+this.datosRepre);
+      /* datos Representante */
+/*     this.datosRepre = 
+    console.log("datos Representante  "+this.datosRepre); */
 
-      this.repreFoto = this.datosRepre[0];
-      this.nomRepre = this.datosRepre[1];
-      this.semestRepre = this.datosRepre[2];
-      this.planRepre = this.datosRepre[3];
+    this.repreFoto = this.dataForRepre[7];
+    this.nomRepre = this.dataForRepre[8];
+    this.semestRepre = this.dataForRepre[9];
+    this.planRepre = this.dataForRepre[10];
         
-      console.log("foto representante  "+this.repreFoto);
-      console.log("nombre representante  "+this.nomRepre);
-      console.log("semestre  "+this.semestRepre);
-      console.log("plan  "+this.planRepre);
-          
-    });
+    /* console.log("foto representante  "+this.repreFoto);
+    console.log("nombre representante  "+this.nomRepre);
+    console.log("semestre  "+this.semestRepre);
+    console.log("index plan  "+this.datosFormula.indexOf("SOCIOLOGÍA")); */
   }
 
   votar(){
-    
+  // disparar servicio votacion store  
   }
 
   borrar(votacion: string){

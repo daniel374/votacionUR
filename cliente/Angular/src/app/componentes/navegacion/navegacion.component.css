@@ -1,0 +1,7 @@
+hr {
+    border-color: blue;
+    display: block;
+    margin-top: 2.5%;
+    border-style: inset;
+    border-width: 15px;
+}
