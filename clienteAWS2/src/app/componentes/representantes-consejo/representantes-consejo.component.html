@@ -23,7 +23,7 @@
                           
                     <label>
                         <input type="radio" name="product" class="card-input-element" (click)="continuar(representante.VrepFoto,representante.VrepNombre,
-                        representante.VrepSemestre,representante.VplNombre);"/>
+                        representante.VrepSemestre,representante.VplNombre,representante.VrepId);" [value]="representante.VrepId"/>
                         
                     
                     <div class="panel panel-default card-input">
@@ -31,10 +31,13 @@
                     
                        <!--  -->
                        <div class="card">
+                           <div *ngIf="this.valuId === representante.VrepId">
+                           <img class="imagenX" src="../../../assets/imagenes/x.png" alt="imagen x">
+		                   </div>
                             <div class="card-header" style="background: #e8e8e8; border: none;">
                                 <div id="conten-bloque-line-height" style="display: inline-block;">
                                     
-                                    <div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>
+                                    <!--<div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>-->
                                 </div>
                                 
                             </div>

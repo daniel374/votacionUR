@@ -11,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class FormulasConsejoComponent implements OnInit {
 
+  
+  public valuId: number = 0;
   dataFormu: any;
   noFormu:any;
   /*  */
@@ -66,9 +68,14 @@ export class FormulasConsejoComponent implements OnInit {
   
   
   /* activada desde el buton del formulario y guarda la data */
-  continuar(noFormul: string,fPresiFoto: string,nomfPresi: string,fVicepreFoto: string,nomfVicepre: string){
+  continuar(noFormul: string,fPresiFoto: string,nomfPresi: string,fVicepreFoto: string,nomfVicepre: string,valId: number){
     this.isButtonVisible = true;
-    this.noFormu = noFormul;
+    
+  // Mostrar la x
+	this.valuId = valId;
+	console.log(' id formula ' + valId);
+	console.log(' id value ' + this.valuId);
+	
     
     this.dataFormu = [
       noFormul,

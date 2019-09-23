@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RepresentantesConsejoComponent implements OnInit {
 
+  public valuId: number = 0;
   vcId: any;
   /* data formula */
   public nomFormula: any;
@@ -78,8 +79,12 @@ export class RepresentantesConsejoComponent implements OnInit {
      
   }
 
-  continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string){
+  continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string,valId: number){
     this.isButtonVisible = true;
+	  
+	this.valuId = valId;
+	console.log(' id represen ' + valId);
+	console.log(' id value ' + this.valuId);
     //data repre para envio
     this.dataRepre = [
       repreFoto,

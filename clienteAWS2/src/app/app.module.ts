@@ -20,6 +20,7 @@ import { FormulasService } from './services/formulas.service';
 import { ResumenVotoComponent } from './componentes/resumen-voto/resumen-voto.component';
 import { NavegacionComponent } from './componentes/navegacion/navegacion.component';
 import { DatosComponentService } from './services/datos-component.service';
+import { IdVotoComponent } from './componentes/id-voto/id-voto.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DatosComponentService } from './services/datos-component.service';
     FormulasConsejoComponent,
     RepresentantesConsejoComponent,
     ResumenVotoComponent,
-    NavegacionComponent
+    NavegacionComponent,
+    IdVotoComponent
   ],
   imports: [
     BrowserModule,

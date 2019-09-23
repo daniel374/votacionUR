@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-//import { Subscription } from 'rxjs/Subscription';
+
+// import { Subscription } from 'rxjs/Subscription';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router'
 
@@ -30,13 +31,11 @@ export class LoginComponent implements OnInit {
         private http: HttpClient,
         private estudianteService: EstudianteService,
         private router: Router
-        ) { 
-        this.titulo = 'VOTACIONES';
-        
-    }
+        ) { this.titulo = 'VOTACIONES';
+        }
 
     ngOnInit() {
-        //Check if the session is still valid
+        // Check if the session is still valid
         this.checkSession()
     }
 
@@ -44,118 +43,115 @@ export class LoginComponent implements OnInit {
      * @param type Could be: requests or agendamate
      */
     goToBackend(type): void {
-        //if has session, only got to redirect
+        // if has session, only got to redirect
         if( this.authService.hasSessiontoken() ){
-            console.log("HAS SESSION STORED - Redirect To Backend");
+            console.log(' HAS SESSION STORED - Redirect To Backend');
             this.redirectToBackend(type);
-        }
-        //if hasnt, we must authenticate
-        else{
-            console.log("HASN'T SESSION");
+        } else {
+          // if hasnt, we must authenticate
+            console.log('HASN\'T SESSION');
             this.authService.login(() => {
-                console.log("NEW SESSION STORED - Redirect To Backend");
-                //After login, go to redirect
+                console.log('NEW SESSION STORED - Redirect To Backend');
+                // After login, go to redirect
                 this.redirectToBackend(type);
             });
         }
     }
 
     redirectToBackend(type): void {
-        console.log("[redirectToBackend]: "+type);
-        console.log("[redirectToBackend]: Get data info user");
-        //Getting info for the user... email
+        console.log('[redirectToBackend]: ' + type);
+        console.log('[redirectToBackend]: Get data info user');
+        // Getting info for the user... email
         this.authService.getMe((me) => {
-            console.log("[redirectToBackend] token is ok, getting token from Lambda");
+            console.log('[redirectToBackend] token is ok, getting token from Lambda');
             console.log(JSON.stringify(me));
             console.log(me.userPrincipalName);
-            localStorage.setItem('datosUsuario',JSON.stringify(me));
+            localStorage.setItem('datosUsuario', JSON.stringify(me));
 
             this.session = true;
             this.ref.detectChanges();
 
             this.getTokenAndRedirect(type, me.userPrincipalName);
-            
         }, () => {
             /**
              * If this fails the meaninig could be: invalid token, expired token, etc...
              * Because that, we must logout and re try login
              */
-            console.log("[redirectToBackend] token is wrong, hide button logout and logout api");
+            console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
             this.logout();
             this.goToBackend(type);
-        });    
+        });
     }
-    //consume servicio de proximate y retorna Token
+    // consume servicio de proximate y retorna Token
     getTokenAndRedirect(type, userPrincipalName): void {
-        let headers = new HttpHeaders().set('Content-Type','application/json');
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
         let respo: any;
-        console.log("userPrincipalName "+userPrincipalName);
-        console.log("this.authService.hasSessiontoken()");
+        console.log('userPrincipalName ' + userPrincipalName);
+        console.log('this.authService.hasSessiontoken()');
         console.log(this.authService.hasSessiontoken());
-        //Getting token from our backend, we secure this combine email and msal token. 'webadmin/authentication/tokensuniquesession' > "https://serveless.proximateapps-services.com.mx/CasaUR/DEV/webadmin/authentication/login"
+        // Getting token from our backend, we secure this combine email and msal token.
+        // 'webadmin/authentication/tokensuniquesession' >
+        // "https://serveless.proximateapps-services.com.mx/CasaUR/DEV/webadmin/authentication/login"
         respo = this.http.post<ResponseWs>(Configs.url + 'webadmin/authentication/login', {
-            correo: "proximateapps@gmail.com",
-            //email: "aoropeza@proximateapps.com",
-            contrasenia: "Proximate10"
+            correo: 'proximateapps@gmail.com',
+            // email: "aoropeza@proximateapps.com",
+            contrasenia: 'Proximate10'
         }, {headers: headers}).subscribe(
             res => {
-                console.log("res "+res);
-                console.log("res.token "+res.token);
-                
-                if(res.token){
-                
-                    //If the user whant to go request's backned
-                    if( type == "votacion" && res.token){
+                console.log('res ' + res);
+                console.log('res.token ' + res.token);
+
+                if (res.token) {
+
+                    // If the user whant to go request's backned
+                    if ( type === 'votacion' && res.token){
                         this.pageName = 'votacion/consejo';
                         this.router.navigate([`${this.pageName}`])
-                                                
-                        localStorage.setItem('meToken',JSON.stringify(res.token));
-                        
+
+                        localStorage.setItem('meToken', JSON.stringify(res.token));
+
                         this.infoEstudiante();
-                    }
-                    
-                    else{
-                        alert("Usuario no registrado");
+                    } else {
+                        alert('Usuario no registrado');
                     }
                 }
             },
             err => {
-                console.log("Error occured");
+                console.log('Error occured');
             }
         );
         return respo;
     }
 
-    //Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
-    infoEstudiante(){
-        this.estudianteService.dataEstudiante().subscribe(d=>{
-            console.log("status del servicio: "+JSON.stringify(d.statusCode));
-            console.log("data estudiante servicio: "+JSON.stringify(d.body));
+    // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
+    infoEstudiante() {
+        this.estudianteService.dataEstudiante().subscribe(d => {
+            console.log('status del servicio: ' + JSON.stringify(d.statusCode));
+            console.log('data estudiante servicio: ' + JSON.stringify(d.body));
             var parserXML = new DOMParser();
-            var xmlDocEs = parserXML.parseFromString(d.body,"text/xml");
-            console.log("xml info estudiante: "+xmlDocEs.getElementsByTagName("xsd:tipoest")[0].childNodes[0].nodeValue);
+            var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');
+            console.log('xml info estudiante: ' + xmlDocEs.getElementsByTagName('xsd:tipoest')[0].childNodes[0].nodeValue);
         });
     }
-    
+
 
     logout(): void {
-        //Call api msal
+        // Call api msal
         this.authService.logout()
-        //Change visual state
+        // Change visual state
         this.session = false;
         this.ref.detectChanges();
     }
 
     checkSession(): void {
         console.log("[checkSession]");
-        
-        //Change visual state, if has ó hasnt token
-        if( this.authService.hasSessiontoken() ){
+
+        // Change visual state, if has ó hasnt token
+        if ( this.authService.hasSessiontoken()) {
             console.log("[checkSession] has token, verify token wit http");
             this.session = true;
             this.ref.detectChanges();
-        }
-        else{
+        } else {
             console.log("[checkSession] hasnt token, hide button logout");
             this.session = false;
             this.ref.detectChanges();
