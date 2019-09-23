@@ -1,13 +1,16 @@
 {
     "body-json": {
         "VresTipoDocumento": 1,
-        "VresNumDocumento": 1374,
+        "VresNumDocumento": "1374",
         "VesNombre": "daniel R Layton",
         "VesEmail": "drodriguez@proximateapps.com",
-        "Consejos": {
-            "VcIdUno":1,
-            "VcIdDos":2
-        }
+        "infoPlanes":[{
+            "codigo":"NI02",
+            "semestre" : "10"
+        }, {
+            "codigo":"FC02",
+            "semestre" : "5"
+        }]
     },
     "stage-variables": {
         "user_db": "casaur_dev",
@@ -17,8 +20,10 @@
 
         "enviroment_apns" : "dev",
 
+        "vot_plan": "vot_plan",
         "vot_consejo" : "vot_consejo",
         "vot_estudiantes" : "vot_estudiantes",
+        "vot_estudiante_x_planes": "vot_estudiante_x_planes",
         "vot_log_votaciones" : "vot_log_votaciones",
         "vot_periodo" : "vot_periodo",
 

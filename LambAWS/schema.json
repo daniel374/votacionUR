@@ -1,13 +1,14 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$id": "http://example.com/schemas/user.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "id_section_app" : { "$ref": "#/definitions/is-number" },
-        "id_cap" : { "$ref": "#/definitions/is-number" },
-        "typeDocument": { "$ref": "#/definitions/is-number" },
-        "numberDocument": { "$ref": "#/definitions/non-empty-string" }
+        "VresTipoDocumento" : { "$ref": "#/definitions/is-number" },
+        "VresNumDocumento": { "$ref": "#/definitions/non-empty-string" },
+        "VesNombre": { "$ref": "#/definitions/non-empty-string" },
+        "VesEmail": { "$ref": "#/definitions/non-empty-string" }
   	}, 
-  	"required": ["id_section_app", "id_cap", "typeDocument", "numberDocument"],
+  	"required": ["VresTipoDocumento", "VresNumDocumento", "VesNombre", "VesEmail"],
     "definitions": {
         "non-empty-string": {
             "type": "string",
