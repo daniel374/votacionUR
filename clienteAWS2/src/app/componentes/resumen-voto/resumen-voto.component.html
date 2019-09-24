@@ -26,39 +26,87 @@
                         
                         <div class="panel panel-default card-input">
                             
-                        
-                           <!-- Representante -->
-                            <h2 class="formula display-6">REPRESENTANTE</h2>
+                            <!-- formula -->
+                            <h2 class="formula display-6">FÓRMULA</h2>
                             <br>
-                            <div class="card card-representante">
-                                <div class="card-header" style="background: #e8e8e8; border: none;">
-                                    <div id="conten-bloque-line-height" style="display: inline-block;">
-                                        
-                                        <div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="card-block" style="background: #e8e8e8; border: none;">
-                                    <div class="row">
-                                        <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
-                                                <img src='{{this.repreFoto}}' class="card-img-top" alt="foto Presidente">
+                            <div class="card card-formula">
+                                    <div class="card-header" style="background: #e8e8e8; border: none;">
+                                        <div id="conten-bloque-line-height" style="display: inline-block;">
+                                            <div><h4>{{this.nomFormula}}</h4></div>
+                                            <!-- <div id="bloque-line-height" style="width: 10px; height: 10px; background: #AB2328; vertical-align: text-top;"></div> -->
                                         </div>
                                         
-                                            <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
-                                                <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
-                                                    <br>
-                                                    <h5 style="color: #AB2328">{{this.nomRepre}}</h5>
-                                                    <h6>Semestre: {{this.semestRepre}}</h6>
-                                                    <h6>{{this.planRepre}}</h6>
+                                    </div>
+                                    <div class="card-block" style="background: #e8e8e8; border: none;">
+                                        <div class="row">
+                                            <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                                    <img src='{{this.forPresiFoto}}' class="card-img-top" alt="foto Presidente">
+                                            </div>
+                                            <!--  -->
+                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                                    <div class="text-xs-left" style="border: none;">
+                                                        <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforPresi}}</h5>
+                                                        <h6>Presidente</h6>
+                                                        <h6>Semestre 7</h6>
+                                                        <h6>Quimica</h6>
+                                                    </div>
+                                                    
                                                 </div>
                                                 
+                                        </div>
+                                    </div>
+                                    <div class="card-block" style="background: #e8e8e8; border: none;">
+                                        <div class="row">
+                                            <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                                    <img src='{{this.forVipreFoto}}' class="card-img-top" alt="foto Presidente">
+                                            </div>
+                                            <!--  -->
+                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                                    <div class="text-xs-left" style="border: none;">
+                                                        <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforVipre}}</h5>
+                                                        <h6>VicePresidente</h6>
+                                                        <h6>Semestre 4</h6>
+                                                        <h6>Biología</h6>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                        </div>
+                                    </div>    
+                                    
+                                </div>
+                           <!-- Representante -->
+                                <h2 class="formula display-6">REPRESENTANTE</h2>
+                                <br>
+                                <div class="card card-representante">
+                                    <div class="card-header" style="background: #e8e8e8; border: none;">
+                                        <!-- <div id="conten-bloque-line-height" style="display: inline-block;">
+                                            
+                                            <div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>
+                                        </div> -->
+                                        
+                                    </div>
+                                    <div class="card-block" style="background: #e8e8e8; border: none;">
+                                        <div class="row">
+                                            <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                                    <img src='{{this.repreFoto}}' class="card-img-top" alt="foto Presidente">
                                             </div>
                                             
+                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                                    <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
+                                                        <br>
+                                                        <h5 style="color: #AB2328">{{this.nomRepre}}</h5>
+                                                        <h6>Semestre: {{this.semestRepre}}</h6>
+                                                        <h6>{{this.planRepre}}</h6>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                        </div>
                                     </div>
+        
+                                    <!--/card-block-->
                                 </div>
-      
-                                <!--/card-block-->
-                            </div>
 
 
                             <!-- /2 columns card -->
@@ -68,65 +116,17 @@
                             </label>
                               
                         </div>
-                                                    <!-- formula -->
-                       <h2 class="formula display-6">FÓRMULA</h2>
-                       <br>
-                       <div class="card card-formula">
-                            <div class="card-header" style="background: #e8e8e8; border: none;">
-                                <div id="conten-bloque-line-height" style="display: inline-block;">
-                                    <div><h4>{{this.nomFormula}}</h4></div>
-                                    <div id="bloque-line-height" style="width: 10px; height: 10px; background: #AB2328; vertical-align: text-top;"></div>
-                                </div>
-                                
-                            </div>
-                            <div class="card-block" style="background: #e8e8e8; border: none;">
-                                <div class="row">
-                                    <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
-                                            <img src='{{this.forPresiFoto}}' class="card-img-top" alt="foto Presidente">
-                                    </div>
-                                    <!--  -->
-                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
-                                            <div class="text-xs-left" style="border: none;">
-                                                <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforPresi}}</h5>
-                                                <h6>Presidente</h6>
-                                                <h6>Semestre 7</h6>
-                                                <h6>Quimica</h6>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                </div>
-                            </div>
-                            <div class="card-block" style="background: #e8e8e8; border: none;">
-                                <div class="row">
-                                    <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
-                                            <img src='{{this.forVipreFoto}}' class="card-img-top" alt="foto Presidente">
-                                    </div>
-                                    <!--  -->
-                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
-                                            <div class="text-xs-left" style="border: none;">
-                                                <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforVipre}}</h5>
-                                                <h6>VicePresidente</h6>
-                                                <h6>Semestre 4</h6>
-                                                <h6>Biología</h6>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                </div>
-                            </div>    
-                            
-                        </div>
+                        
                         
                         </div>
                         <div class="continuar">
                             <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="borrar('votacion');" 
-                            routerLink="resumenVoto" routerLinkActive="router-link-active" style="margin-right: 2%;">
+                            routerLink="consejo" routerLinkActive="router-link-active" style="margin-right: 2%;">
                                 <h1>Borrar</h1>
                             </a>
                             <span> </span>
                             <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="votar();" 
-                            routerLink="resumenVoto" routerLinkActive="router-link-active" style="margin-left: 2%;">
+                            routerLink="idVoto" routerLinkActive="router-link-active" style="margin-left: 2%;">
                                 <h1>Votar</h1>
                             </a>
                         </div>

@@ -5,6 +5,7 @@ import { ConsejosComponent } from './componentes/consejos/consejos.component';
 import { FormulasConsejoComponent } from './componentes/formulas-consejo/formulas-consejo.component';
 import { RepresentantesConsejoComponent } from './componentes/representantes-consejo/representantes-consejo.component';
 import { ResumenVotoComponent } from './componentes/resumen-voto/resumen-voto.component';
+import { IdVotoComponent } from './componentes/id-voto/id-voto.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'votacion/consejo/formulas/representantes/resumenVoto', component: ResumenVotoComponent
+  },
+  {
+    path: 'votacion/consejo/formulas/representantes/resumenVoto/idVoto', component: IdVotoComponent
   }
 ];
 

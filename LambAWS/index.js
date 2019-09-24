@@ -133,7 +133,8 @@ exports.handler = function (event, context, callback) {
 							
 					// Consulta los consejos
 					//console.log("los consejos son: " + JSON.stringify(consejoEstudiante));
-
+					response.data = consejoEstudiante;
+					callback(null, encryptObjectIfNedd(event, response));
 				});
 			});
 			

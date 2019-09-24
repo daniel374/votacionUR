@@ -9,9 +9,6 @@ import { ResWsBD } from '../interfaces/ResWsBD';
 })
 export class FormulasService {
 
-  /* Servicios Backend Node.js */
-  API_URI = 'http://localhost:3000/api/votaciones/Consejos/formulas/';
-
   /* Servicos AWS */
   project: string = "casaur";
   enviroment: string = "dev";
@@ -19,15 +16,7 @@ export class FormulasService {
   
 
   constructor(private http: HttpClient) { }
-  /* Servicios Backend Node.js */
 
-  getFormulas() {
-    return this.http.get(`${this.API_URI}`);
-  }
-
-  getFormulasConse(id: number) {
-    return this.http.get(`${this.API_URI}${id}`);
-  }
   /* Servicos AWS */
   formulasConse(vcId: any){
     

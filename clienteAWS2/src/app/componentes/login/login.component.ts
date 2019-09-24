@@ -9,7 +9,8 @@ import { EstudianteService } from '../../services/estudiante.service';
 import { ResponseWs } from '../../interfaces/ResponseWs';
 import { ResWsEstud } from '../../interfaces/ResWsEstud';
 import { Configs } from '../../lib/config';
-
+import { NgxXml2jsonService } from 'ngx-xml2json';
+import { DatosComponentService } from '../../services/datos-component.service';
 
 
 
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
         private ref: ChangeDetectorRef,
         private http: HttpClient,
         private estudianteService: EstudianteService,
-        private router: Router
+        private router: Router,
+        private ngxXml2jsonService: NgxXml2jsonService,
+        private datosComponentService: DatosComponentService
         ) { this.titulo = 'VOTACIONES';
         }
 
@@ -71,7 +74,7 @@ export class LoginComponent implements OnInit {
             this.session = true;
             this.ref.detectChanges();
 
-            this.getTokenAndRedirect(type, me.userPrincipalName);
+            this.getTokenAndRedirect(type, me.displayName, me.userPrincipalName);
         }, () => {
             /**
              * If this fails the meaninig could be: invalid token, expired token, etc...
@@ -83,7 +86,7 @@ export class LoginComponent implements OnInit {
         });
     }
     // consume servicio de proximate y retorna Token
-    getTokenAndRedirect(type, userPrincipalName): void {
+    getTokenAndRedirect(type, displayName, userPrincipalName): void {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         let respo: any;
         console.log('userPrincipalName ' + userPrincipalName);
@@ -110,7 +113,7 @@ export class LoginComponent implements OnInit {
 
                         localStorage.setItem('meToken', JSON.stringify(res.token));
 
-                        this.infoEstudiante();
+                        this.infoEstudiante(1,123,displayName,userPrincipalName);
                     } else {
                         alert('Usuario no registrado');
                     }
@@ -124,14 +127,85 @@ export class LoginComponent implements OnInit {
     }
 
     // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
-    infoEstudiante() {
+    infoEstudiante(tpDoc: any, numDoc: any, esNom: any, email: any) {
+        var habilitado = true;
+        var infoPlanes: any;
+        var datEstudi = [];
+        var datosComponentService: DatosComponentService;
         this.estudianteService.dataEstudiante().subscribe(d => {
+            
             console.log('status del servicio: ' + JSON.stringify(d.statusCode));
             console.log('data estudiante servicio: ' + JSON.stringify(d.body));
             var parserXML = new DOMParser();
-            var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');
-            console.log('xml info estudiante: ' + xmlDocEs.getElementsByTagName('xsd:tipoest')[0].childNodes[0].nodeValue);
+            var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');            
+
+            /* ************* JSON ARRAY ************** */
+            var obj = this.ngxXml2jsonService.xmlToJson(xmlDocEs);
+            var objArray = obj['soapenv:Envelope']['S:Body']['wss:getProgramasResponse']['wss:return'];
+            console.log('Json DocEs ');
+            console.log(JSON.stringify(objArray));
+            console.log('longitud ');
+            console.log(objArray.length);
+
+            /* *************** Valida los Datos *************** */
+            objArray.forEach(function(elemt,ind) {
+                /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
+                var tipoest = xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
+                var bloqueado = xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
+                var cerrado = xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
+                var retirado = xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
+                var programa = xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
+                var semestre = xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
+                
+                console.log('tipoest del estudiante: ' + tipoest);
+                console.log('bloqueado del estudiante: ' + bloqueado);
+                console.log('cerrado del estudiante: ' + cerrado);
+                console.log('retirado del estudiante: ' + retirado);
+                console.log('programa del estudiante: ' + programa);
+                console.log('semestre del estudiante: ' + semestre);
+                if (tipoest === "PRE") {
+                    if (bloqueado === "N") {
+                        if (cerrado === "N") {
+                            if (retirado === "N") {
+                                habilitado = true;
+                            } else {
+                                habilitado = false;
+                            }
+                        } else {
+                            habilitado = false;
+                        }
+                    } else {
+                        habilitado = false;
+                    }
+                } else {
+                    habilitado = false;
+                }
+
+                if (habilitado == true) {
+                    console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+                } else {
+                    console.log('El Estudiante se encuentra Inhabilido para el programa ' + programa);
+                }
+                infoPlanes = `{
+                    "codigo":"NI02",
+                    "semestre" : "10"
+                    }, {
+                    "codigo":"FC02",
+                    "semestre" : "5"
+                    }`;
+                datEstudi = [
+                    tpDoc,
+                    numDoc,
+                    esNom,
+                    email,
+                    infoPlanes
+                ]
+                console.log("info service estudiante "+datEstudi);
+                this.datosComponentService.guarDatosEstudi(datEstudi);
+                
+            });
         });
+        
     }
 
 
