@@ -1,36 +1,23 @@
-// 1 validar campos del estudiante bloqueado, cerrado y retirado sean N pasar a frontend
-// 2 valida estado del estudiante, Frontend
-
 // 3 Servicio de consultar si el usuario existe en la base de datos: return
 // 4 Consulta log votos si el usuario ya voto: return respuesta la misma que el 7
-// 6 inserta ó modifica el Usuario Estudiante en la base de datos
+// 5 inserta ó modifica el Usuario Estudiante en la base de datos
+// 6 inserta plan x estudiante
 // 7 por ultimo dispara ó responde con el servicio de Consejos, 
 //   tambien puede redireccionarlo ó disparar este servicio hasta el pto 6 dentro del Componente Login
 
 		/* data retornada del servicio de UR
 			Data: {
-				
-
-				Data para validar desde el Frontend si es correcta se consume el servicio
-				tipoest,
-				bloqueado,
-				cerrado,
-				retirado
-				nombreFacultad para obtener el VcId'S de los consejos
-				programa, //es el codigo del programa
-				nombreprograma,
-				semestre,
 
 				/* para validar service 
 				documento,
 				tipoDocumento,
+				inserta plan x estudiante
+				consulta los consejos
 
 				datos sacados de login de Ofice365
 				VesNombre
 				VesEmail
 				
-				
-
 			}
 		*/
 
@@ -142,17 +129,11 @@ exports.handler = function (event, context, callback) {
 			// console.log("existe el usuario con C.C. " + existEstudiante);
 			guardaEstudiante(existEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(guardarEstudiante){
 				// console.log("guarda o actualiza el usuario " + guardarEstudiante);
-				consejosEstudi(guardarEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(consejoEstudiante){
+				consejosEstudi(existEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(consejoEstudiante){
 							
 					// Consulta los consejos
 					//console.log("los consejos son: " + JSON.stringify(consejoEstudiante));
-					/* var losConsejo = JSON.parse(JSON.stringify(consejoEstudiante));
-					var datoConsejos = jsonArrayQuery("VcId",losConsejo);
-					console.log("array consejos " + datoConsejos); */
-					/* guardPlanXEstud(guardarEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(planXEstud){
-						console.log("respuesta planXEstud " + planXEstud);
-					}); */
-					
+
 				});
 			});
 			
@@ -183,7 +164,7 @@ function guardaEstudiante(_existEstudiante, _objConexion, _response, _stageVars,
 		queryUpdate = mysql.format(queryUpdate, [_objectRequest.VresNumDocumento]);
 
 		execQuery(_objConexion, queryUpdate, _response, _event, _callbackKill,function(resultSet){
-			_callbackComplete(resultSet["affectedRows"]);
+			_callbackComplete(resultSet["insertId"]);
 		});
 	}else{
 		var queryInsert = "INSERT INTO "+_stageVars["vot_estudiantes"]+
@@ -196,9 +177,9 @@ function guardaEstudiante(_existEstudiante, _objConexion, _response, _stageVars,
 	}	
 	
 }
-// Consulta log votos si el usuario ya voto y
-// por ultimo dispara ó responde con el listado de Consejos:
-function consejosEstudi(_guardarEstudiante, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
+// ***************            Consulta log votos si el usuario ya voto y
+// ***************       por ultimo dispara ó responde con el listado de Consejos:
+function consejosEstudi(_existEstudiante, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
 	
 	var queryLogConse = "SELECT * FROM "+_stageVars["vot_log_votaciones"]+" logVo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId WHERE VresNumDocumento = ?";
 	queryLogConse = mysql.format(queryLogConse, [_objectRequest.VresNumDocumento]);
@@ -206,46 +187,51 @@ function consejosEstudi(_guardarEstudiante, _objConexion, _response, _stageVars,
 	execQuery(_objConexion, queryLogConse, _response, _event, _callbackKill,function(resultSet){
 		consejosLog = resultSet[0]["VlgFechaVotacion"];
 	});
-	console.log("fecha voto consejo " + consejosLog);
-	// function para recorrer el JSON-Array	
-	var codPlanes = jsonArrayQuery("codigo",_objectRequest["infoPlanes"]);
+	// console.log("fecha voto consejo " + consejosLog);
+	// function para recorrer el JSON-Array	con los datos de planes y semestre
+	var planesSemestre = jsonArrayQuery("codigo",_objectRequest["infoPlanes"]);
+	var codPlanes = planesSemestre[0];
+	var semesPlan = planesSemestre[1];
+/* 	console.log('Planes result ' + consejosLog);
+	console.log('Semestre result ' + consejosLog); */
 
-	if (_guardarEstudiante) {
-		var i;
-		var objetRequest = JSON.parse(JSON.stringify(_objectRequest['infoPlanes']));
-		console.log(" length planes " + objetRequest.length);
-		for (i = 0; i < objetRequest.length; i++){
+
+	if (_existEstudiante) {
+		
+		var idEstudiante = "SELECT VesId FROM " + _stageVars["vot_estudiantes"] + " WHERE VresNumDocumento = ? " ;
+		idEstudiante = mysql.format(idEstudiante, _existEstudiante);
+		execQuery(_objConexion, idEstudiante, _response, _event, _callbackKill,function(resultId){
+			var idEstu = resultId[0]["VesId"];
 			
-			var codPlanU = JSON.stringify(_objectRequest["infoPlanes"][i]["codigo"]);
-			var semesXPlan = JSON.stringify(_objectRequest["infoPlanes"][i]["semestre"]);
-			var queryIdPlan = "SELECT VplId FROM "+_stageVars["vot_plan"]+" WHERE VplCodigo = " + codPlanU + " ";
-			//queryIdPlan = mysql.format(queryIdPlan, codPlanU);
-			execQuery(_objConexion, queryIdPlan, _response, _event, _callbackKill,function(resultSet){
-				var resulIdPlan = resultSet[0]["VplId"];
-				/* console.log(' plan ' + codPlanU);
-				console.log('semestre ' + semesXPlan);
-				console.log('id plan ' + resulIdPlan); */
-				// console.log('consulta ' + queryIdPlan);
+			codPlanes.forEach(function(coplan){
 
-					// ****** Insert datos
-				if (resulIdPlan) {
-					var queryInsert = "INSERT INTO "+_stageVars["vot_estudiante_x_planes"]+
-					" (VepEstudiante,VepPlan,VepSemestre) VALUES (?,?," + semesXPlan + ") ";
-					var params = [_guardarEstudiante,resulIdPlan];
-					queryInsert = mysql.format(queryInsert, params);
-					// console.log('Insert de plan x estud ' + queryInsert);
-					execQuery(_objConexion, queryInsert, _response, _event, _callbackKill,function(resultSet){
-						// console.log(resultSet["insertId"]);
-					});
-				} else {
-					console.log('No existe plan ');
-				}
+				var queryIdPlan = "SELECT VplId FROM "+_stageVars["vot_plan"]+" WHERE VplCodigo = " + coplan + " ";
 				
-			
+				semesPlan.forEach(function(semPl){
+				
+				execQuery(_objConexion, queryIdPlan, _response, _event, _callbackKill,function(resSetPlan){
+					var resPlan = resSetPlan[0]["VplId"];
+					// console.log('Id del plan ' + resultSet[0]["VplId"]);
+				
+					// console.log('Id del plan ' + resPlan);
+						// ****** Insert datos
+					if (resPlan) {				
+						// console.log('semestre ' + semPl);
+						var queryInsert = "INSERT INTO "+_stageVars["vot_estudiante_x_planes"]+
+						" (VepEstudiante,VepPlan,VepSemestre) VALUES (?,?," + semPl + ") ";
+						var params = [idEstu,resPlan];
+						queryInsert = mysql.format(queryInsert, params);
+						// console.log('Insert de plan x estud ' + queryInsert);
+						execQuery(_objConexion, queryInsert, _response, _event, _callbackKill,function(resultSet){
+							// console.log(resultSet["insertId"]);
+						});
+					} else {
+						console.log('No existe plan ');
+					}
+				});
 			});
-			
-			
-		}
+		});
+	});
 
 		if (consejosLog) {
 			
@@ -269,32 +255,25 @@ function consejosEstudi(_guardarEstudiante, _objConexion, _response, _stageVars,
 	}
 
 }
-
-// recorre los Json array jsonArrayQuery(campo  a consultar, Json array]);
+// ***************************    recorre los Json array jsonArrayQuery(campo  a consultar, Json array]);
 function jsonArrayQuery(_campoArray, _jsonArray){
 	
-	var i = 0;
 	var objetRequest = JSON.parse(JSON.stringify(_jsonArray));
-	
-	var codPlanD = "";
-	// console.log("campos array " + _campoArray);
-	console.log("Json " + objetRequest);
+	var semesXPlan = [];
+	var codPlanU = [];
+	var lengPlanes = objetRequest.length;
 
-	for (i; i < objetRequest.length; i++){
-		
-		if (i == (objetRequest.length - 1)) {
-			var codPlanU = JSON.stringify(_jsonArray[i][_campoArray]) + ",";
-		} else {
-			var codPlanU = JSON.stringify(_jsonArray[i][_campoArray]);
-		}
-		var codPlanes = codPlanU.concat(codPlanD);
-		var codPlanD = codPlanes;	
-		console.log("Valor Array: " + codPlanU);	
-	}
-	console.log("array " + codPlanes);
-	// console.log("Objetos Request " + objetRequest.length);
-	return codPlanes;
+	_jsonArray.forEach(function(elem,index) {
+		codPlanU.push(JSON.stringify(_jsonArray[index][_campoArray]));
+		semesXPlan.push(JSON.stringify(_jsonArray[index]["semestre"]));	
+	})
+	
+/* 	console.log("Valor Array: " + codPlanU);
+	console.log("Valor Array semestre : " + semesXPlan);
+	console.log("Objetos Request " + lengPlanes); */
+	return [codPlanU, semesXPlan, lengPlanes];
 }
+
 // Conexion  y execQuery a BD
 function execQuery(_objConexion, _query, _response, _event, _callbackKill, _callbackComplete){
 	// console.log("====================== execQuery START ======================");
