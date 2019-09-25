@@ -17,10 +17,10 @@ export class ConsejosService {
   constructor(private http: HttpClient) { }
 
     /* Servicos AWS */
-    getConsejos(tpDoc: any, numDoc: any, esNom: any, email: any, infoPlanes: any){
+    getConsejos(tpDoc: number, numDoc: any, esNom: any, email: any, infoPlanes: any){
     
       let newToken = localStorage.getItem('newToken');
-      console.log("token new "+newToken);
+      console.log('token new ' + newToken);
       if (newToken === ''){
   
       }
@@ -29,18 +29,21 @@ export class ConsejosService {
         'Content-Type': 'application/json',
         'Authorization': newToken
       });
-      console.log("headers:");
+      console.log('headers:');
       console.log(headers);
-      
-      let xmlBody = {
-        "VresTipoDocumento": `${tpDoc}`,
-        "VresNumDocumento": `${numDoc}`,
-        "VesNombre": `${esNom}`,
-        "VesEmail": `${email}`,
-        "infoPlanes":[`${infoPlanes}`]
-    };
-      console.log("body serviceFormula: ");
-      
+
+	  console.log('el tipo id  ' + tpDoc);
+      console.log(typeof(tpDoc));
+      let xmlBody = new Object();
+	  xmlBody.VresTipoDocumento = tpDoc;
+	  xmlBody.VresNumDocumento = `${numDoc}`;
+	  xmlBody.VesNombre = esNom;
+	  xmlBody.VesEmail = email;
+	  xmlBody.infoPlanes = infoPlanes;
+        
+    
+      console.log('body service Lambda: ');
+      console.log(xmlBody);
       console.log(JSON.stringify(xmlBody));
       return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});
       

@@ -39,7 +39,7 @@ export class RegisVotoService {
         `${formu}`,
         `${repre}`
       ]};
-    console.log("body serviceFormula: ");
+    console.log("body service Registrar voto: ");
     
     console.log(JSON.stringify(xmlBody));
     return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});

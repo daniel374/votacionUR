@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
             this.session = true;
             this.ref.detectChanges();
 
-            this.getTokenAndRedirect(type, me.displayName, me.userPrincipalName);
+            this.getTokenAndRedirect(type, me.userPrincipalName);
         }, () => {
             /**
              * If this fails the meaninig could be: invalid token, expired token, etc...
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
         });
     }
     // consume servicio de proximate y retorna Token
-    getTokenAndRedirect(type, displayName, userPrincipalName): void {
+    getTokenAndRedirect(type, userPrincipalName): void {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         let respo: any;
         console.log('userPrincipalName ' + userPrincipalName);
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
 
                         localStorage.setItem('meToken', JSON.stringify(res.token));
 
-                        this.infoEstudiante(1,123,displayName,userPrincipalName);
+                        this.infoEstudiante();
                     } else {
                         alert('Usuario no registrado');
                     }
@@ -127,25 +127,26 @@ export class LoginComponent implements OnInit {
     }
 
     // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
-    infoEstudiante(tpDoc: any, numDoc: any, esNom: any, email: any) {
+    infoEstudiante() {
         var habilitado = true;
-        var infoPlanes: any;
+        var infoPlanes = new Object();
+		var arrayinfoPlanes = new Array();
         var datEstudi = [];
         var datosComponentService: DatosComponentService;
         this.estudianteService.dataEstudiante().subscribe(d => {
             
-            console.log('status del servicio: ' + JSON.stringify(d.statusCode));
-            console.log('data estudiante servicio: ' + JSON.stringify(d.body));
+        /*  console.log('status del servicio: ' + JSON.stringify(d.statusCode));
+            console.log('data estudiante servicio: ' + JSON.stringify(d.body)); */
             var parserXML = new DOMParser();
             var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');            
 
             /* ************* JSON ARRAY ************** */
             var obj = this.ngxXml2jsonService.xmlToJson(xmlDocEs);
             var objArray = obj['soapenv:Envelope']['S:Body']['wss:getProgramasResponse']['wss:return'];
-            console.log('Json DocEs ');
+         /* console.log('Json DocEs ');
             console.log(JSON.stringify(objArray));
             console.log('longitud ');
-            console.log(objArray.length);
+            console.log(objArray.length); */
 
             /* *************** Valida los Datos *************** */
             objArray.forEach(function(elemt,ind) {
@@ -181,27 +182,18 @@ export class LoginComponent implements OnInit {
                     habilitado = false;
                 }
 
-                if (habilitado == true) {
+                if (habilitado == false) { // Se debe cambiar a true
                     console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+					infoPlanes.codigo = programa;
+					infoPlanes.semestre = semestre;
+					
+					arrayinfoPlanes.push(infoPlanes);
+					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
+					
                 } else {
                     console.log('El Estudiante se encuentra Inhabilido para el programa ' + programa);
                 }
-                infoPlanes = `{
-                    "codigo":"NI02",
-                    "semestre" : "10"
-                    }, {
-                    "codigo":"FC02",
-                    "semestre" : "5"
-                    }`;
-                datEstudi = [
-                    tpDoc,
-                    numDoc,
-                    esNom,
-                    email,
-                    infoPlanes
-                ]
-                console.log("info service estudiante "+datEstudi);
-                this.datosComponentService.guarDatosEstudi(datEstudi);
+				console.log('La info de los planes del estudiante: ' + JSON.stringify(arrayinfoPlanes));
                 
             });
         });

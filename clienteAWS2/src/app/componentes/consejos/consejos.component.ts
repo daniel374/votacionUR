@@ -13,7 +13,7 @@ export class ConsejosComponent implements OnInit {
   idConsejo: number;
   /* variables data consejo */
   datConsejo: any = [];
-  
+  datosEstudi: any = [];
   tpDoc: any;
   numDoc: any;
   esNom: any;
@@ -31,24 +31,32 @@ export class ConsejosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.tpDoc = this.datosComponentService.resDatosEst;
-    console.log('datos del estudiante ' + this.tpDoc);
-    /* this.numDoc = String(this.datosComponentService.resDatosEst[1]);
-    this.esNom = String(this.datosComponentService.resDatosEst[2]);
-    this.email = String(this.datosComponentService.resDatosEst[3]);
-    this.infoPlanes = String(this.datosComponentService.resDatosEst[4]);
+    
+	this.datosEstudi = localStorage.getItem('datosUsuario');
+	this.datosEstudi = JSON.parse(this.datosEstudi);
+	console.log(this.datosEstudi);
+	console.log('data estudiante:   ');
+	console.log(JSON.stringify(this.datosEstudi));
+    this.tpDoc = 1;
+    // this.numDoc = this.datosEstudi['mobilePhone'];
+	this.numDoc = "1374"; // descomentar la linea de arriba para validacion
+    this.esNom = this.datosEstudi['displayName'];
+    this.email = this.datosEstudi['userPrincipalName'];
+    this.infoPlanes = localStorage.getItem('infoPlanes');
     console.log('tipo documento ' + this.tpDoc);
     console.log('num. documento ' + this.numDoc);
     console.log('nombre estudi. ' + this.esNom);
     console.log('email ' + this.email);
-    console.log('infoPlanes ' + this.infoPlanes); */
-/*     this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
+    console.log('infoPlanes ' + this.infoPlanes);
+    
+	this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
       res => {
         this.consejos = res;
+		console.log('El response del servicio lambda ');
         console.log(res);
       },
       err => console.error(err)
-    ); */
+    );
   }
 
   serGuarConsejo(vcId: number, noConsejo: any){
