@@ -16,7 +16,7 @@ export class RegisVotoService {
 
   constructor(private http: HttpClient) { }
 
-  regisVoto(numUser: any, formu: any, repre: any){
+  regisVoto(numUser: any, vcId: any, formu: any, repre: any){
     
     let newToken = localStorage.getItem('newToken');
     console.log("token new "+newToken);
@@ -35,7 +35,7 @@ export class RegisVotoService {
       "key" : "guardarVoto",
       "parameters" : [
         `${numUser}`,
-        1,
+        `${vcId}`,
         `${formu}`,
         `${repre}`
       ]};

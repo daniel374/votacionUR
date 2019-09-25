@@ -6,15 +6,8 @@ import { Injectable } from '@angular/core';
 export class DatosComponentService {
 
   public resDatos: any = [];
-  public resDatosEst: any = [];
   
   constructor() { }
-
-  guarDatosEstudi(datosEstudiante: any){
-    this.resDatosEst = this.resDatosEst.concat(datosEstudiante);
-    //console.log("res datos "+this.resDatos);
-    return this.resDatosEst;
-  }
 
   guarDatosConsejo(datosConsejo: any){
     this.resDatos = datosConsejo;

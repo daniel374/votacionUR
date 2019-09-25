@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DatosComponentService } from '../../services/datos-component.service';
+import { RegisVotoService } from '../../services/regis-voto.service';
 
 @Component({
   selector: 'app-resumen-voto',
@@ -20,6 +21,7 @@ export class ResumenVotoComponent implements OnInit {
   public nomforPresi: any;
   public forVipreFoto: any;
   public nomforVipre: any;
+  public idFormul: any;
   
   /* variables data Representante */
   /* **************************** */
@@ -29,25 +31,45 @@ export class ResumenVotoComponent implements OnInit {
   public nomRepre: any;
   public semestRepre: any;
   public planRepre: any;
+  public idRepre: any;
+  datosEstudi: any = [];
+  esNom: any;
+  numDoc: any;
   /*  */
-  
+  idVoto: any;
 
 
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
-    private datosComponentService: DatosComponentService
+    private datosComponentService: DatosComponentService,
+    private regisVotoService: RegisVotoService
   ) { }
 
   ngOnInit() {
 
     console.log("datos res WS "+this.datosComponentService.resDatos);
     this.resumenVoto();
+
+    this.datosEstudi = localStorage.getItem('datosUsuario');
+    this.datosEstudi = JSON.parse(this.datosEstudi);
+    this.esNom = this.datosEstudi['displayName'];
+    this.numDoc = this.datosEstudi['mobilePhone'];
+    /* servicio Guarda Voto */
+    this.regisVotoService.regisVoto(this.numDoc, this.vcId, this.idFormul, this.idRepre).subscribe(
+      res => {
+        this.idVoto = res.data;
+		    console.log('El response del servicio lambda ');
+        console.log(res.data);
+      },
+      err => console.error(err)
+    );
+    
   }
 
   resumenVoto(){
     this.dataForRepre = this.datosComponentService.resDatos;
-      console.log("data formula y repre  "+this.dataForRepre);
+      console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
       
     this.vcId = this.dataForRepre[0] || 0;
     this.nomFormula = this.dataForRepre[2];
@@ -55,6 +77,7 @@ export class ResumenVotoComponent implements OnInit {
     this.nomforPresi = this.dataForRepre[4];
     this.forVipreFoto = this.dataForRepre[5];
     this.nomforVipre = this.dataForRepre[6];
+    this.idFormul = this.dataForRepre[7];
       
 
     console.log("nombre formula  "+this.nomFormula);
@@ -62,20 +85,24 @@ export class ResumenVotoComponent implements OnInit {
     console.log("nombre presidente  "+this.nomforPresi);
     console.log("foto vicepresidente  "+this.forVipreFoto);
     console.log("nombre vicepresidente  "+this.nomforVipre);
+    console.log("id formula  "+this.idFormul);
         
-      /* datos Representante */
-/*     this.datosRepre = 
+    /* datos Representante */
+    /*     this.datosRepre = 
     console.log("datos Representante  "+this.datosRepre); */
 
-    this.repreFoto = this.dataForRepre[7];
-    this.nomRepre = this.dataForRepre[8];
-    this.semestRepre = this.dataForRepre[9];
-    this.planRepre = this.dataForRepre[10];
+    this.repreFoto = this.dataForRepre[8];
+    this.nomRepre = this.dataForRepre[9];
+    this.semestRepre = this.dataForRepre[10];
+    this.planRepre = this.dataForRepre[11];
+    this.idRepre = this.dataForRepre[12];
         
-    /* console.log("foto representante  "+this.repreFoto);
+    console.log("foto representante  "+this.repreFoto);
     console.log("nombre representante  "+this.nomRepre);
     console.log("semestre  "+this.semestRepre);
-    console.log("index plan  "+this.datosFormula.indexOf("SOCIOLOGÍA")); */
+    console.log("plan representante  "+this.planRepre);
+    console.log("id representante  "+this.idRepre);
+    console.log("index plan  "+this.dataForRepre.indexOf(this.planRepre));
   }
 
   votar(){

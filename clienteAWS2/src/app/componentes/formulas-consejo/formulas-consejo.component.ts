@@ -68,12 +68,12 @@ export class FormulasConsejoComponent implements OnInit {
   
   
   /* activada desde el buton del formulario y guarda la data */
-  continuar(noFormul: string,fPresiFoto: string,nomfPresi: string,fVicepreFoto: string,nomfVicepre: string,valId: number){
+  continuar(noFormul: string,fPresiFoto: string,nomfPresi: string,fVicepreFoto: string,nomfVicepre: string,VfId: number){
     this.isButtonVisible = true;
     
   // Mostrar la x
-	this.valuId = valId;
-	console.log(' id formula ' + valId);
+	this.valuId = VfId;
+	console.log(' id formula ' + VfId);
 	console.log(' id value ' + this.valuId);
 	
     
@@ -83,6 +83,7 @@ export class FormulasConsejoComponent implements OnInit {
       nomfPresi,
       fVicepreFoto,
       nomfVicepre,
+      VfId
     ]
     this.datosComponentService.guarDatosFormula(this.dataFormu);
   }

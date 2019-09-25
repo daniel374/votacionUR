@@ -1,3 +1,8 @@
+.card-img-top {
+  width: 250px;
+  height: 250px;
+}
+
 .conteiner-consejos {
     background-color: white;
     height: 50%;

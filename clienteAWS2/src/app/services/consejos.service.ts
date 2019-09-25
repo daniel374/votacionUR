@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable } from 'rxjs';
 
 import { ResWsBD } from '../interfaces/ResWsBD';
+import { bodyLbWs } from '../interfaces/bodyLbWs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,20 +33,26 @@ export class ConsejosService {
       console.log('headers:');
       console.log(headers);
 
-	  console.log('el tipo id  ' + tpDoc);
-      console.log(typeof(tpDoc));
-      let xmlBody = new Object();
-	  xmlBody.VresTipoDocumento = tpDoc;
-	  xmlBody.VresNumDocumento = `${numDoc}`;
-	  xmlBody.VesNombre = esNom;
-	  xmlBody.VesEmail = email;
-	  xmlBody.infoPlanes = infoPlanes;
+	    
+      let arrPlanes = JSON.parse(infoPlanes);
+      /* console.log('arrPlanes' + arrPlanes);
+      console.log(typeof(arrPlanes)); */
+      let xmlBody: bodyLbWs;
+      xmlBody = {
+          VresTipoDocumento: tpDoc,
+          VresNumDocumento: `${numDoc}`,
+          VesNombre: esNom,
+          VesEmail: email,
+          infoPlanes: arrPlanes,
+      }
+      let xmlBody2 = JSON.stringify(xmlBody);
+      
         
     
       console.log('body service Lambda: ');
       console.log(xmlBody);
-      console.log(JSON.stringify(xmlBody));
-      return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});
+      console.log(xmlBody2);
+      return this.http.post<ResWsBD>(this.Data_Est, xmlBody2, {headers: headers});
       
     }
 

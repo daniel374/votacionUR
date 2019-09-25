@@ -79,11 +79,11 @@ export class RepresentantesConsejoComponent implements OnInit {
      
   }
 
-  continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string,valId: number){
+  continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string,VrepId: number){
     this.isButtonVisible = true;
 	  
-	this.valuId = valId;
-	console.log(' id represen ' + valId);
+	this.valuId = VrepId;
+	console.log(' id represen ' + VrepId);
 	console.log(' id value ' + this.valuId);
     //data repre para envio
     this.dataRepre = [
@@ -91,6 +91,7 @@ export class RepresentantesConsejoComponent implements OnInit {
       nomRepre,
       semestRepre,
       planRepre,
+      VrepId
     ]
 
     this.datosComponentService.guarDatosRepre(this.dataRepre);

@@ -12,7 +12,7 @@ import { Configs } from '../../lib/config';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 import { DatosComponentService } from '../../services/datos-component.service';
 
-
+import { infoPlanesWs } from '../../interfaces/infoPlanesWs';
 
 @Component({
   selector: 'app-login',
@@ -129,10 +129,10 @@ export class LoginComponent implements OnInit {
     // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
     infoEstudiante() {
         var habilitado = true;
-        var infoPlanes = new Object();
-		var arrayinfoPlanes = new Array();
-        var datEstudi = [];
-        var datosComponentService: DatosComponentService;
+        var infoPlanes: infoPlanesWs;
+        // var infoPlanes = new Object();
+		var arrayinfoPlanes: any = [];
+        
         this.estudianteService.dataEstudiante().subscribe(d => {
             
         /*  console.log('status del servicio: ' + JSON.stringify(d.statusCode));
@@ -182,11 +182,14 @@ export class LoginComponent implements OnInit {
                     habilitado = false;
                 }
 
-                if (habilitado == false) { // Se debe cambiar a true
+                if (habilitado == true) { // Se debe cambiar a true
                     console.log('El Estudiante se encuentra habilido para el programa ' + programa);
-					infoPlanes.codigo = programa;
-					infoPlanes.semestre = semestre;
-					
+                    infoPlanes = {
+                        codigo: `${programa}`,
+					    semestre: `${semestre}`,
+                    }
+                    /* infoPlanes.codigo = programa;
+					infoPlanes.semestre = semestre; */
 					arrayinfoPlanes.push(infoPlanes);
 					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
 					
