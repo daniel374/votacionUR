@@ -1,17 +1,20 @@
 {
     "body-json": {
         "VresTipoDocumento": 1,
-        "VresNumDocumento": "1374",
-        "VesNombre": "daniel R Layton",
-        "VesEmail": "drodriguez@proximateapps.com",
-        "infoPlanes":[{
-            "codigo":"NI02",
-            "semestre" : "10"
-        }, {
-            "codigo":"FC02",
-            "semestre" : "5"
-        }]
-    },
+        "VresNumDocumento": "4317777",
+        "VesNombre": "Carlos dos",
+        "VesEmail": "carlos_@prueba12.co",
+        "infoPlanes": [
+          {
+            "codigo": "FC02",
+            "semestre": "9"
+          },
+          {
+            "codigo": "NI02",
+            "semestre": "10"
+          }
+        ]
+      },
     "stage-variables": {
         "user_db": "casaur_dev",
         "password_db": "ur0s4r1o_d3v_s3cur3",
