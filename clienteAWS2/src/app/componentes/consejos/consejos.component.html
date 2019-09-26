@@ -14,7 +14,7 @@
             <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let consejo of consejos">
                       
                 <label>
-                    <input type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre)"/>
+                    <input *ngIf="consejo.VlgFechaVotacion == null" type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre)"/>
                     
                 
                 <div class="panel panel-default card-input">
