@@ -3,8 +3,7 @@
     <!-- <br>
     <div class="image" style="margin-left: 2%;">
         <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
-    </div>
-    <hr/> -->
+    </div> --> 
     <br>
     <h2 class="titulo display-6">Consejo Estudiantil</h2>
     <h2 class="titulo display-6" style="color:#AB2328;">{{forConsejo}}</h2>
@@ -88,7 +87,7 @@
                     </div>
                     <div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
                         <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="iraRepresent('votacion');"
-                        routerLink="representantes" routerLinkActive="router-link-active">
+                        routerLink="representantes" routerLinkActive="router-link-active" style="border-radius:15px;">
                             <h1 style="color: white;">Continuar</h1>
                         </a>
                     </div>

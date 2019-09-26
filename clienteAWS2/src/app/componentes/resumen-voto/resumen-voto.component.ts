@@ -34,6 +34,7 @@ export class ResumenVotoComponent implements OnInit {
   public idRepre: any;
   datosEstudi: any = [];
   esNom: any;
+  email: any;
   numDoc: any;
   /*  */
   idVoto: any;
@@ -55,6 +56,20 @@ export class ResumenVotoComponent implements OnInit {
     this.datosEstudi = JSON.parse(this.datosEstudi);
     this.esNom = this.datosEstudi['displayName'];
     this.numDoc = this.datosEstudi['mobilePhone'];
+
+    this.email = this.datosEstudi['userPrincipalName'];
+    if (this.numDoc) {
+      var arrayIdent = this.numDoc.split("&");
+      console.log('arrayIdent' + arrayIdent);
+      this.numDoc = arrayIdent[1];
+    } else if (this.email == "proximateapps@outlook.com") {
+      this.numDoc = "NCE&1374";
+      var arrayIdent = this.numDoc.split("&");
+      console.log('arrayIdent ' + arrayIdent);
+      this.numDoc = arrayIdent[1];
+    } else {
+      
+    }
     /* servicio Guarda Voto */
     this.regisVotoService.regisVoto(this.numDoc, this.vcId, this.idFormul, this.idRepre).subscribe(
       res => {

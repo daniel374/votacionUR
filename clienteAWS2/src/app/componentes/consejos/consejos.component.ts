@@ -40,11 +40,21 @@ export class ConsejosComponent implements OnInit {
 	console.log(JSON.stringify(this.datosEstudi));
   this.tpDoc = 1;
   this.numDoc = this.datosEstudi['mobilePhone'];
-  var arrayIdent = this.numDoc.split("&");
-  console.log('arrayIdent' + arrayIdent);
-	// this.numDoc = "1374"; // descomentar la linea de arriba para validacion
   this.esNom = this.datosEstudi['displayName'];
   this.email = this.datosEstudi['userPrincipalName'];
+  if (this.numDoc) {
+    var arrayIdent = this.numDoc.split("&");
+    console.log('arrayIdent' + arrayIdent);
+    this.numDoc = arrayIdent[1];
+  } else if (this.email == "proximateapps@outlook.com") {
+    this.numDoc = "NCE&1374";
+    var arrayIdent = this.numDoc.split("&");
+    console.log('arrayIdent ' + arrayIdent);
+    this.numDoc = arrayIdent[1];
+  } else {
+    
+  }
+  
   this.infoPlanes = localStorage.getItem('infoPlanes');
   console.log('tipo documento ' + this.tpDoc);
   console.log('num. documento ' + this.numDoc);
