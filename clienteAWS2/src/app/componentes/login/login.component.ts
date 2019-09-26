@@ -182,7 +182,7 @@ export class LoginComponent implements OnInit {
                     habilitado = false;
                 }
 
-                if (habilitado == true) { // Se debe cambiar a true
+                if (habilitado == false) { // Se debe cambiar a true
                     console.log('El Estudiante se encuentra habilido para el programa ' + programa);
                     infoPlanes = {
                         codigo: `${programa}`,

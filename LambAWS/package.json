@@ -5,6 +5,7 @@
   "private": "true",
   "dependencies": {
     "mysql": "^2.17.1",
+    "ajv": "6.10.2",
     "mysql-qb": "0.7.*",
     "request": "2.81.*",
     "xml2js": "0.4.*"

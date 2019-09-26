@@ -40,6 +40,8 @@ export class ConsejosComponent implements OnInit {
 	console.log(JSON.stringify(this.datosEstudi));
   this.tpDoc = 1;
   this.numDoc = this.datosEstudi['mobilePhone'];
+  var arrayIdent = this.numDoc.split("&");
+  console.log('arrayIdent' + arrayIdent);
 	// this.numDoc = "1374"; // descomentar la linea de arriba para validacion
   this.esNom = this.datosEstudi['displayName'];
   this.email = this.datosEstudi['userPrincipalName'];

@@ -231,17 +231,19 @@ function estudXPlanes(_existEstudiante, _objConexion, _response, _stageVars, _ev
 			
 			codPlanes.forEach(function(coplan){
 
-				var queryIdPlan = "SELECT VplId FROM "+_stageVars["vot_plan"]+" WHERE VplCodigo = " + coplan + " ";
+				var queryIdPlan = "SELECT VplId FROM "+_stageVars["vot_plan"] + " WHERE VplCodigo = " + coplan + " ";
 				
 				semesPlan.forEach(function(semPl){
 				
 				execQuery(_objConexion, queryIdPlan, _response, _event, _callbackKill,function(resSetPlan){
 					var resPlan = resSetPlan[0]["VplId"];
 					// console.log('Id del plan ' + resSetPlan[0]["VplId"]);
-				
 					// console.log('Id del plan ' + resPlan);
+					var selecPlanXEstu = "SELECT * FROM " + _stageVars["vot_estudiante_x_planes"] + " WHERE VepPlan = " + resPlan + " AND VepEstudiante = " + idEstu + " ";
+					execQuery(_objConexion, selecPlanXEstu, _response, _event, _callbackKill,function(resPlanXEst){
+						//console.log('plan X est ' + resPlanXEst);
 						// ****** Insert datos
-					if (resPlan) {				
+					if (resPlanXEst == "") {				
 						// console.log('semestre ' + semPl);
 						var queryInsert = "INSERT INTO "+_stageVars["vot_estudiante_x_planes"]+
 						" (VepEstudiante,VepPlan,VepSemestre) VALUES (?,?," + semPl + ") ";
@@ -253,11 +255,13 @@ function estudXPlanes(_existEstudiante, _objConexion, _response, _stageVars, _ev
 							_callbackComplete();
 						});
 					} else {
-						_response.success = false;
+						/* _response.success = false;
                         _response.error = true;
                         _response.message = "No se encuentra Planes";
-                        _callbackKill(null, encryptObjectIfNedd(_event, _response));
+						_callbackKill(null, encryptObjectIfNedd(_event, _response)); */
+						_callbackComplete();
 					}
+				});
 				});
 			});
 		});
