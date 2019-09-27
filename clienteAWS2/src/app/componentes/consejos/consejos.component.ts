@@ -72,10 +72,11 @@ export class ConsejosComponent implements OnInit {
     );
   }
 
-  serGuarConsejo(vcId: number, noConsejo: any){
+  serGuarConsejo(vcId: number, noConsejo: any, nomPlan: any){
     this.datConsejo = [
       vcId,
-      noConsejo
+      noConsejo,
+      nomPlan
     ]
     console.log("info service consejo "+this.datConsejo);
     this.datosComponentService.guarDatosConsejo(this.datConsejo);

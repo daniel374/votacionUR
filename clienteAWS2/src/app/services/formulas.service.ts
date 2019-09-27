@@ -18,7 +18,7 @@ export class FormulasService {
   constructor(private http: HttpClient) { }
 
   /* Servicos AWS */
-  formulasConse(vcId: any){
+  formulasConse(vcId: any,vfSemestre: any){
     
     let newToken = localStorage.getItem('newToken');
     console.log("token new "+newToken);
@@ -47,6 +47,10 @@ export class FormulasService {
         {
           "type" : "where",
           "conditions" : {"VfConsejo" : `${vcId}`}
+        },
+        {
+          "type" : "where",
+          "conditions" : {"VfSemestre" : `${vfSemestre}`}
         }
       ]};
     console.log("body serviceFormula: ");
