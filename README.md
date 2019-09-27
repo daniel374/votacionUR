@@ -9,3 +9,4 @@
 - El proyecto clienteAWS2 cuenta con el consumo y adaptación a los servicios AWS
 
 - Servicio Lambda para validaciones iniciales y response con la lista de Consejos correspondiente
+-Ajuste frontend y Modal de cierre de flujo de votación
