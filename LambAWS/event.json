@@ -1,18 +1,14 @@
 {
     "body-json": {
-        "VresTipoDocumento": 1,
-        "VresNumDocumento": "33333",
-        "VesNombre": "Jessica ",
-        "VesEmail": "carlos_@prueba19.co",
-        "infoPlanes": [
-          {
-            "codigo": "FC02",
-            "semestre": "9"
-          },
-          {
-            "codigo": "NI02",
-            "semestre": "10"
-          }
+      "VresTipoDocumento":1,
+      "VresNumDocumento":"1098627035",
+      "VesNombre":"Silvia Juliana Olarte camargo",
+      "VesEmail":"silvia.olarte@lab.urosario.edu.co",
+      "infoPlanes":[
+        {"codigo":"FC02",
+          "semestre":"9"},
+        {"codigo":"NI02",
+        "semestre":"10"}
         ]
       },
     "stage-variables": {

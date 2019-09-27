@@ -279,9 +279,10 @@ function consejosEstudi(_logVoto, _objConexion, _response, _stageVars, _event, _
 
 	if (_logVoto[0]) {
 			
-		var queryCheck = "SELECT conse.VcNombre, conse.VcId, conse.VcFoto, logVo.VlgFechaVotacion FROM "+_stageVars["vot_consejo"]+" conse LEFT JOIN "+_stageVars["vot_log_votaciones"]+" logVo ON conse.VcId = logVo.VlgConsejo LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId WHERE VplCodigo IN (" + codPlanes + ") ";
+		var queryCheck = "SELECT conse.VcNombre, conse.VcId, conse.VcFoto, logVo.VlgFechaVotacion FROM "+_stageVars["vot_consejo"]+" conse LEFT JOIN "+_stageVars["vot_log_votaciones"]+" logVo ON conse.VcId = logVo.VlgConsejo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId WHERE VresNumDocumento = ? ";
+		
+		queryCheck = mysql.format(queryCheck, [_objectRequest.VresNumDocumento]);
 		// console.log("Consejos del estudiante: " + queryCheck);
-	
 		execQuery(_objConexion, queryCheck, _response, _event, _callbackKill,function(resultSet){
 			_callbackComplete(resultSet);
 		});
