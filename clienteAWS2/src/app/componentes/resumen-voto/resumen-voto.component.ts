@@ -4,6 +4,7 @@ import { DatosComponentService } from '../../services/datos-component.service';
 import { RegisVotoService } from '../../services/regis-voto.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-resumen-voto',
   templateUrl: './resumen-voto.component.html',

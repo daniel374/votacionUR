@@ -21,6 +21,7 @@ import { ResumenVotoComponent } from './componentes/resumen-voto/resumen-voto.co
 import { NavegacionComponent } from './componentes/navegacion/navegacion.component';
 import { DatosComponentService } from './services/datos-component.service';
 import { IdVotoComponent } from './componentes/id-voto/id-voto.component';
+import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,10 @@ import { IdVotoComponent } from './componentes/id-voto/id-voto.component';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+	NgbModule,
+	NgbPaginationModule,
+	NgbAlertModule
   ],
   providers: [
     HttpService,

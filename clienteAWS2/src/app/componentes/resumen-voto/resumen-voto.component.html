@@ -137,13 +137,30 @@
 
 <ng-template #votoModal>
     <div class="modal-header">
-        <h4 class="modal-title">titulo</h4>
-    </div>
-    <div class="modal-body">
-        <div>dato1</div>
-        <div>dato2</div>
-    </div>
-    <div class="modal-footer">
+         <img class="logo" src="../../../assets/imagenes/logo.png" alt="logo imagen">
 
+    </div>
+    <div id="bloque-line-height" style="width: 50px; height: 20px;">
+   
+    </div>
+    
+    <div class="modal-body">
+       <div class="container-fluid">
+         <div class="row">
+			 <div class="col-md-3"></div>
+            <div class="col-md-6">
+            <h6 class="modh5">Hemos recibido tu voto.</h6>
+            <h6 class="modh5">El ID de tu transacción</h6>
+            <h6 class="modh5">es #</h6>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal-footer continuar">
+         <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" 
+            routerLinkActive="router-link-active" style="border-radius:15px;">
+           <h1 style="color: white; font-size: 12px;">Continuar</h1>
+       </a>
     </div>
 </ng-template>
