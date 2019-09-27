@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { RegisVotoService } from '../../services/regis-voto.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-resumen-voto',
@@ -44,7 +45,8 @@ export class ResumenVotoComponent implements OnInit {
     private router: Router, 
     private route: ActivatedRoute,
     private datosComponentService: DatosComponentService,
-    private regisVotoService: RegisVotoService
+    private regisVotoService: RegisVotoService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -120,8 +122,8 @@ export class ResumenVotoComponent implements OnInit {
     console.log("index plan  "+this.dataForRepre.indexOf(this.planRepre));
   }
 
-  votar(){
-    
+  votar(modal){
+    this.modalService.open(modal);
   }
 
   borrar(votacion: string){

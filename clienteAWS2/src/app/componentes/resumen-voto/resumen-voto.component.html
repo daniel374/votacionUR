@@ -129,8 +129,21 @@
                                 <h1 style="color: white;">Borrar</h1>
                             </a>
                             <span> </span>
-                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="votar();" 
+                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="votar(votoModal);" 
                              routerLinkActive="router-link-active" style="margin-left: 2%; border-radius:15px;">
                                 <h1 style="color: white;">Votar</h1>
                             </a>
                         </div>
+
+<ng-template #votoModal>
+    <div class="modal-header">
+        <h4 class="modal-title">titulo</h4>
+    </div>
+    <div class="modal-body">
+        <div>dato1</div>
+        <div>dato2</div>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</ng-template>
