@@ -129,19 +129,15 @@ exports.handler = function (event, context, callback) {
 			// console.log("existe el usuario con C.C. " + existEstudiante);
 			guardaEstudiante(existEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(guardarEstudiante){
 				// console.log("guarda o actualiza el usuario " + guardarEstudiante);
-				logVotoConsejo(objConexion, response, event["stage-variables"], event, objectRequest, callback, function(logVoto){
-
-					consejosEstudi(logVoto, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(consejoEstudiante){
+				consejosEstudi(objConexion, response, event["stage-variables"], event, objectRequest, callback, function(consejoEstudiante){
 						
-						estudXPlanes(existEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(estudXPlan){
+					estudXPlanes(existEstudiante, objConexion, response, event["stage-variables"], event, objectRequest, callback, function(estudXPlan){
 
-							// *** *** Consulta los consejos
-							// console.log("los consejos son: " + JSON.stringify(consejoEstudiante));
-							response.data = consejoEstudiante;
-							callback(null, encryptObjectIfNedd(event, response));
-						});	
-						
-					});
+						// *** *** Consulta los consejos
+						// console.log("los consejos son: " + JSON.stringify(consejoEstudiante));
+						response.data = consejoEstudiante;
+						callback(null, encryptObjectIfNedd(event, response));
+					});		
 				});
 			});
 			
@@ -190,22 +186,6 @@ function guardaEstudiante(_existEstudiante, _objConexion, _response, _stageVars,
 		});
 	}	
 	
-}
-// ***************            Consulta log votos si el usuario ya voto:
-function logVotoConsejo(_objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
-	var queryLogConse = "SELECT * FROM "+_stageVars["vot_log_votaciones"]+" logVo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId WHERE VresNumDocumento = ?";
-	queryLogConse = mysql.format(queryLogConse, [_objectRequest.VresNumDocumento]);
-	
-	execQuery(_objConexion, queryLogConse, _response, _event, _callbackKill,function(resultSet){
-		if (resultSet[0]) {
-			// console.log("fecha voto consejo " + resultSet[0]["VlgFechaVotacion"]);
-			_callbackComplete(resultSet);
-			
-		} else {
-			_callbackComplete(resultSet);
-		}
-		
-	});
 }
 
 function estudXPlanes(_existEstudiante, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
@@ -268,8 +248,9 @@ function estudXPlanes(_existEstudiante, _objConexion, _response, _stageVars, _ev
 	});
 }
 }
+// ***************            Consulta log votos si el usuario ya voto:
 // ***************       por ultimo dispara ó responde con el listado de Consejos:
-function consejosEstudi(_logVoto, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
+function consejosEstudi(_objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
 	
 	
 	// function para recorrer el JSON-Array	con los datos de planes y semestre
@@ -277,22 +258,28 @@ function consejosEstudi(_logVoto, _objConexion, _response, _stageVars, _event, _
 	var codPlanes = planesSemestre[0];
 	/* console.log('Planes result ' + codPlanes); */
 
-	if (_logVoto[0]) {
-			
-		var queryCheck = "SELECT conse.VcNombre, conse.VcId, conse.VcFoto, logVo.VlgFechaVotacion FROM "+_stageVars["vot_consejo"]+" conse LEFT JOIN "+_stageVars["vot_log_votaciones"]+" logVo ON conse.VcId = logVo.VlgConsejo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId WHERE VresNumDocumento = ? ";
+		var queryLogConse = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo, DATE_FORMAT(logVo.VlgFechaVotacion, "%Y %d %m : %H %i %s") FROM '+_stageVars["vot_log_votaciones"]+" logVo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId LEFT JOIN "+_stageVars["vot_consejo"]+" conse ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") AND VresNumDocumento = ?";
+		queryLogConse = mysql.format(queryLogConse, [_objectRequest.VresNumDocumento]);
 		
-		queryCheck = mysql.format(queryCheck, [_objectRequest.VresNumDocumento]);
-		// console.log("Consejos del estudiante: " + queryCheck);
-		execQuery(_objConexion, queryCheck, _response, _event, _callbackKill,function(resultSet){
-			_callbackComplete(resultSet);
+		// console.log("Consejos del estudiante: " + queryLogConse);
+		execQuery(_objConexion, queryLogConse, _response, _event, _callbackKill,function(resultSet){
+			// console.log("Consejos del estudiante: " + resultSet[0]['VplCodigo']);
+			if (resultSet[0]) {
+				var queryLogConse2 = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo FROM '+_stageVars["vot_consejo"]+' conse LEFT JOIN '+_stageVars["vot_log_votaciones"]+" logVo ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") AND VplCodigo != '" + resultSet[0]['VplCodigo'] + "' ";
+				execQuery(_objConexion, queryLogConse2, _response, _event, _callbackKill,function(resultSet2){
+					respConsejo = resultSet.concat(resultSet2);
+					// console.log('segundo consejo ' + resultSet2);
+					_callbackComplete(respConsejo);
+				});
+			} else {
+				var queryLogConse2 = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo FROM '+_stageVars["vot_consejo"]+' conse LEFT JOIN '+_stageVars["vot_log_votaciones"]+" logVo ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ")";
+				execQuery(_objConexion, queryLogConse2, _response, _event, _callbackKill,function(resultSet2){
+					// console.log(' consejos ' + resultSet2);
+					_callbackComplete(resultSet2);
+				});
+			}
+			
 		});
-	} else {
-		var queryCheck = "SELECT * FROM "+_stageVars["vot_consejo"]+" conse LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") ";
-		// console.log("Consejos del estudiante sin log voto: " + queryCheck);
-		execQuery(_objConexion, queryCheck, _response, _event, _callbackKill,function(resultSet){
-			_callbackComplete(resultSet);
-		});
-	}
 }
 
 // ***************************    recorre los Json array jsonArrayQuery(campo  a consultar, Json array]);
