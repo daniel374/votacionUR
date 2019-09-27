@@ -258,7 +258,7 @@ function consejosEstudi(_objConexion, _response, _stageVars, _event, _objectRequ
 	var codPlanes = planesSemestre[0];
 	/* console.log('Planes result ' + codPlanes); */
 
-		var queryLogConse = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo, DATE_FORMAT(logVo.VlgFechaVotacion, "%Y %d %m : %H %i %s") FROM '+_stageVars["vot_log_votaciones"]+" logVo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId LEFT JOIN "+_stageVars["vot_consejo"]+" conse ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") AND VresNumDocumento = ?";
+		var queryLogConse = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo, DATE_FORMAT(logVo.VlgFechaVotacion, "%Y %d %m : %H %i %s") as VlgFechaVotacion FROM '+_stageVars["vot_log_votaciones"]+" logVo LEFT JOIN "+_stageVars["vot_estudiantes"]+" estu ON logVo.VlgEstudiante=estu.VesId LEFT JOIN "+_stageVars["vot_consejo"]+" conse ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") AND VresNumDocumento = ?";
 		queryLogConse = mysql.format(queryLogConse, [_objectRequest.VresNumDocumento]);
 		
 		// console.log("Consejos del estudiante: " + queryLogConse);
@@ -268,13 +268,15 @@ function consejosEstudi(_objConexion, _response, _stageVars, _event, _objectRequ
 				var queryLogConse2 = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo FROM '+_stageVars["vot_consejo"]+' conse LEFT JOIN '+_stageVars["vot_log_votaciones"]+" logVo ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ") AND VplCodigo != '" + resultSet[0]['VplCodigo'] + "' ";
 				execQuery(_objConexion, queryLogConse2, _response, _event, _callbackKill,function(resultSet2){
 					respConsejo = resultSet.concat(resultSet2);
-					// console.log('segundo consejo ' + resultSet2);
+					/* console.log("Objetos Request consejos con fecha log " + respConsejo.length);
+					console.log('segundo consejo ' + resultSet2);*/
 					_callbackComplete(respConsejo);
 				});
 			} else {
 				var queryLogConse2 = 'SELECT conse.VcNombre, conse.VcId, conse.VcFoto, plan.VplCodigo FROM '+_stageVars["vot_consejo"]+' conse LEFT JOIN '+_stageVars["vot_log_votaciones"]+" logVo ON logVo.VlgConsejo = conse.VcId LEFT JOIN "+_stageVars["vot_plan"]+" plan ON plan.VplConsejo = conse.VcId WHERE VplCodigo IN (" + codPlanes + ")";
 				execQuery(_objConexion, queryLogConse2, _response, _event, _callbackKill,function(resultSet2){
-					// console.log(' consejos ' + resultSet2);
+					/* console.log(' consejos ' + resultSet2);
+					   console.log("Objetos Request consejos sin voto " + resultSet2.length);*/
 					_callbackComplete(resultSet2);
 				});
 			}
@@ -295,7 +297,7 @@ function jsonArrayQuery(_campoArray, _jsonArray){
 		semesXPlan.push(JSON.stringify(_jsonArray[index]["semestre"]));	
 	})
 	
-/* 	console.log("Valor Array: " + codPlanU);
+	/* console.log("Valor Array: " + codPlanU);
 	console.log("Valor Array semestre : " + semesXPlan);
 	console.log("Objetos Request " + lengPlanes); */
 	return [codPlanU, semesXPlan, lengPlanes];
