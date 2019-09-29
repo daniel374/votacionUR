@@ -185,30 +185,41 @@ function guardaEstudiante(_existEstudiante, _objConexion, _response, _stageVars,
 // guarda los planes del estudiante
 function estudXPlanes(_idEstudiante, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
 	_objectRequest["infoPlanes"].forEach(function(element){
-		var queryIdPlan = "SELECT VplId FROM "+_stageVars["vot_plan"] + " WHERE VplCodigo = '" + element["codigo"] + "'";
+		var queryIdPlan = "SELECT VplId ,VplConsejo FROM " +_stageVars["vot_plan"] + " WHERE VplCodigo = '" + element["codigo"] + "'";
 		execQuery(_objConexion, queryIdPlan, _response, _event, _callbackKill,function(resSetPlan){
 			var resPlan = resSetPlan[0]["VplId"];
-			var selecPlanXEstu = "SELECT * FROM " + _stageVars["vot_estudiante_x_planes"] + " WHERE VepPlan = " + resPlan + " AND VepEstudiante = " + _idEstudiante + " ";
+			var resConsejo = resSetPlan[0]["VplConsejo"];
+			var selecPlanXEstu = "SELECT * FROM " + _stageVars["vot_estudiante_x_planes"] + " voep INNER JOIN " + _stageVars["vot_plan"] + " vop ON vop.VplId = voep.VepPlan WHERE vop.VplConsejo = " + resConsejo + " AND voep.VepEstudiante = " + _idEstudiante + "";
 			execQuery(_objConexion, selecPlanXEstu, _response, _event, _callbackKill,function(resPlanXEst){
 				if (resPlanXEst.length === 0) {		
-					var queryInsert = "INSERT INTO "+_stageVars["vot_estudiante_x_planes"]+
+					var queryInsert = "INSERT INTO "+_stageVars["vot_estudiante_x_planes"]+ 
 					" (VepEstudiante,VepPlan,VepSemestre) VALUES (?,?," + element["semestre"] + ") ";
 					var params = [_idEstudiante,resPlan];
 					queryInsert = mysql.format(queryInsert, params);
 					execQuery(_objConexion, queryInsert, _response, _event, _callbackKill,function(resultSet){
-						
+						_callbackComplete();
 					});
+				}else{
+					if (parseInt(element["semestre"]) > parseInt(resPlanXEst[0]["VepSemestre"])){
+						var queryUpdate = "UPDATE "+_stageVars["vot_estudiante_x_planes"]+ " SET VepPlan = ?, VepSemestre = ? WHERE VepId = ?";
+						var params = [resPlan,element["semestre"],resPlanXEst[0]["VepId"]];
+						queryUpdate = mysql.format(queryUpdate, params);
+						execQuery(_objConexion, queryUpdate, _response, _event, _callbackKill,function(resultSet){
+							_callbackComplete();
+						});
+					}else{
+						_callbackComplete();
+					}
 				}
 			});
 		});
 	});
-	_callbackComplete();
 }
 
 // ***************            Consulta log votos si el usuario ya voto:
 // ***************       por ultimo dispara ó responde con el listado de Consejos:
 function consejosEstudi(_idEstudiante, _objConexion, _response, _stageVars, _event, _objectRequest, _callbackKill, _callbackComplete){
-		var queryLogConse = 'SELECT vtc.VcNombre, vtc.VcId, vtc.VcFoto, vtp.VplCodigo, DATE_FORMAT(vtl.VlgFechaVotacion, "%Y-%d-%m %H:%i:%s") as VlgFechaVotacion FROM '+_stageVars["vot_consejo"]+' vtc INNER JOIN '+_stageVars["vot_plan"]+' vtp ON vtc.VcId = vtp.VplConsejo INNER JOIN '+_stageVars["vot_estudiante_x_planes"]+' vtep ON vtp.VplId = vtep.VepPlan INNER JOIN '+_stageVars["vot_estudiantes"]+' vte ON vte.VesId = vtep.VepEstudiante LEFT JOIN '+_stageVars["vot_log_votaciones"]+' vtl ON vte.VesId = vtl.VlgEstudiante AND vtc.VcId = vtl.VlgConsejo where vte.VesId = ?';
+		var queryLogConse = 'SELECT vtc.VcNombre, vtc.VcId, vtc.VcFoto, vtp.VplCodigo, vtp.VplId, vtep.VepSemestre, DATE_FORMAT(vtl.VlgFechaVotacion, "%Y-%d-%m %H:%i:%s") as VlgFechaVotacion FROM '+_stageVars["vot_consejo"]+' vtc INNER JOIN '+_stageVars["vot_plan"]+' vtp ON vtc.VcId = vtp.VplConsejo INNER JOIN '+_stageVars["vot_estudiante_x_planes"]+' vtep ON vtp.VplId = vtep.VepPlan INNER JOIN '+_stageVars["vot_estudiantes"]+' vte ON vte.VesId = vtep.VepEstudiante LEFT JOIN '+_stageVars["vot_log_votaciones"]+' vtl ON vte.VesId = vtl.VlgEstudiante AND vtc.VcId = vtl.VlgConsejo where vte.VesId = ?';
 		queryLogConse = mysql.format(queryLogConse, _idEstudiante);
 		execQuery(_objConexion, queryLogConse, _response, _event, _callbackKill,function(resultSet){
 			_callbackComplete(resultSet);
