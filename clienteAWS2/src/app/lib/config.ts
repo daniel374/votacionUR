@@ -9,6 +9,6 @@ export const Configs = {
     appId: '7f1d1eaa-59b3-4ba0-9109-748f7bb1a8f4',//casaur-uniquelogin-dev
     //appId: '5847a953-467b-4af5-b119-75a031595a91',
     scope: 'User.Read',
-    url : 'https://serveless.proximateapps-services.com.mx/casaur/prod/'
+    url : 'https://serveless.proximateapps-services.com.mx/casaur/dev/'
   };
   

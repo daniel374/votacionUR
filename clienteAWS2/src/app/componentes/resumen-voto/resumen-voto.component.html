@@ -45,7 +45,7 @@
                                                     <img src='{{this.forPresiFoto}}' class="card-img-top" alt="foto Presidente">
                                             </div>
                                             <!--  -->
-                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;" *ngIf="this.nomFormula !='voto en blanco'">
                                                     <div class="text-xs-left" style="border: none;">
                                                         <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforPresi}}</h5>
                                                         <h6>Presidente</h6>
@@ -57,7 +57,7 @@
                                                 
                                         </div>
                                     </div>
-                                    <div class="card-block" style="background: #e8e8e8; border: none;">
+                                    <div class="card-block" style="background: #e8e8e8; border: none;" *ngIf="this.nomFormula !='voto en blanco'">
                                         <div class="row">
                                             <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
                                                     <img src='{{this.forVipreFoto}}' class="card-img-top" alt="foto Presidente">
@@ -124,8 +124,7 @@
                         
                         </div>
                         <div class="continuar">
-                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="borrar('votacion');" 
-                            routerLink="consejo" routerLinkActive="router-link-active" style="margin-right: 2%; border-radius:15px;">
+                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="margin-right: 2%; border-radius:15px;">
                                 <h1 style="color: white;">Borrar</h1>
                             </a>
                             <span> </span>

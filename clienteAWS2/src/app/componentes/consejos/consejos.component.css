@@ -1,13 +1,57 @@
-.card-img-top {
-  width: 250px;
-  height: 250px;
-}
-
+@media (max-width: 575px) {
 .conteiner-consejos {
     background-color: white;
-    height: 50%;
+    height: 30%;
+    width: 100%;
+    }
+.card-img-top {
+    width: 250px;
+    height: 250px;
+	display: block;
+	margin: auto;
+    }
+.panel {
+	display: block;
+	margin: auto;
+	text-align: center;
+	}
+}
+@media (max-width: 650px) and (min-width: 575px){
+.conteiner-consejos {
+    background-color: white;
+    height: 30%;
+    width: 100%;
+    }
+.card-img-top {
+    width: 150px;
+    height: 150px;
+    }
+}
+
+@media (max-width: 800px) and (min-width: 650px){
+.conteiner-consejos {
+    background-color: white;
+    height: 20%;
+    width: 100%;
+    }
+.card-img-top {
+    width: 200px;
+    height: 200px;
+    }
+}
+
+@media (min-width: 800px) {
+.conteiner-consejos {
+    background-color: white;
+    height: 15%;
     width: 100%;
 }
+.card-img-top {
+    width: 250px;
+    height: 250px;
+    }
+}
+
 
 .titulo {
     font-family: 'Nunito-Regular';

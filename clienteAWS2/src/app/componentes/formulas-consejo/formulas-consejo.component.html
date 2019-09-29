@@ -24,12 +24,13 @@
 
                          
                     <div class="panel panel-default card-input">
-                    
+                        
                        <!--  -->
                        <div class="card">
-                          <div *ngIf="this.valuId === formula.VfId">
-                           <img class="imagenX" src="../../../assets/imagenes/x.png" alt="imagen x">
-		                   </div>
+                         <img *ngIf="this.valuId === formula.VfId" class="imagenX" src="../../../assets/imagenes/x.png" alt="imagen x">
+                          <!--<div *ngIf="this.valuId === formula.VfId" [ngStyle]="{'background-image': 'url(../../../assets/imagenes/x.png)'} no-repeat 0px 0px;">
+                           
+		                   </div> [ngStyle]="{'background-image': this.valuId === formula.VfId ? 'url(../../../assets/imagenes/x.png)' : null , 'position': 'absolute', 'z-index': 1}"-->
                             <div class="card-header" style="background: #e8e8e8; border: none;">
                                 <div id="conten-bloque-line-height" style="display: inline-block;">
                                     <div><h4>{{formula.Vfnombre_lista}}</h4></div>
@@ -43,7 +44,7 @@
                                             <img src='{{formula.VfPresidenteFoto}}' class="card-img-top" alt="foto Presidente">
                                     </div>
                                     <!--  -->
-                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
+                                        <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;" *ngIf="formula.Vfnombre_lista !='voto en blanco'">
                                             <div class="text-xs-left" style="border: none;">
                                                 <h5 style="color: #AB2328; max-width: 250px;">{{formula.VfPresidenteNombre}}</h5>
                                                 <h6>Presidente</h6>
@@ -54,9 +55,9 @@
                                         </div>
 
                                 </div>
-                            </div>
-                            <div class="card-block" style="background: #e8e8e8; border: none;">
-                                <div class="row">
+                            <!--</div>
+                            <div class="card-block" style="background: #e8e8e8; border: none;">-->
+                                <div class="row" *ngIf="formula.Vfnombre_lista !='voto en blanco'">
                                     <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
                                             <img src='{{formula.VfVicepresidenteFoto}}' class="card-img-top" alt="foto Presidente">
                                     </div>

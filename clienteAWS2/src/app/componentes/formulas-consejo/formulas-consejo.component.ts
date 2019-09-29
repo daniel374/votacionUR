@@ -53,22 +53,11 @@ export class FormulasConsejoComponent implements OnInit {
         if (this.vcId == 8 || this.vcId == 9 || this.vcId == 10) {
           this.vfSemestre = '';
         } else {
-          this.infoPlanes = JSON.parse(localStorage.getItem('infoPlanes'));
+          /*this.infoPlanes = JSON.parse(localStorage.getItem('infoPlanes'));
           console.log('los planes ' + JSON.stringify(this.infoPlanes));
-          console.log('codigo ' + this.infoPlanes[0]['codigo'] + ' cod plan ' + this.codPlan);
-          this.infoPlanes.forEach(function(planes,indx,arrPl){
-            let coPlan = JSON.stringify(arrPl[indx]['codigo']);
-            console.log('array json ' + coPlan);
-            console.log('type ' + typeof(coPlan));
-            //this.codPlan = this.datosComponentService.resDatos[2];
-            /* console.log('type 2' + JSON.stringify(this.codPlan));
-            if (coPlan = JSON.stringify(this.codPlan)) {              
-              this.vfSemestre = arrPl[indx]['semestre'];
-            } else {
-              this.vfSemestre = '';
-            } */
-          });
-          //this.vfSemestre = '';
+          console.log('codigo ' + this.infoPlanes[0]['codigo'] + ' cod plan ' + this.codPlan);*/
+          
+          this.vfSemestre = '';
         }
         console.log('semestre ' + this.vfSemestre);
 

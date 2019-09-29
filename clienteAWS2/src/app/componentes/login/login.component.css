@@ -1,10 +1,12 @@
 @media (max-width: 330px){
     .imagenfech {
-		max-width: 210px;
-		height: 70px;
+		max-width: 100%;
+		height: 100%;
     }
     .btn {
         max-width: 210px;
+		margin-bottom: 50%;
+		margin-top: 10%;
     }
     .tituB {
         font-size: 12px;
@@ -12,20 +14,21 @@
 }
 @media (max-width: 1000px) and (min-width: 330px){
     .imagenfech {
-		max-width: 350px;
+		max-width: 320px;
 		height: 120px;
+    }
+	.btn {
+		margin-top: 30%;
+		margin-bottom: 50%;
     }
 }
 @media (max-width: 2000px) and (min-width: 1000px){
     .imagenfech {
 		width: 600px;
-		height: 210px;
+		height: 100%;
     }
 }
-/* .imagenfech {
-	max-width: 150px;
-	height: 150px;
-} */
+
 
 .btn-outline-primary {
     box-shadow: none;
@@ -44,13 +47,6 @@
     overflow: hidden;
 }
 
-/* .subtitle {
-    position: relative;
-    font-family: 'Nunito-Regular';
-    color: #e8e8e8;
-    left: 10%;
-    opacity: 0.5;
-} */
 
 .title {
     font-family: 'Nunito-Regular';
@@ -60,7 +56,12 @@
 
 .bg {
     background-image: url(../../../assets/imagenes/fondo-web.png);
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: center center;
     background-size: cover;
-}
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100%;
+}		
+
+
+

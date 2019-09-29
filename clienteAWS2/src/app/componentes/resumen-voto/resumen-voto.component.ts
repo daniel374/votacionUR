@@ -90,12 +90,12 @@ export class ResumenVotoComponent implements OnInit {
       console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
       
     this.vcId = this.dataForRepre[0] || 0;
-    this.nomFormula = this.dataForRepre[2];
-    this.forPresiFoto = this.dataForRepre[3];
-    this.nomforPresi = this.dataForRepre[4];
-    this.forVipreFoto = this.dataForRepre[5];
-    this.nomforVipre = this.dataForRepre[6];
-    this.idFormul = this.dataForRepre[7];
+    this.nomFormula = this.dataForRepre[3];
+    this.forPresiFoto = this.dataForRepre[4];
+    this.nomforPresi = this.dataForRepre[5];
+    this.forVipreFoto = this.dataForRepre[6];
+    this.nomforVipre = this.dataForRepre[7];
+    this.idFormul = this.dataForRepre[8];
       
 
     console.log("nombre formula  "+this.nomFormula);
@@ -109,11 +109,11 @@ export class ResumenVotoComponent implements OnInit {
     /*     this.datosRepre = 
     console.log("datos Representante  "+this.datosRepre); */
 
-    this.repreFoto = this.dataForRepre[8];
-    this.nomRepre = this.dataForRepre[9];
-    this.semestRepre = this.dataForRepre[10];
-    this.planRepre = this.dataForRepre[11];
-    this.idRepre = this.dataForRepre[12];
+    this.repreFoto = this.dataForRepre[9];
+    this.nomRepre = this.dataForRepre[10];
+    this.semestRepre = this.dataForRepre[11];
+    this.planRepre = this.dataForRepre[12];
+    this.idRepre = this.dataForRepre[13];
         
     console.log("foto representante  "+this.repreFoto);
     console.log("nombre representante  "+this.nomRepre);
