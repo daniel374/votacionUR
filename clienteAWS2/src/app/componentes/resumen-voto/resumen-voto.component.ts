@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ResumenVotoComponent implements OnInit {
 
   public vcId: any;
-
+  public nomConsejo: any;
   /* data formu y repre */
   public dataForRepre: any;
   /* variables data formula */
