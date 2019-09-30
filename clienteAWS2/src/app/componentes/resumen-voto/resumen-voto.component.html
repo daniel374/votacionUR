@@ -140,7 +140,7 @@
                             </a>
                         </div>
 
-<ng-template #votoModal>
+<ng-template #votoModal let-modal>
     <div class="modal-header">
          <img class="logo" src="../../../assets/imagenes/logo.png" alt="logo imagen">
 
@@ -164,7 +164,7 @@
 
     <div class="modal-footer continuar">
          <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" 
-            routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="border-radius:15px;" (click)="this.votoModal.close();">
+            routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="border-radius:15px;" (click)="modal.close('Close click')">
            <h1 style="color: white; font-size: 12px;">Continuar</h1>
        </a>
     </div>
