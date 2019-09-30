@@ -12,7 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ResumenVotoComponent implements OnInit {
 
-  vcId: any;
+  public vcId: any;
 
   /* data formu y repre */
   public dataForRepre: any;
@@ -37,7 +37,7 @@ export class ResumenVotoComponent implements OnInit {
   datosEstudi: any = [];
   esNom: any;
   email: any;
-  numDoc: any;
+  public numDoc: any;
   /*  */
   idVoto: any;
 
@@ -51,38 +51,7 @@ export class ResumenVotoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    console.log("datos res WS "+this.datosComponentService.resDatos);
     this.resumenVoto();
-
-    this.datosEstudi = localStorage.getItem('datosUsuario');
-    this.datosEstudi = JSON.parse(this.datosEstudi);
-    this.esNom = this.datosEstudi['displayName'];
-    this.numDoc = this.datosEstudi['mobilePhone'];
-
-    this.email = this.datosEstudi['userPrincipalName'];
-    if (this.numDoc) {
-      var arrayIdent = this.numDoc.split("&");
-      console.log('arrayIdent' + arrayIdent);
-      this.numDoc = arrayIdent[1];
-    } else if (this.email == "proximateapps@outlook.com") {
-      this.numDoc = "NCE&1374";
-      var arrayIdent = this.numDoc.split("&");
-      console.log('arrayIdent ' + arrayIdent);
-      this.numDoc = arrayIdent[1];
-    } else {
-      
-    }
-    /* servicio Guarda Voto */
-    this.regisVotoService.regisVoto(this.numDoc, this.vcId, this.idFormul, this.idRepre).subscribe(
-      res => {
-        this.idVoto = res.data;
-		    console.log('El response del servicio lambda ');
-        console.log(res.data);
-      },
-      err => console.error(err)
-    );
-    
   }
 
   resumenVoto(){
@@ -90,6 +59,7 @@ export class ResumenVotoComponent implements OnInit {
       console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
       
     this.vcId = this.dataForRepre[0] || 0;
+	this.nomConsejo = this.dataForRepre[1];  
     this.nomFormula = this.dataForRepre[3];
     this.forPresiFoto = this.dataForRepre[4];
     this.nomforPresi = this.dataForRepre[5];
@@ -125,10 +95,46 @@ export class ResumenVotoComponent implements OnInit {
 
   votar(modal){
     this.modalService.open(modal);
+	console.log("datos res WS "+this.datosComponentService.resDatos);
+    
+
+    this.datosEstudi = localStorage.getItem('datosUsuario');
+    this.datosEstudi = JSON.parse(this.datosEstudi);
+    this.esNom = this.datosEstudi['displayName'];
+    this.numDoc = this.datosEstudi['mobilePhone'];
+
+    this.email = this.datosEstudi['userPrincipalName'];
+    if (this.numDoc) {
+      var arrayIdent = this.numDoc.split("&");
+      console.log('arrayIdent' + arrayIdent);
+      this.numDoc = arrayIdent[1];
+    } else if (this.email == "proximateapps@outlook.com") {
+      this.numDoc = "NCE&1374";
+      var arrayIdent = this.numDoc.split("&");
+      console.log('arrayIdent ' + arrayIdent);
+      this.numDoc = arrayIdent[1];
+    } else {
+      
+    }
+    /* servicio Guarda Voto */
+	this.registroVoto();
   }
 
-  borrar(votacion: string){
 
+  registroVoto() {
+	  this.regisVotoService.regisVoto(this.numDoc, this.vcId, this.idFormul, this.idRepre).subscribe(
+      res => {
+        this.idVoto = JSON.stringify(res.data[0][0]['id']);
+		  console.log('El response del servicio lambda ');
+          console.log(res.data);
+		  console.log('id ');
+		  console.log(this.idVoto);
+		    
+      },
+      err => console.error(err)
+    );
+	  return this.idVoto;
   }
+
 
 }

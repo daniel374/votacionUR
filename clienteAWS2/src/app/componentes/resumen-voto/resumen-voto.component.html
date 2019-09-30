@@ -8,7 +8,7 @@
          -->
         <br>
         <h2 class="titulo display-6">Consejo Estudiantil</h2>
-        <h2 class="titulo display-6" style="color:#AB2328;">"CONSEJO"</h2>
+        <h2 class="titulo display-6" style="color:#AB2328;">{{this.nomConsejo}}</h2>
         <br> 
         <h3 class="subtitulo display-6">ESTE ES EL RESUMEN DE TU INTENCIÓN DE VOTO</h3>
                 
@@ -23,14 +23,17 @@
                     <div class="col-md-4 col-lg-6 col-sm-4" style="justify-content: center;">
                               
                         <label>
-                            <input type="radio" name="product" class="card-input-element" />
+                            <!--<input type="radio" name="product" class="card-input-element" />
                             
                         
                         <div class="panel panel-default card-input">
                             
-                            <!-- formula -->
+                             formula -->
+                            <div>
                             <h2 class="formula display-6">FÓRMULA</h2>
-                            <br>
+                            <br>	
+                            </div>
+                            
                             <div class="card card-formula">
                                     <div class="card-header" style="background: #e8e8e8; border: none;">
                                         <div id="conten-bloque-line-height" style="display: inline-block;">
@@ -78,14 +81,17 @@
                                     
                                 </div>
 
-                            </div>
+                            <!--</div>-->
                       
                                 </label>
                           
                             </div>
                            <!-- Representante -->
-                                <h2 class="formula display-6">REPRESENTANTE</h2>
+                               <div style="align-content: right">
+                               	<h2 class="formula display-6">REPRESENTANTE</h2>
                                 <br>
+                               </div>
+                                
                                 <div class="card card-representante">
                                     <div class="card-header" style="background: #e8e8e8; border: none;">
                                         <!-- <div id="conten-bloque-line-height" style="display: inline-block;">
@@ -150,7 +156,7 @@
             <div class="col-md-6">
             <h6 class="modh5">Hemos recibido tu voto.</h6>
             <h6 class="modh5">El ID de tu transacción</h6>
-            <h6 class="modh5">es #</h6>
+            <h6 class="modh5">es # {{this.idVoto}}</h6>
         </div>
         </div>
         </div>
@@ -158,7 +164,7 @@
 
     <div class="modal-footer continuar">
          <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" 
-            routerLinkActive="router-link-active" style="border-radius:15px;">
+            routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="border-radius:15px;" (click)="this.votoModal.close();">
            <h1 style="color: white; font-size: 12px;">Continuar</h1>
        </a>
     </div>
