@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     session = false;
     public pageName: string;
     public modToken: string;
+    public validado: any;
 
 
     constructor(
@@ -33,8 +34,7 @@ export class LoginComponent implements OnInit {
         private estudianteService: EstudianteService,
 		private ngZone: NgZone,
         private router: Router,
-        private ngxXml2jsonService: NgxXml2jsonService,
-        private datosComponentService: DatosComponentService
+        private ngxXml2jsonService: NgxXml2jsonService
         ) { this.titulo = 'VOTACIONES';
         }
 
@@ -83,7 +83,6 @@ export class LoginComponent implements OnInit {
              */
             console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
             this.logout();
-            this.goToBackend(type);
         });
     }
     // consume servicio de proximate y retorna Token
@@ -109,13 +108,10 @@ export class LoginComponent implements OnInit {
 
                     // If the user whant to go request's backned
                     if ( type === 'votacion' && res.token){
-                        this.pageName = 'votacion/consejo';
                         
-
                         localStorage.setItem('meToken', JSON.stringify(res.token));
-
                         this.infoEstudiante();
-						this.ngZone.run(() =>this.router.navigate([`${this.pageName}`])).then();
+                        this.validado = true;
                     } else {
                         alert('Usuario no registrado');
                     }
@@ -133,7 +129,6 @@ export class LoginComponent implements OnInit {
         var habilitado = true;
         var infoPlanes: infoPlanesWs;
 		var arrayinfoPlanes: any = [];
-        
         this.estudianteService.dataEstudiante().subscribe(d => {
             
         /*  console.log('status del servicio: ' + JSON.stringify(d.statusCode));
@@ -159,12 +154,6 @@ export class LoginComponent implements OnInit {
                 var programa = xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
                 var semestre = xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
                 
-                console.log('tipoest del estudiante: ' + tipoest);
-                console.log('bloqueado del estudiante: ' + bloqueado);
-                console.log('cerrado del estudiante: ' + cerrado);
-                console.log('retirado del estudiante: ' + retirado);
-                console.log('programa del estudiante: ' + programa);
-                console.log('semestre del estudiante: ' + semestre);
                 if (tipoest === "PRE") {
                     if (bloqueado === "N") {
                         if (cerrado === "N") {
@@ -192,14 +181,13 @@ export class LoginComponent implements OnInit {
 
 					arrayinfoPlanes.push(infoPlanes);
 					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
-					
-					
-                } else {
-                    console.log('El Estudiante se encuentra Inhabilido para el programa ' + programa);
-                }
-				console.log('La info de los planes del estudiante: ' + JSON.stringify(arrayinfoPlanes));
-                
+                } 
             });
+            if (arrayinfoPlanes != null && arrayinfoPlanes.length > 0){
+                this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
+            }else{
+                console.log('El Estudiante no se encuentra habilitado para votar comuniquese con el encargado');
+            }
         });
         
     }

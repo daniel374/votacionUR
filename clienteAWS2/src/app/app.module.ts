@@ -13,20 +13,23 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RepresentantesService } from './services/representantes.service';
 import { FormulasService } from './services/formulas.service';
 import { DatosComponentService } from './services/datos-component.service';
+import { SpinnerService } from './services/spinner.service';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
-	NgbModule,
-	NgbPaginationModule,
-	NgbAlertModule
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule  
   ],
   exports: [
   ],
@@ -38,7 +41,8 @@ import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng
     ConsejosService,
     RepresentantesService,
     FormulasService,
-    DatosComponentService
+    DatosComponentService,
+    SpinnerService
   ],
   bootstrap: [AppComponent]
 })

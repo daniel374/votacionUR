@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 
 import { AuthService } from '../../services/auth.service';
 
+
 @Component({
   selector: 'app-navegacion',
   templateUrl: './navegacion.component.html',

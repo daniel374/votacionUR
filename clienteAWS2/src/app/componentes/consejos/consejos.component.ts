@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsejosService } from '../../services/consejos.service';
 import { DatosComponentService } from '../../services/datos-component.service';
+import { SpinnerService } from '../../services/spinner.service';
+//import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,26 +27,32 @@ export class ConsejosComponent implements OnInit {
   
   constructor(
     private consejosService: ConsejosService,
-    private datosComponentService: DatosComponentService  
-  ) { }
+    private datosComponentService: DatosComponentService,
+    private spinnerService: SpinnerService,
+    //private spinner: NgxSpinnerService,
+    private router: Router  
+  ) {
+    
+   }
 
   formulasConsejo(idConsejo){
     console.log(idConsejo);
   }
 
 
-  ngOnInit() {
-    
-	  this.traerConsejos ();
-	
+  ngOnInit(): void {
+    /** spinner starts on init */
+    this.spinnerService.activate();
+    this.traerConsejos ();
+    //this.router.navigate(['votacion/consejo']);
   }
 
   traerConsejos () {
 	  this.datosEstudi = localStorage.getItem('datosUsuario');
-	this.datosEstudi = JSON.parse(this.datosEstudi);
-	console.log(this.datosEstudi);
-	console.log('data estudiante:   ');
-	console.log(JSON.stringify(this.datosEstudi));
+    this.datosEstudi = JSON.parse(this.datosEstudi);
+    console.log(this.datosEstudi);
+    console.log('data estudiante:   ');
+    console.log(JSON.stringify(this.datosEstudi));
     this.tpDoc = 1;
     this.numDoc = this.datosEstudi['mobilePhone'];
     this.esNom = this.datosEstudi['displayName'];
@@ -68,13 +77,17 @@ export class ConsejosComponent implements OnInit {
     console.log('email ' + this.email);
     console.log('infoPlanes ' + this.infoPlanes);
     
-	this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
+    this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
       res => {
         this.consejos = res.data;
-		    console.log('El response del servicio lambda ');
+        this.spinnerService.deactivate();
+        console.log('El response del servicio lambda ');
         console.log(res.data);
       },
-      err => console.error(err)
+      err => {
+        this.spinnerService.deactivate();
+        console.error(err);
+      }
     );
   }
 

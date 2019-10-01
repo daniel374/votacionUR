@@ -15,7 +15,7 @@ import { NavegacionModule } from '../navegacion/navegacion.module';
   imports: [
     CommonModule,
     ConsejosRoutingModule,
-	NavegacionModule
+    NavegacionModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
