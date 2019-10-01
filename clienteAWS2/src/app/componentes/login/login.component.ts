@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 
-// import { Subscription } from 'rxjs/Subscription';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router'
 
@@ -11,7 +10,6 @@ import { ResWsEstud } from '../../interfaces/ResWsEstud';
 import { Configs } from '../../lib/config';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 import { DatosComponentService } from '../../services/datos-component.service';
-import { ConsejosService } from '../../services/consejos.service';
 
 import { infoPlanesWs } from '../../interfaces/infoPlanesWs';
 
@@ -27,15 +25,6 @@ export class LoginComponent implements OnInit {
     public pageName: string;
     public modToken: string;
 
-    /* variables data consejo */
-  consejos: any = [];
-  datConsejo: any = [];
-  datosEstudi: any = [];
-  tpDoc: any;
-  numDoc: any;
-  esNom: any;
-  email: any;
-  infoPlanes: any = [];
 
     constructor(
         private authService: AuthService,
@@ -45,8 +34,7 @@ export class LoginComponent implements OnInit {
 		private ngZone: NgZone,
         private router: Router,
         private ngxXml2jsonService: NgxXml2jsonService,
-        private datosComponentService: DatosComponentService,
-		private consejosService: ConsejosService
+        private datosComponentService: DatosComponentService
         ) { this.titulo = 'VOTACIONES';
         }
 
@@ -144,7 +132,6 @@ export class LoginComponent implements OnInit {
     infoEstudiante() {
         var habilitado = true;
         var infoPlanes: infoPlanesWs;
-        // var infoPlanes = new Object();
 		var arrayinfoPlanes: any = [];
         
         this.estudianteService.dataEstudiante().subscribe(d => {
@@ -202,11 +189,10 @@ export class LoginComponent implements OnInit {
                         codigo: `${programa}`,
 					    semestre: `${semestre}`,
                     }
-                    /* infoPlanes.codigo = programa;
-					infoPlanes.semestre = semestre; */
+
 					arrayinfoPlanes.push(infoPlanes);
 					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
-					this.traerConsejos ();
+					
 					
                 } else {
                     console.log('El Estudiante se encuentra Inhabilido para el programa ' + programa);
@@ -217,46 +203,6 @@ export class LoginComponent implements OnInit {
         });
         
     }
-
-traerConsejos () {
-	  this.datosEstudi = localStorage.getItem('datosUsuario');
-	this.datosEstudi = JSON.parse(this.datosEstudi);
-	console.log(this.datosEstudi);
-	console.log('data estudiante:   ');
-	console.log(JSON.stringify(this.datosEstudi));
-    this.tpDoc = 1;
-    this.numDoc = this.datosEstudi['mobilePhone'];
-    this.esNom = this.datosEstudi['displayName'];
-    this.email = this.datosEstudi['userPrincipalName'];
-    if (this.numDoc) {
-      var arrayIdent = this.numDoc.split("&");
-      console.log('arrayIdent' + arrayIdent);
-      this.numDoc = arrayIdent[1];
-    } else if (this.email == "proximateapps@outlook.com") {
-      this.numDoc = "NCE&1374";
-      var arrayIdent = this.numDoc.split("&");
-      console.log('arrayIdent ' + arrayIdent);
-      this.numDoc = arrayIdent[1];
-    } else {
-    
-    }
-  
-    this.infoPlanes = localStorage.getItem('infoPlanes');
-    console.log('tipo documento ' + this.tpDoc);
-    console.log('num. documento ' + this.numDoc);
-    console.log('nombre estudi. ' + this.esNom);
-    console.log('email ' + this.email);
-    console.log('infoPlanes ' + this.infoPlanes);
-    
-	this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
-      res => {
-        this.consejos = res.data;
-		    console.log('El response del servicio lambda ');
-        console.log(res.data);
-      },
-      err => console.error(err)
-    );
-  }
 
 
     logout(): void {

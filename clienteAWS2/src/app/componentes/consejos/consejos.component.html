@@ -1,10 +1,5 @@
 <app-navegacion></app-navegacion>
 <div class="conteiner-consejos">
-<!--     <br>
-        <div class="image" style="margin-left: 2%;">
-            <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
-        </div>
-    <hr/> --> 
     <br> 
     <h3 class="titulo display-6">SELECCIONA EL CONSEJO PARA INICIAR LA VOTACIÓN</h3>
 </div>    
@@ -27,7 +22,6 @@
                         
                     <h6 style="color: #AB2328">{{consejo.VcNombre}}</h6>
                     <div style="flex: content;">
-                        <!-- <div id="bloque-line-height" style="align-self: auto; width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div> -->
                         <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">{{consejo.VlgFechaVotacion}}</h6>
                         <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion == null">Pendiente de votación</h6>
                     </div>

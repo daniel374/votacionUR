@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { RegisVotoService } from '../../services/regis-voto.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-resumen-voto',
   templateUrl: './resumen-voto.component.html',
-  styleUrls: ['./resumen-voto.component.css']
+  styleUrls: ['./resumen-voto.component.css'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class ResumenVotoComponent implements OnInit {
 
@@ -47,8 +48,12 @@ export class ResumenVotoComponent implements OnInit {
     private route: ActivatedRoute,
     private datosComponentService: DatosComponentService,
     private regisVotoService: RegisVotoService,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+	config: NgbModalConfig
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
     this.resumenVoto();
@@ -94,7 +99,7 @@ export class ResumenVotoComponent implements OnInit {
   }
 
   votar(modal){
-    this.modalService.open(modal);
+    
 	console.log("datos res WS "+this.datosComponentService.resDatos);
     
 
@@ -118,6 +123,7 @@ export class ResumenVotoComponent implements OnInit {
     }
     /* servicio Guarda Voto */
 	this.registroVoto();
+	this.modalService.open(modal, { centered: true });
   }
 
 
