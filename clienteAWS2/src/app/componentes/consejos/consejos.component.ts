@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsejosService } from '../../services/consejos.service';
 import { DatosComponentService } from '../../services/datos-component.service';
-import { SpinnerService } from '../../services/spinner.service';
-//import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
 
@@ -12,8 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./consejos.component.css']
 })
 export class ConsejosComponent implements OnInit {
-  
-  
+  msjCarga: any;
   idConsejo: number;
   /* variables data consejo */
   consejos: any = [];
@@ -28,12 +26,14 @@ export class ConsejosComponent implements OnInit {
   constructor(
     private consejosService: ConsejosService,
     private datosComponentService: DatosComponentService,
-    private spinnerService: SpinnerService,
-    //private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private router: Router  
   ) {
     
-   }
+  }
+
+  /* this.msjCarga = this.datosComponentService.msjSpinner;
+  this.msjCarga = 'Consejos Cargando...'; */
 
   formulasConsejo(idConsejo){
     console.log(idConsejo);
@@ -42,7 +42,8 @@ export class ConsejosComponent implements OnInit {
 
   ngOnInit(): void {
     /** spinner starts on init */
-    this.spinnerService.activate();
+    //this.spinnerService.activate();
+    this.spinner.show();
     this.traerConsejos ();
     //this.router.navigate(['votacion/consejo']);
   }
@@ -80,23 +81,24 @@ export class ConsejosComponent implements OnInit {
     this.consejosService.getConsejos(this.tpDoc, this.numDoc, this.esNom, this.email, this.infoPlanes).subscribe(
       res => {
         this.consejos = res.data;
-        this.spinnerService.deactivate();
+        this.spinner.hide();
         console.log('El response del servicio lambda ');
         console.log(res.data);
       },
       err => {
-        this.spinnerService.deactivate();
+        this.spinner.hide();
         console.error(err);
       }
     );
   }
 
 
-  serGuarConsejo(vcId: number, noConsejo: any, nomPlan: any){
+  serGuarConsejo(vcId: number, noConsejo: any, nomPlan: any, semesPl: any){
     this.datConsejo = [
       vcId,
       noConsejo,
-      nomPlan
+      nomPlan,
+      semesPl
     ]
     console.log("info service consejo "+this.datConsejo);
     this.datosComponentService.guarDatosConsejo(this.datConsejo);

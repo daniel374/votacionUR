@@ -10,6 +10,7 @@ import { ResWsBD } from '../interfaces/ResWsBD';
 export class FormulasService {
 
   /* Servicos AWS */
+  xmlBody: any;
   project: string = "casaur";
   enviroment: string = "dev";
   Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
@@ -18,14 +19,79 @@ export class FormulasService {
   constructor(private http: HttpClient) { }
 
   /* Servicos AWS */
-  formulasConse(vcId: any,vfSemestre: any){
+  formulasConse(vcId: any,vfSemestre: any, codPlan: any){
     
     let newToken = localStorage.getItem('newToken');
     console.log("token new "+newToken);
     if (newToken === ''){
 
     }
-    
+
+    if (vfSemestre != '' && codPlan == '') {
+      this.xmlBody = { 
+        "fields" : "*",
+        "table" : "vot_formula_consejo",
+        "wheres" : [
+          {
+            "type" : "where",
+            "conditions" : {"VfSemestre" : null}
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VfPlanCode" : null}
+          },
+          {
+              "type" : "where",
+              "conditions" : {"VfConsejo" : `${vcId}`}
+          },
+          { 
+            "type": "whereOR", 
+            "key": "VfSemestre", 
+            "value": `${vfSemestre}`
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VfConsejo" : `${vcId}`}
+          }
+        ]};
+    } else if (codPlan != '' && vfSemestre == '') {
+      this.xmlBody = { 
+        "fields" : "*",
+        "table" : "vot_formula_consejo",
+        "wheres" : [
+          {
+            "type" : "where",
+            "conditions" : {"VfSemestre" : null}
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VfPlanCode" : null}
+          },
+          {
+              "type" : "where",
+              "conditions" : {"VfConsejo" : `${vcId}`}
+          },
+          { 
+            "type": "whereOR", 
+            "key": "VfPlanCode", 
+            "value": `${codPlan}`
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VfConsejo" : `${vcId}`}
+          }
+        ]};
+    } else {
+      this.xmlBody = { 
+        "fields" : "*",
+        "table" : "vot_formula_consejo",
+        "wheres" : [
+          {
+              "type" : "where",
+              "conditions" : {"VfConsejo" : `${vcId}`}
+          }
+        ]};
+    }
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': newToken
@@ -33,34 +99,16 @@ export class FormulasService {
     console.log("headers:");
     console.log(headers);
     
-    let xmlBody = { 
-      "fields" : "*",
-      "table" : "vot_formula_consejo",
-      "joins" : [
-        {
-          "table" : "vot_consejo",
-          "on" : "vot_formula_consejo.VfConsejo = vot_consejo.VcId",
-          "type" : "left"
-        }
-      ],
-      "wheres" : [
-        {
-          "type" : "where",
-          "conditions" : {"VfConsejo" : `${vcId}`}
-        },
-        {
-          "type" : "where",
-          "conditions" : {"VfSemestre" : `${vfSemestre}`}
-        }
-      ]};
+
     console.log("body serviceFormula: ");
     
-    console.log(JSON.stringify(xmlBody));
-    return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});
+    console.log(JSON.stringify(this.xmlBody));
+    return this.http.post<ResWsBD>(this.Data_Est, this.xmlBody, {headers: headers});
     
   }
 
 }
+
 
 
 

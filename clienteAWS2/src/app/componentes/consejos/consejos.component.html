@@ -1,5 +1,4 @@
 <app-navegacion></app-navegacion>
-<!-- <app-spinner></app-spinner> -->
 <!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
     <p style="font-size: 20px; color: white">Cargando...</p>
 </ngx-spinner> -->
@@ -13,7 +12,7 @@
             <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let consejo of consejos">
                       
                 <label>
-                    <input *ngIf="consejo.VlgFechaVotacion == null" type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre, consejo.VplCodigo)"/>
+                    <input *ngIf="consejo.VlgFechaVotacion == null" type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre, consejo.VplCodigo, consejo.VepSemestre)"/>
                     
                 
                 <div class="panel panel-default card-input">
@@ -24,10 +23,10 @@
                 <div class="panel-body">                                    
                         
                         
-                    <h6 style="color: #AB2328">{{consejo.VcNombre}}</h6>
+                    <h6 style="color: #424242">{{consejo.VcNombre}}</h6>
                     <div style="flex: content;">
                         <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">{{consejo.VlgFechaVotacion}}</h6>
-                        <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion == null">Pendiente de votación</h6>
+                        <h5 style="align-self: right; color: #AB2328" *ngIf="consejo.VlgFechaVotacion == null">Pendiente de votación</h5>
                     </div>
                     
                 </div>

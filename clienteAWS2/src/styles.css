@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @font-face {
     font-family: Nunito-Bold;
     src: url(./assets/fonts/Nunito-Bold.ttf) format("opentype");
@@ -12,6 +13,7 @@
     font-family: Nunito-Regular;
     src: url(./assets/fonts/Nunito-Regular.ttf) format("opentype");
 }
+
 body, html {
     height: 100%;
     margin: 0;

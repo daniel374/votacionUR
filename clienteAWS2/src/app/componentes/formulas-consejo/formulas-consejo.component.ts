@@ -45,43 +45,52 @@ export class FormulasConsejoComponent implements OnInit {
     
       this.vcId = this.datosComponentService.resDatos[0] || 0;
       this.codPlan = this.datosComponentService.resDatos[2];
-      console.log(' plan   ' + this.codPlan + '  type 2 ' + typeof(JSON.stringify(this.codPlan)));
-      this.noConsejo = String(this.datosComponentService.resDatos[1]);
-      console.log("vcId "+this.vcId);
-      console.log("noConsejo "+this.noConsejo);
-      if (this.vcId !=0){
-        if (this.vcId == 8 || this.vcId == 9 || this.vcId == 10) {
-          this.vfSemestre = '';
-        } else {
-          /*this.infoPlanes = JSON.parse(localStorage.getItem('infoPlanes'));
-          console.log('los planes ' + JSON.stringify(this.infoPlanes));
-          console.log('codigo ' + this.infoPlanes[0]['codigo'] + ' cod plan ' + this.codPlan);*/
-          
-          this.vfSemestre = '';
-        }
-        console.log('semestre ' + this.vfSemestre);
 
-        this.formulasService.formulasConse(this.vcId,this.vfSemestre).subscribe(
+      this.noConsejo = String(this.datosComponentService.resDatos[1]);
+      this.vfSemestre = String(this.datosComponentService.resDatos[3]);
+
+      if (this.vcId !=0){
+          if (this.vcId == 8) {
+            this.vfSemestre > 4 ? this.vfSemestre == '' : this.vfSemestre;
+            var arrayCodPlan = this.codPlan.split(/([0-9]+)/);
+            // console.log('cod plan' + arrayCodPlan);
+            this.codPlan = arrayCodPlan[1];
+            // console.log('cod plan' + arrayCodPlan[1]);
+          } else if (this.vcId == 9) {
+            this.vfSemestre = this.vfSemestre;
+            this.codPlan = '';
+          } else if (this.vcId == 10) {
+            this.vfSemestre = this.vfSemestre;
+            this.codPlan = '';
+          } else {
+            this.vfSemestre = '';
+            this.codPlan = '';
+          }
+          
+          // console.log('semestre ' + this.vfSemestre);
+        }
+        
+
+        this.formulasService.formulasConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
           res=>{
-            console.log("status del servicio: "+JSON.stringify(res.success));
-            console.log("data formulas consejo servicio: "+JSON.stringify(res.data));
+            /* console.log("status del servicio: "+JSON.stringify(res.success));
+            console.log("data formulas consejo servicio: "+JSON.stringify(res.data)); */
             this.formulas = res.data;
             if(this.formulas!=''){
               this.forConsejo = res.data[0]['VcNombre'];
-              console.log("forconsejo "+this.forConsejo);
-              console.log(res);
+              /* console.log("forconsejo "+this.forConsejo);
+              console.log(res); */
             }else{
               this.forConsejo = this.noConsejo;
-              console.log(this.forConsejo);
-              console.log(res);
+              /* console.log(this.forConsejo);
+              console.log(res); */
             }
             
         },
         err => console.error(err)
         );
-      }  
+        
   }
-  
   
   /* activada desde el buton del formulario y guarda la data */
   continuar(noFormul: string,fPresiFoto: string,nomfPresi: string,fVicepreFoto: string,nomfVicepre: string,VfId: number){
@@ -89,8 +98,8 @@ export class FormulasConsejoComponent implements OnInit {
     
   // Mostrar la x
 	this.valuId = VfId;
-	console.log(' id formula ' + VfId);
-	console.log(' id value ' + this.valuId);
+	/* console.log(' id formula ' + VfId);
+	console.log(' id value ' + this.valuId); */
 	
     
     this.dataFormu = [
@@ -102,10 +111,6 @@ export class FormulasConsejoComponent implements OnInit {
       VfId
     ]
     this.datosComponentService.guarDatosFormula(this.dataFormu);
-  }
-
-  iraRepresent(votacion: string){
-
   }
 
 }

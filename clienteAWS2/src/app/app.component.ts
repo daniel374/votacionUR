@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import { DatosComponentService } from './services/datos-component.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +10,17 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit{
   titulo = 'votaciones';
-
-  constructor(private authService: AuthService) {}
+  carga = 'Cargando...';
+  constructor(
+    private authService: AuthService,
+    private spinner: NgxSpinnerService,
+    private datosComponentService: DatosComponentService
+    ) {}
 
   ngOnInit() {
-  	this.authService.initAuth();
+    this.authService.initAuth();
+    this.datosComponentService.mensajeSpinner(this.carga);
   }
+
+  
 }

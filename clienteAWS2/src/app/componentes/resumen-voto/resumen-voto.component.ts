@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { RegisVotoService } from '../../services/regis-voto.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-resumen-voto',
@@ -12,7 +12,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbModalConfig, NgbModal]
 })
 export class ResumenVotoComponent implements OnInit {
-
+  carga = 'Registrando Voto...';
   public vcId: any;
   public nomConsejo: any;
   /* data formu y repre */
@@ -49,6 +49,7 @@ export class ResumenVotoComponent implements OnInit {
     private datosComponentService: DatosComponentService,
     private regisVotoService: RegisVotoService,
     private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
 	config: NgbModalConfig
   ) { 
     config.backdrop = 'static';
@@ -64,13 +65,13 @@ export class ResumenVotoComponent implements OnInit {
       console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
       
     this.vcId = this.dataForRepre[0] || 0;
-	this.nomConsejo = this.dataForRepre[1];  
-    this.nomFormula = this.dataForRepre[3];
-    this.forPresiFoto = this.dataForRepre[4];
-    this.nomforPresi = this.dataForRepre[5];
-    this.forVipreFoto = this.dataForRepre[6];
-    this.nomforVipre = this.dataForRepre[7];
-    this.idFormul = this.dataForRepre[8];
+	  this.nomConsejo = this.dataForRepre[1];  
+    this.nomFormula = this.dataForRepre[4];
+    this.forPresiFoto = this.dataForRepre[5];
+    this.nomforPresi = this.dataForRepre[6];
+    this.forVipreFoto = this.dataForRepre[7];
+    this.nomforVipre = this.dataForRepre[8];
+    this.idFormul = this.dataForRepre[9];
       
 
     console.log("nombre formula  "+this.nomFormula);
@@ -84,11 +85,11 @@ export class ResumenVotoComponent implements OnInit {
     /*     this.datosRepre = 
     console.log("datos Representante  "+this.datosRepre); */
 
-    this.repreFoto = this.dataForRepre[9];
-    this.nomRepre = this.dataForRepre[10];
-    this.semestRepre = this.dataForRepre[11];
-    this.planRepre = this.dataForRepre[12];
-    this.idRepre = this.dataForRepre[13];
+    this.repreFoto = this.dataForRepre[10];
+    this.nomRepre = this.dataForRepre[11];
+    this.semestRepre = this.dataForRepre[12];
+    this.planRepre = this.dataForRepre[13];
+    this.idRepre = this.dataForRepre[14];
         
     console.log("foto representante  "+this.repreFoto);
     console.log("nombre representante  "+this.nomRepre);
@@ -100,9 +101,6 @@ export class ResumenVotoComponent implements OnInit {
 
   votar(modal){
     
-	console.log("datos res WS "+this.datosComponentService.resDatos);
-    
-
     this.datosEstudi = localStorage.getItem('datosUsuario');
     this.datosEstudi = JSON.parse(this.datosEstudi);
     this.esNom = this.datosEstudi['displayName'];
@@ -122,22 +120,22 @@ export class ResumenVotoComponent implements OnInit {
       
     }
     /* servicio Guarda Voto */
-	this.registroVoto();
-	this.modalService.open(modal, { centered: true });
+	  this.registroVoto(modal);
   }
 
 
-  registroVoto() {
+  registroVoto(modal) {
+    this.spinner.show();
 	  this.regisVotoService.regisVoto(this.numDoc, this.vcId, this.idFormul, this.idRepre).subscribe(
       res => {
+        this.spinner.hide();
         this.idVoto = JSON.stringify(res.data[0][0]['id']);
-		  console.log('El response del servicio lambda ');
-          console.log(res.data);
-		  console.log('id ');
-		  console.log(this.idVoto);
-		    
+        this.modalService.open(modal, { centered: true });
       },
-      err => console.error(err)
+      err => {
+        this.spinner.hide();
+        console.error(err);
+      }
     );
 	  return this.idVoto;
   }

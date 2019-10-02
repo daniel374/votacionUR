@@ -13,14 +13,14 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RepresentantesService } from './services/representantes.service';
 import { FormulasService } from './services/formulas.service';
 import { DatosComponentService } from './services/datos-component.service';
-import { SpinnerService } from './services/spinner.service';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SpinnerComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,10 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
     RouterModule,
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule  
+    NgbAlertModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    NgxSpinnerModule
   ],
   exports: [
   ],
@@ -41,8 +44,7 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
     ConsejosService,
     RepresentantesService,
     FormulasService,
-    DatosComponentService,
-    SpinnerService
+    DatosComponentService
   ],
   bootstrap: [AppComponent]
 })
