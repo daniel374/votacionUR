@@ -46,7 +46,8 @@ export class NavegacionComponent implements OnInit {
     //Change visual state
     this.session = false;
     this.ref.detectChanges();
-    this.pageName = 'votacion/';
+    localStorage.clear();
+    this.pageName = '/';
     this.router.navigate([`${this.pageName}`])
   }
 }

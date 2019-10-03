@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('numDoc', numDoc);
                 this.session = true;
                 this.ref.detectChanges();
-                this.getTokenAndRedirect(type, me.userPrincipalName);
+                this.getTokenAndRedirect(type);
             }else{
                 this.spinner.hide();
                 console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
@@ -100,15 +100,9 @@ export class LoginComponent implements OnInit {
         });
     }
     // consume servicio de proximate y retorna Token
-    getTokenAndRedirect(type, userPrincipalName): void {
+    getTokenAndRedirect(type): void {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         let respo: any;
-        console.log('userPrincipalName ' + userPrincipalName);
-        console.log('this.authService.hasSessiontoken()');
-        console.log(this.authService.hasSessiontoken());
-        // Getting token from our backend, we secure this combine email and msal token.
-        // 'webadmin/authentication/tokensuniquesession' >
-        // "https://serveless.proximateapps-services.com.mx/CasaUR/DEV/webadmin/authentication/login"
         respo = this.http.post<ResponseWs>(Configs.url + 'webadmin/authentication/login', {
             correo: 'proximateapps@gmail.com',
             // email: "aoropeza@proximateapps.com",
@@ -145,30 +139,25 @@ export class LoginComponent implements OnInit {
 		var arrayinfoPlanes: any = [];
         this.estudianteService.dataEstudiante().subscribe(d => {
             
-        /*  console.log('status del servicio: ' + JSON.stringify(d.statusCode));*/
-        console.log('data estudiante servicio: ' + JSON.stringify(d.body)); 
+        //console.log('data estudiante servicio: ' + JSON.stringify(d.body)); 
         var parserXML = new DOMParser();
-        var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');            
-        console.log('xml ', xmlDocEs);
+        var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml'); 
             /* ************* JSON ARRAY ************** */
         var obj = this.ngxXml2jsonService.xmlToJson(xmlDocEs);
         var objArray = obj['soapenv:Envelope']['S:Body']['wss:getProgramasResponse']['wss:return'];
-        console.log(JSON.stringify(objArray));
-        console.log('longitud ');
-        /* var leng = objArray.length;
-        console.log(leng); */
+        //console.log(JSON.stringify(objArray));
         
         if (objArray.length) {
             /* *************** Valida los Datos *************** */
-            objArray.forEach(function(elemt,ind) {
+            objArray.forEach(function(elemt) {
                 /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
-                var tipoest = xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
-                var bloqueado = xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
-                var cerrado = xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
-                var retirado = xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
-                var programa = xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
-                var semestre = xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
-                
+                var tipoest = elemt["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
+                var bloqueado = elemt["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
+                var cerrado = elemt["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
+                var retirado = elemt["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
+                var programa = elemt["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
+                var semestre = elemt["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
+
                 if (tipoest === "PRE") {
                     if (bloqueado === "N") {
                         if (cerrado === "N") {
@@ -187,7 +176,7 @@ export class LoginComponent implements OnInit {
                     habilitado = false;
                 }
 
-                if (habilitado == false) { // Se debe cambiar a true
+                if (habilitado === true) { // Se debe cambiar a true
                     console.log('El Estudiante se encuentra habilido para el programa ' + programa);
                     infoPlanes = {
                         codigo: `${programa}`,
@@ -200,14 +189,14 @@ export class LoginComponent implements OnInit {
             });
         } else {
             /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
-            var tipoest = xmlDocEs.getElementsByTagName('xsd:tipoest')[0].childNodes[0].nodeValue;
-            var bloqueado = xmlDocEs.getElementsByTagName('xsd:bloqueado')[0].childNodes[0].nodeValue;
-            var cerrado = xmlDocEs.getElementsByTagName('xsd:cerrado')[0].childNodes[0].nodeValue;
-            var retirado = xmlDocEs.getElementsByTagName('xsd:retirado')[0].childNodes[0].nodeValue;
-            var programa = xmlDocEs.getElementsByTagName('xsd:programa')[0].childNodes[0].nodeValue;
-            if (xmlDocEs.getElementsByTagName('xsd:semestre')) {
-                var semestre = xmlDocEs.getElementsByTagName('xsd:semestre')[0].childNodes[0].nodeValue;
-            } else {
+            var tipoest = objArray["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
+            var bloqueado = objArray["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
+            var cerrado = objArray["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
+            var retirado = objArray["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
+            var programa = objArray["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
+            var semestre = objArray["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
+
+            if (!semestre) {
                 this.spinner.hide();
                 this.ngZone.run(() =>this.router.navigate(['/'])).then();
                 console.log('No tiene permiso, no cuenta con semestre ');
@@ -232,7 +221,7 @@ export class LoginComponent implements OnInit {
                 habilitado = false;
             }
 
-            if (habilitado == false) { // Se debe cambiar a true
+            if (habilitado == true) { // Se debe cambiar a true
                 console.log('El Estudiante se encuentra habilido para el programa ' + programa);
                 infoPlanes = {
                     codigo: `${programa}`,
@@ -257,16 +246,13 @@ export class LoginComponent implements OnInit {
 
 
     logout(): void {
-        // Call api msal
         this.authService.logout()
-        // Change visual state
         this.session = false;
         this.ref.detectChanges();
     }
 
     checkSession(): void {
         console.log("[checkSession]");
-
         // Change visual state, if has ó hasnt token
         if ( this.authService.hasSessiontoken()) {
             console.log("[checkSession] has token, verify token wit http");

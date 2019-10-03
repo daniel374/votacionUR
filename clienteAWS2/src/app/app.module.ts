@@ -18,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+export function tokenGetter() {
+  return localStorage.getItem("meToken");
+}
+
 @NgModule({
   declarations: [
     AppComponent
