@@ -49,7 +49,7 @@ export class FormulasConsejoComponent implements OnInit {
       this.noConsejo = String(this.datosComponentService.resDatos[1]);
       this.vfSemestre = String(this.datosComponentService.resDatos[3]);
 
-      if (this.vcId !=0){
+      if (this.vcId){
           if (this.vcId == 8) {
             this.vfSemestre > 4 ? this.vfSemestre == '' : this.vfSemestre;
             var arrayCodPlan = this.codPlan.split(/([0-9]+)/);
@@ -68,10 +68,7 @@ export class FormulasConsejoComponent implements OnInit {
           }
           
           // console.log('semestre ' + this.vfSemestre);
-        }
-        
-
-        this.formulasService.formulasConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
+		  this.formulasService.formulasConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
           res=>{
             /* console.log("status del servicio: "+JSON.stringify(res.success));
             console.log("data formulas consejo servicio: "+JSON.stringify(res.data)); */
@@ -89,6 +86,10 @@ export class FormulasConsejoComponent implements OnInit {
         },
         err => console.error(err)
         );
+      }
+        
+
+        
         
   }
   

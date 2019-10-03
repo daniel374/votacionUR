@@ -56,7 +56,19 @@ export class RepresentantesConsejoComponent implements OnInit {
       this.nomforPresi = this.datosComponentService.resDatos[6];
       this.forVipreFoto = this.datosComponentService.resDatos[7];
       this.nomforVipre = this.datosComponentService.resDatos[8];
-      if(this.vcId !=0){
+	  
+      if(this.vcId){
+		  
+		if (this.vcId > 4 && this.vcId < 9 ) {
+            var arrayCodPlan = this.codPlan.split(/([a-zA-Z]+)/);// colocar -
+            console.log('cod plan' + arrayCodPlan);
+            this.codPlan = arrayCodPlan[1];
+            
+
+          } else {
+            this.codPlan = '';			
+          }
+		  
         console.log(this.vcId);
         console.log('plan ' + this.codPlan );
         console.log('semestre ' + this.vfSemestre);

@@ -9,7 +9,7 @@
         
         <div class="row">
                   
-            <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let consejo of consejos">
+            <div class="col-md-6 col-lg-6 col-sm-6" *ngFor="let consejo of consejos">
                       
                 <label>
                     <input *ngIf="consejo.VlgFechaVotacion == null" type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre, consejo.VplCodigo, consejo.VepSemestre)"/>
@@ -25,6 +25,7 @@
                         
                     <h6 style="color: #424242">{{consejo.VcNombre}}</h6>
                     <div style="flex: content;">
+                        <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">Fecha del voto:</h6>
                         <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">{{consejo.VlgFechaVotacion}}</h6>
                         <h5 style="align-self: right; color: #AB2328" *ngIf="consejo.VlgFechaVotacion == null">Pendiente de votación</h5>
                     </div>
