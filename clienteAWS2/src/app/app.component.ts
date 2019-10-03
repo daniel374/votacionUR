@@ -10,7 +10,7 @@ import { DatosComponentService } from './services/datos-component.service';
 })
 export class AppComponent implements OnInit{
   titulo = 'votaciones';
-  carga = 'Cargando...';
+  mensaje: any;
   constructor(
     private authService: AuthService,
     private spinner: NgxSpinnerService,
@@ -19,7 +19,8 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.authService.initAuth();
-    this.datosComponentService.mensajeSpinner(this.carga);
+    this.mensaje = this.datosComponentService.mensajeSpinner();
+
   }
 
   

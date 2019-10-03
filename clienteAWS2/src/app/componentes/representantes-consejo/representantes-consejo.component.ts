@@ -12,6 +12,9 @@ export class RepresentantesConsejoComponent implements OnInit {
 
   public valuId: number = 0;
   vcId: any;
+  vfSemestre: any;
+  codPlan: any;
+
   /* data formula */
   public nomFormula: any;
   public forPresiFoto: any;
@@ -46,20 +49,23 @@ export class RepresentantesConsejoComponent implements OnInit {
       this.dataFormula = this.datosComponentService.resDatos[2];//JSON.stringify(p);
       console.log("data formula  "+this.dataFormula);
       this.vcId = this.datosComponentService.resDatos[0] || 0;
-      this.nomFormula = this.datosComponentService.resDatos[2];
-      this.forPresiFoto = this.datosComponentService.resDatos[3];
-      this.nomforPresi = this.datosComponentService.resDatos[4];
-      this.forVipreFoto = this.datosComponentService.resDatos[5];
-      this.nomforVipre = this.datosComponentService.resDatos[6];
+      this.codPlan = this.datosComponentService.resDatos[2];
+      this.vfSemestre = String(this.datosComponentService.resDatos[3]);
+      this.nomFormula = this.datosComponentService.resDatos[4];
+      this.forPresiFoto = this.datosComponentService.resDatos[5];
+      this.nomforPresi = this.datosComponentService.resDatos[6];
+      this.forVipreFoto = this.datosComponentService.resDatos[7];
+      this.nomforVipre = this.datosComponentService.resDatos[8];
       if(this.vcId !=0){
-        //console.log(this.vcId);
-
-        /* console.log("nombre formula  "+this.nomFormula);
+        console.log(this.vcId);
+        console.log('plan ' + this.codPlan );
+        console.log('semestre ' + this.vfSemestre);
+        console.log("nombre formula  "+this.nomFormula);
         console.log("foto presidente  "+this.forPresiFoto);
         console.log("nombre presidente  "+this.nomforPresi);
         console.log("foto vicepresidente  "+this.forVipreFoto);
-        console.log("nombre vicepresidente  "+this.nomforVipre); */
-        this.representantesService.representConse(this.vcId).subscribe(
+        console.log("nombre vicepresidente  "+this.nomforVipre);
+        this.representantesService.representConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
           res => {
             console.log("status del servicio: "+JSON.stringify(res.success));
             console.log("data representantes servicio: "+JSON.stringify(res.data));
@@ -95,10 +101,6 @@ export class RepresentantesConsejoComponent implements OnInit {
     ]
 
     this.datosComponentService.guarDatosRepre(this.dataRepre);
-
-  }
-
-  iraRepresent(votacion: string){
 
   }
 

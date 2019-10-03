@@ -6,11 +6,16 @@ import { Injectable } from '@angular/core';
 export class DatosComponentService {
 
   public resDatos: any = [];
-  public msjSpinner: any;
+  public msjSpinner: any = 'Cargando...';
   constructor() { }
 
-  mensajeSpinner(mensaje: any){
-    this.msjSpinner = mensaje;
+  cambiaSpinner(msj: any){
+    this.msjSpinner = msj;
+    return this.msjSpinner;
+  }
+
+  mensajeSpinner(){
+    //this.msjSpinner = mensaje;
     return this.msjSpinner;
   }
   guarDatosConsejo(datosConsejo: any){

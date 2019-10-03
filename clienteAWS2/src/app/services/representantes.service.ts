@@ -8,8 +8,8 @@ import { ResWsBD } from '../interfaces/ResWsBD';
   providedIn: 'root'
 })
 export class RepresentantesService {
-  /* Servicios Backend Node.js */
-  API_URI = 'http://localhost:3000/api/votaciones/Consejos/Representantes/';
+  
+  xmlBody: any;
 
   /* Servicos AWS */
   project: string = "casaur";
@@ -17,18 +17,9 @@ export class RepresentantesService {
   Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
 
   constructor(private http: HttpClient) { }
-  
-  /* Servicios Backend Node.js */
-  getRepresentantes() {
-    return this.http.get(`${this.API_URI}`);
-  }
-  
-  getRepresentConse(id: number) {
-    return this.http.get(`${this.API_URI}${id}`);
-  }
 
   /* service AWS */
-  representConse(vcId: any){
+  representConse(vcId: any,vfSemestre: any, codPlan: any){
     let newToken = localStorage.getItem('newToken');
     console.log("token new "+newToken);
     if (newToken === ''){
@@ -41,28 +32,294 @@ export class RepresentantesService {
     });
     console.log("headers:");
     console.log(headers);
+    if (vcId < 5) {
+      this.xmlBody = {
+        "fields": "*",
+        "table": "vot_representantes",
+        "joins": [
+          {
+            "table": "vot_plan",
+            "on": "vot_representantes.VrepPlan = vot_plan.VplId",
+            "type": "left"
+          }
+        ],
+        "wheres": [
+          {
+            "type": "where",
+            "conditions": {"VplConsejo": `${vcId}`}
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VrepPeriodo !=" : null}
+          },
+          {  
+            "type": "whereOR", 
+            "key": "VrepSemestre", 
+            "value": `${vfSemestre}`
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VplConsejo" : `${vcId}`}
+          },
+          {
+            "type" : "where",
+            "conditions" : {"VrepPeriodo" : null}
+          }
+        ]
+      };
+    } else if (vcId > 4 && vcId < 8) {
+      if (vfSemestre < 5) {
+        this.xmlBody = {
+          "fields": "*",
+          "table": "vot_representantes",
+          "joins": [
+            {
+              "table": "vot_plan",
+              "on": "vot_representantes.VrepPlan = vot_plan.VplId",
+              "type": "left"
+            }
+          ],
+          "wheres": [
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepSemestre": `${vfSemestre}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo !=": null
+              }
+            },
+            {
+              "type": "whereOR",
+              "key": "VrepSemestre",
+              "value": `${vfSemestre}`
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo": null
+              }
+            }
+          ]
+        }
+      } else {
+        this.xmlBody = {
+          "fields": "*",
+          "table": "vista_vot_repre_codigo",
+          "wheres": [
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo !=": null
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplCodigo": `${codPlan}`
+              }
+            },
+            {
+              "type": "whereOR",
+              "key": "VrepSemestre",
+              "value": null
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo": null
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplCodigo": `${codPlan}`
+              }
+            }
+          ]
+        };
+      }
+    } else if (vcId == 8) {
+      if (vfSemestre < 4) {
+        this.xmlBody = {
+          "fields": "*",
+          "table": "vot_representantes",
+          "joins": [
+            {
+              "table": "vot_plan",
+              "on": "vot_representantes.VrepPlan = vot_plan.VplId",
+              "type": "left"
+            }
+          ],
+          "wheres": [
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepSemestre": `${vfSemestre}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo !=": null
+              }
+            },
+            {
+              "type": "whereOR",
+              "key": "VrepSemestre",
+              "value": `${vfSemestre}`
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo": null
+              }
+            }
+          ]
+        };
+      } else {
+        this.xmlBody = {
+          "fields": "*",
+          "table": "vista_vot_repre_codigo",
+          "wheres": [
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo !=": null
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplCodigo": `${codPlan}`
+              }
+            },
+            {
+              "type": "whereOR",
+              "key": "VrepSemestre",
+              "value": null
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplConsejo": `${vcId}`
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VrepPeriodo": null
+              }
+            },
+            {
+              "type": "where",
+              "conditions": {
+                "VplCodigo": `${codPlan}`
+              }
+            }
+          ]
+        };
+      }
+    } else {
+      this.xmlBody = {
+        "fields": "*",
+        "table": "vot_representantes",
+        "joins": [
+          {
+            "table": "vot_plan",
+            "on": "vot_representantes.VrepPlan = vot_plan.VplId",
+            "type": "left"
+          }
+        ],
+        "wheres": [
+          {
+            "type": "where",
+            "conditions": {
+              "VplConsejo": `${vcId}`
+            }
+          },
+          {
+            "type": "where",
+            "conditions": {
+              "VrepSemestre": `${vfSemestre}`
+            }
+          },
+          {
+            "type": "where",
+            "conditions": {
+              "VrepPeriodo !=": null
+            }
+          },
+          {
+            "type": "whereOR",
+            "key": "VrepSemestre",
+            "value": `${vfSemestre}`
+          },
+          {
+            "type": "where",
+            "conditions": {
+              "VplConsejo": `${vcId}`
+            }
+          },
+          {
+            "type": "where",
+            "conditions": {
+              "VrepPeriodo": null
+            }
+          }
+        ]
+      };
+    } 
     
-    let xmlBody = { 
-      "fields" : "*",
-      "table" : "vot_representantes",
-      "joins" : [
-        {
-          "table" : "vot_plan",
-          "on" : "vot_representantes.VrepPlan = vot_plan.VplId",
-          "type" : "left"
-        }
-      ],
-      "wheres" : [
-        {
-          "type" : "where",
-          "conditions" : {"VplConsejo" : `${vcId}`}
-        }
-      ]
-    };
     console.log("body serviceRepresentantes: ");
     
-    console.log(JSON.stringify(xmlBody));
-    return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});
+    console.log(JSON.stringify(this.xmlBody));
+    return this.http.post<ResWsBD>(this.Data_Est, this.xmlBody, {headers: headers});
   }
 
 }

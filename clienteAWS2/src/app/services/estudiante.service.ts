@@ -33,10 +33,8 @@ export class EstudianteService {
       'Content-Type': 'application/json',
       'Authorization': newToken
     });
-    console.log("headers:");
-    console.log(headers);
-    const cedulaEst = 1010202013;
-    let xmlBody = { "body": `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wss=\"http://wsservicios.urosario.edu.co\"><soapenv:Header/><soapenv:Body><wss:getProgramas><wss:identification>${cedulaEst}</wss:identification></wss:getProgramas></soapenv:Body></soapenv:Envelope>`};
+    var numDocEstu = localStorage.getItem('numDoc');
+    let xmlBody = { "body": `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wss=\"http://wsservicios.urosario.edu.co\"><soapenv:Header/><soapenv:Body><wss:getProgramas><wss:identification>${numDocEstu}</wss:identification></wss:getProgramas></soapenv:Body></soapenv:Envelope>`};
     console.log(JSON.stringify(xmlBody));
     return this.http.post<ResWsEstud>(this.Data_Est, xmlBody, {headers: headers});
     

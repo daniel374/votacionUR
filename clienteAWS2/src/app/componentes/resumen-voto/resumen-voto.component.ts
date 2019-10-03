@@ -58,6 +58,7 @@ export class ResumenVotoComponent implements OnInit {
 
   ngOnInit() {
     this.resumenVoto();
+    this.datosComponentService.cambiaSpinner('Registrando Voto');
   }
 
   resumenVoto(){
