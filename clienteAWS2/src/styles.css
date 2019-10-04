@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 @font-face {
     font-family: Nunito-Bold;
     src: url(./assets/fonts/Nunito-Bold.ttf) format("opentype");

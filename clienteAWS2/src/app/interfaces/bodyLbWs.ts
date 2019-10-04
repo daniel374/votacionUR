@@ -5,3 +5,10 @@ export interface bodyLbWs {
     VesEmail: string,
     infoPlanes: string
 }
+export interface representante {
+    VrepFoto ? : string,
+    VrepNombre: string,
+    VrepSemestre: any,
+    VplNombre: string,
+    VrepId: any
+}

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RepresentantesService } from '../../services/representantes.service';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { representante } from 'src/app/interfaces/bodyLbWs';
+import { FormControl, FormGroup} from '@angular/forms';
+import { NgSelectConfig } from '@ng-select/ng-select';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-representantes-consejo',
@@ -9,7 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./representantes-consejo.component.css']
 })
 export class RepresentantesConsejoComponent implements OnInit {
-
+  
+  selected: any;
   public valuId: number = 0;
   vcId: any;
   vfSemestre: any;
@@ -27,16 +32,23 @@ export class RepresentantesConsejoComponent implements OnInit {
 
   representantes: any = [];
   repConsejo: string;
+  /* multiselect */
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   public isButtonVisible: boolean;
   constructor(
     private representantesService: RepresentantesService, 
     private router: Router, 
     private route: ActivatedRoute,
-    private datosComponentService: DatosComponentService
-  ) { }
+    private datosComponentService: DatosComponentService,
+    private config: NgSelectConfig
+  ) {  }
 
   ngOnInit() {
+    /* multiselect */
+    
     /* trae los representantes del consejo */
     
     //console.log("datos res WS "+this.datosComponentService.resDatos);
@@ -44,10 +56,12 @@ export class RepresentantesConsejoComponent implements OnInit {
     this.infoRepre();
   }
 
+  
+
   infoRepre(){
     
       this.dataFormula = this.datosComponentService.resDatos[2];//JSON.stringify(p);
-      console.log("data formula  "+this.dataFormula);
+      // console.log("data formula  "+this.dataFormula);
       this.vcId = this.datosComponentService.resDatos[0] || 0;
       this.codPlan = this.datosComponentService.resDatos[2];
       this.vfSemestre = String(this.datosComponentService.resDatos[3]);
@@ -69,18 +83,14 @@ export class RepresentantesConsejoComponent implements OnInit {
             this.codPlan = '';			
           }
 		  
-        console.log(this.vcId);
+        /* 
         console.log('plan ' + this.codPlan );
         console.log('semestre ' + this.vfSemestre);
-        console.log("nombre formula  "+this.nomFormula);
-        console.log("foto presidente  "+this.forPresiFoto);
-        console.log("nombre presidente  "+this.nomforPresi);
-        console.log("foto vicepresidente  "+this.forVipreFoto);
-        console.log("nombre vicepresidente  "+this.nomforVipre);
+         */
         this.representantesService.representConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
           res => {
-            console.log("status del servicio: "+JSON.stringify(res.success));
-            console.log("data representantes servicio: "+JSON.stringify(res.data));
+            /* console.log("status del servicio: "+JSON.stringify(res.success));
+            console.log("data representantes servicio: "+JSON.stringify(res.data)); */
             this.representantes = res.data;
             console.log("representantes "+this.representantes)            
             if(this.representantes!=''){
@@ -97,19 +107,19 @@ export class RepresentantesConsejoComponent implements OnInit {
      
   }
 
-  continuar(repreFoto: string,nomRepre: string,semestRepre: string,planRepre: string,VrepId: number){
+  continuar(repre: representante){
     this.isButtonVisible = true;
 	  
-	this.valuId = VrepId;
-	console.log(' id represen ' + VrepId);
-	console.log(' id value ' + this.valuId);
+	this.valuId = repre.VrepId;
+    /* console.log(' id represen ' + VrepId);
+    console.log(' id value ' + this.valuId); */
     //data repre para envio
     this.dataRepre = [
-      repreFoto,
-      nomRepre,
-      semestRepre,
-      planRepre,
-      VrepId
+      repre.VrepFoto,
+      repre.VrepNombre,
+      repre.VrepSemestre,
+      repre.VplNombre,
+      repre.VrepId
     ]
 
     this.datosComponentService.guarDatosRepre(this.dataRepre);

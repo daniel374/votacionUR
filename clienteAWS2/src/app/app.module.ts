@@ -18,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+
 export function tokenGetter() {
   return localStorage.getItem("meToken");
 }
@@ -36,7 +40,10 @@ export function tokenGetter() {
     NgbAlertModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgSelectModule,
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
   ],

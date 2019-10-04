@@ -25,11 +25,11 @@ export class NavegacionComponent implements OnInit {
   }
 
   checkSession(): void {
-    console.log("[checkSession]");
+    // console.log("[checkSession]");
     
     //Change visual state, if has ó hasnt token
     if( this.authService.hasSessiontoken() ){
-        console.log("[checkSession] has token, verify token wit http");
+        // console.log("[checkSession] has token, verify token wit http");
         this.session = true;
         this.ref.detectChanges();
     }

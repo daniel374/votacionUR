@@ -175,17 +175,16 @@ export class LoginComponent implements OnInit {
                 } else {
                     habilitado = false;
                 }
-
-                if (habilitado === true) { // Se debe cambiar a true
+                console.log("estado ", habilitado);
+                if (habilitado == true) { // Se debe cambiar a true
                     console.log('El Estudiante se encuentra habilido para el programa ' + programa);
                     infoPlanes = {
                         codigo: `${programa}`,
 					    semestre: `${semestre}`,
                     }
-
 					arrayinfoPlanes.push(infoPlanes);
 					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
-                } 
+                }
             });
         } else {
             /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
@@ -220,7 +219,7 @@ export class LoginComponent implements OnInit {
             } else {
                 habilitado = false;
             }
-
+            console.log("estado ", habilitado);
             if (habilitado == true) { // Se debe cambiar a true
                 console.log('El Estudiante se encuentra habilido para el programa ' + programa);
                 infoPlanes = {
@@ -232,14 +231,12 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
             }
         }
-
-            
-            this.spinner.hide();
-            if (arrayinfoPlanes != null && arrayinfoPlanes.length > 0){
-                this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
-            }else{
-                console.log('El Estudiante no se encuentra habilitado para votar comuniquese con el encargado');
-            }
+        this.spinner.hide();
+        if (arrayinfoPlanes != null && arrayinfoPlanes.length > 0){
+            this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
+        }else{
+            console.log('El Estudiante no se encuentra habilitado para votar comuniquese con el encargado');
+        }
         });
         
     }
@@ -263,6 +260,7 @@ export class LoginComponent implements OnInit {
             this.session = false;
             this.ref.detectChanges();
         }
+        
     }
 
 }
