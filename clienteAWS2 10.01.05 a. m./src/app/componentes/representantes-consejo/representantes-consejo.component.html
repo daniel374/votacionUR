@@ -1,0 +1,143 @@
+<app-navegacion></app-navegacion>
+<div class="conteiner-represent">
+    <!-- <br>
+        <div class="image" style="margin-left: 2%;">
+            <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
+        </div>
+    <hr/> -->
+    <br>
+    <h2 class="titulo display-6">Consejo Estudiantil</h2>
+    <h2 class="titulo display-6" style="color:#AB2328;">{{repConsejo}}</h2>
+    <br>
+    <h3 class="subtitulo display-6">SELECCIONA EL REPRESENTANTE POR EL CUAL DESEAS VOTAR</h3>
+
+</div>
+
+<div *ngIf="this.vcId != '10'" class="row card-group">
+
+    <div class="col-md-6 col-lg-6 col-sm-6" *ngFor="let representante of representantes"
+        style="justify-content: center;">
+
+        <label>
+            <input type="radio" name="representante" class="card-input-element" (click)="continuar(representante);"
+                [value]="representante.VrepId"/>
+
+
+            <div class="panel panel-default card-input">
+
+
+                <!--  -->
+                <div class="card">
+
+                    <img *ngIf="this.valuId === representante.VrepId" class="imagenX"
+                        src="../../../assets/imagenes/x.png" alt="imagen x">
+
+                    <div class="card-header" style="background: #e8e8e8; border: none;">
+                        <div id="conten-bloque-line-height" style="display: inline-block;">
+
+                            <!--<div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>-->
+                        </div>
+
+                    </div>
+                    <div class="card-block" style="background: #e8e8e8; border: none;">
+                        <div class="row">
+                            <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                <img src='{{representante.VrepFoto}}' class="card-img-top" alt="foto Presidente">
+                            </div>
+
+                            <div class="row card card-outline-success m-x-auto"
+                                style="background: #e8e8e8; border: none;">
+                                <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
+                                    <br>
+                                    <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
+
+                                    <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'">Semestre
+                                        {{representante.VrepSemestre}}</h6>
+                                    <h6>{{representante.VplNombre}}</h6>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </label>
+
+    </div>
+</div>
+    <!-- medicina -->
+<div *ngIf="this.vcId == '10'" class="row card-group">
+
+
+        <div class="col-md-6 col-lg-6 col-sm-6" style="justify-content: center;">
+        
+        <div class="input-group" *ngFor="let representante of representantes">
+                   
+            
+            <label>
+                    <input type="radio" name="representante" class="card-input-element" (click)="conti2Repre(representante);"
+                        [value]="representante.VrepId"/>
+        
+                        
+                    <div class="panel panel-default card-input">
+        
+                        <div class="card">
+        
+                            <img *ngIf="this.ponerX.indexOf(representante.VrepId) >= 0" class="imagenX"
+                                src="../../../assets/imagenes/x.png" alt="imagen x">
+        
+                            <div class="card-header" style="background: #e8e8e8; border: none;">
+                                <div id="conten-bloque-line-height" style="display: inline-block;">
+        
+                                </div>
+        
+                            </div>
+                            <div class="card-block" style="background: #e8e8e8; border: none;">
+                                <div class="row">
+                                    <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
+                                        <img src='{{representante.VrepFoto}}' class="card-img-top" alt="foto Presidente">
+                                    </div>
+        
+                                    <div class="row card card-outline-success m-x-auto"
+                                        style="background: #e8e8e8; border: none;">
+                                        <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
+                                            <br>
+                                            <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
+        
+                                            <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'">Semestre
+                                                {{representante.VrepSemestre}}</h6>
+                                            <h6>{{representante.VplNombre}}</h6>
+                                        </div>
+        
+                                    </div>
+        
+                                </div>
+                            </div>
+        
+                        </div>
+                    
+                    </div>
+        
+                </label>
+        
+        </div>
+    
+        
+
+    </div>
+    
+
+</div>
+
+
+
+<div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
+    <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" routerLink="resumenVoto"
+        routerLinkActive="router-link-active" style="border-radius:15px;">
+        <h1 style="color: white;">Continuar</h1>
+    </a>
+</div>
