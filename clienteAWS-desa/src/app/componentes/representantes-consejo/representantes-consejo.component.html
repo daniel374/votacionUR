@@ -1,10 +1,6 @@
 <app-navegacion></app-navegacion>
 <div class="conteiner-represent">
-    <!-- <br>
-        <div class="image" style="margin-left: 2%;">
-            <img src="../../../assets/imagenes/logo.png" alt="logo imagen">
-        </div>
-    <hr/> -->
+
     <br>
     <h2 class="titulo display-6">Consejo Estudiantil</h2>
     <h2 class="titulo display-6" style="color:#AB2328;">{{repConsejo}}</h2>
@@ -135,7 +131,7 @@
 
 
 
-<div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
+<div class="continuar" *ngIf="this.isButtonVisible" (click)="regisVoto();">
     <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" routerLink="resumenVoto"
         routerLinkActive="router-link-active" style="border-radius:15px;">
         <h1 style="color: white;">Continuar</h1>

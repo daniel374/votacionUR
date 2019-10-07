@@ -71,15 +71,15 @@
                                     <div class="card-block" style="background: #e8e8e8; border: none;">
                                         <div class="row">
                                             <div class="col-lg-4 tags p-b-2" style="margin: 3%; background: #e8e8e8">
-                                                    <img src='{{representante.repreFoto}}' class="card-img-top" alt="foto Presidente">
+                                                    <img src='{{representante.VrepFoto}}' class="card-img-top" alt="foto Presidente">
                                             </div>
                                             
                                                 <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
                                                     <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
                                                         <br>
-                                                        <h5 style="color: #AB2328">{{representante.nomRepre}}</h5>
-                                                        <h6 *ngIf="representante.nomRepre.toLowerCase() != 'voto en blanco' ">Semestre: {{representante.semestRepre}}</h6>
-                                                        <h6>{{representante.planRepre}}</h6>
+                                                        <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
+                                                        <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco' ">Semestre: {{representante.VrepSemestre}}</h6>
+                                                        <h6>{{representante.VplNombre}}</h6>
                                                     </div>
                                                     
                                                 </div>

@@ -79,44 +79,34 @@ export class ResumenVotoComponent implements OnInit {
       
 
     /* para el caso de mandar dos representantes */
-    if (this.dataForRepre.length > 10) {
+    if (this.dataForRepre.length > 12) {
       this.representantes = [
         {
-          "repreFoto": `${this.dataForRepre[10]}`,
-          "nomRepre": `${this.dataForRepre[11]}`,
-          "semestRepre": `${this.dataForRepre[12]}`,
-          "planRepre": `${this.dataForRepre[13]}`,
-          "idRepre": `${this.dataForRepre[14]}`
+          "VrepFoto": `${this.dataForRepre[10]}`,
+          "VrepNombre": `${this.dataForRepre[11]}`,
+          "VrepSemestre": `${this.dataForRepre[12]}`,
+          "VplNombre": `${this.dataForRepre[13]}`,
+          "VrepId": `${this.dataForRepre[14]}`
         }
       ];
 
       console.log('data repre' + JSON.stringify(this.representantes));
 
     } else {
-      this.representantes = this.dataForRepre[10];
-      /* this.representantes = [
-        {
-          "repreFoto": `${this.dataForRepre[10]}`,
-          "nomRepre": `${this.dataForRepre[11]}`,
-          "semestRepre": `${this.dataForRepre[12]}`,
-          "planRepre": `${this.dataForRepre[13]}`,
-          "idRepre": `${this.dataForRepre[14]}`
-        },
-        {
-          "repreFoto": `${this.dataForRepre[15]}`,
-          "nomRepre": `${this.dataForRepre[16]}`,
-          "semestRepre": `${this.dataForRepre[17]}`,
-          "planRepre": `${this.dataForRepre[18]}`,
-          "idRepre": `${this.dataForRepre[19]}`
-        }
-      ]; */
-      console.log('data repre <= 10 ' + JSON.stringify(this.representantes));
+      this.representantes = [
+		  this.dataForRepre[10],
+	      this.dataForRepre[11]
+	  ];
+      
+	  console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
+	  console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
+      console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
     }
     
     console.log('INFORMACION Representante  ' + JSON.stringify(this.representantes));
 
     this.representantes.forEach(element => {
-      this.idRepre.push(element['idRepre']);
+      this.idRepre.push(element['VrepId']);
     })    
     console.log('los Id de repres: .' + JSON.stringify(this.idRepre));
     

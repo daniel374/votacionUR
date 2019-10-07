@@ -115,13 +115,17 @@ export class RepresentantesConsejoComponent implements OnInit {
     console.log('Id consejo ' + this.vcId);
   }
 
+
   /* medicina */
   conti2Repre(repre: representante){
-    this.isButtonVisible = true;
+    this.ponerX = this.ponerX.filter(function(element, index, array) {
+		return (element != null);  
+	});
     // muestra img X
     if (this.ponerX.length < 2 ) {
+	  	
       this.ponerX = this.ponerX.concat(repre.VrepId);
-      
+ 
       this.dataRepre = this.dataRepre.concat([
         {
           "VrepFoto": `${repre.VrepFoto}`,
@@ -132,9 +136,9 @@ export class RepresentantesConsejoComponent implements OnInit {
         }
       ]        
       );
-    } else {
+	} else {
       this.dataRepre.reverse();
-
+      this.ponerX.reverse();
       this.dataRepre.splice(1, 1, {
         "VrepFoto": `${repre.VrepFoto}`,
         "VrepNombre": `${repre.VrepNombre}`,
@@ -143,20 +147,26 @@ export class RepresentantesConsejoComponent implements OnInit {
         "VrepId": `${repre.VrepId}`,
       }
       );
-
-
-
-      /* this.dataRepre.forEach(element => {
-        this.secuRepre.push(element);
-      }) */
+      this.ponerX.splice(1,1,repre.VrepId);
+	  
     }
+	
+	if (this.ponerX.length == 2) {
+	  this.isButtonVisible = true;
+	}
+	
     console.log('ponerx ' + JSON.stringify(this.ponerX));
     
 
     console.log('dataRepre ' + JSON.stringify(this.dataRepre));
     console.log('Id consejo ' + this.vcId);
-    this.datosComponentService.guarDatosRepre(this.dataRepre, this.vcId);
+    
 
+  }
+
+  regisVoto(){
+	  this.isButtonVisible = false;
+	  this.datosComponentService.guarDatosRepre(this.dataRepre, this.vcId);
   }
 
 }
