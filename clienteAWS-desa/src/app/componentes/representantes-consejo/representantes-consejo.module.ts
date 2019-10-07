@@ -13,7 +13,7 @@ import { NavegacionModule } from '../navegacion/navegacion.module';
   imports: [
     CommonModule,
     RepresentantesConsejoRoutingModule,
-	NavegacionModule
+	  NavegacionModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

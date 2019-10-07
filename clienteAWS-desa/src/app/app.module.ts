@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes  } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,12 +16,11 @@ import { FormulasService } from './services/formulas.service';
 import { DatosComponentService } from './services/datos-component.service';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxSpinnerModule } from "ngx-spinner";
-
-import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+import { MDBBootstrapModule, DropdownModule } from 'angular-bootstrap-md';
+import { NavegacionModule } from './componentes/navegacion/navegacion.module';
+
 
 export function tokenGetter() {
   return localStorage.getItem("meToken");
@@ -39,11 +39,11 @@ export function tokenGetter() {
     NgbPaginationModule,
     NgbAlertModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule,
     NgxSpinnerModule,
-    NgSelectModule,
     FormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    DropdownModule.forRoot(),
+    NavegacionModule
   ],
   exports: [
   ],

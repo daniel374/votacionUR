@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Configs } from '../lib/config';
 import { ResWsBD } from '../interfaces/ResWsBD';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class FormulasService {
   xmlBody: any;
   project: string = "casaur";
   enviroment: string = "dev";
-  Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
-  
+  //data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
+  data_Est = Configs.url+'/webadmin/generic/gettable';
 
   constructor(private http: HttpClient) { }
 
@@ -107,7 +107,7 @@ export class FormulasService {
     console.log("body serviceFormula: ");
     
     console.log(JSON.stringify(this.xmlBody));
-    return this.http.post<ResWsBD>(this.Data_Est, this.xmlBody, {headers: headers});
+    return this.http.post<ResWsBD>(this.data_Est, this.xmlBody, {headers: headers});
     
   }
 

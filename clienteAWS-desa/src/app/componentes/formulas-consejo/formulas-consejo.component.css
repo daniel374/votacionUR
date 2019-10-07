@@ -19,7 +19,9 @@
 	background-position: center center;
 	opacity: 0.5;
 }
-
+.card-block {
+    width: 100%;
+}
 .card-group {
 	width: auto; 
 	height: auto;
@@ -80,7 +82,7 @@ body {
 }
 
 .row {
-  max-width: 1000px;
+  width: 80%;
   margin: auto;
 }
 

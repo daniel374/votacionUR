@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Configs } from '../lib/config';
 import { ResWsBD } from '../interfaces/ResWsBD';
 import { bodyLbWs } from '../interfaces/bodyLbWs';
 
@@ -13,13 +13,14 @@ export class ConsejosService {
   /* Servicos AWS */
   project: string = "casaur";
   enviroment: string = "dev";
-  Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/voting/savestudent`;
-
+  //data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/voting/savestudent`;
+  data_Est = Configs.url+'/webadmin/voting/savestudent';
+  
   constructor(private http: HttpClient) { }
 
     /* Servicos AWS */
     getConsejos(tpDoc: number, numDoc: any, esNom: any, email: any, infoPlanes: any){
-    
+      console.log('url '+ this.data_Est);
       let newToken = localStorage.getItem('newToken');
       console.log('token new ' + newToken);
       if (newToken === ''){
@@ -52,7 +53,7 @@ export class ConsejosService {
       console.log('body service Lambda: ');
       console.log(xmlBody);
       console.log(xmlBody2);
-      return this.http.post<ResWsBD>(this.Data_Est, xmlBody2, {headers: headers});
+      return this.http.post<ResWsBD>(this.data_Est, xmlBody2, {headers: headers});
       
     }
 

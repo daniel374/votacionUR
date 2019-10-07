@@ -34,6 +34,9 @@
 	text-align:justify;
 	z-index: -1;
 }
+.card-block {
+    width: 100%;
+}
 .continuar {
     display: flex;
     align-items: center;
@@ -85,7 +88,7 @@ body {
 }
 
 .row {
-  max-width: 950px;
+  width: 80%;
   margin: auto;
   display: flex;
   flex-direction: row;

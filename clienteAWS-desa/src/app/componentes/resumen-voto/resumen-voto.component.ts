@@ -155,5 +155,10 @@ export class ResumenVotoComponent implements OnInit {
 	  return this.idVoto;
   }
 
+  limpiaDatos(){
+    this.representantes.splice(0,1);
+    this.representantes.splice(1,1);
+    this.datosComponentService.borrarData(this.dataLimp);
+  }
 
 }

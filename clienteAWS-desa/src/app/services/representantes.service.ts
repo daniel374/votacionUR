@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Configs } from '../lib/config';
 import { ResWsBD } from '../interfaces/ResWsBD';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class RepresentantesService {
   /* Servicos AWS */
   project: string = "casaur";
   enviroment: string = "dev";
-  Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
-
+  //data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/gettable`;
+  data_Est = Configs.url+'/webadmin/generic/gettable';
   constructor(private http: HttpClient) { }
 
   /* service AWS */
@@ -52,6 +52,10 @@ export class RepresentantesService {
             "type" : "where",
             "conditions" : {"VrepPeriodo !=" : null}
           },
+          {
+            "type" : "where",
+            "conditions" : {"VrepSemestre" : `${vfSemestre}`}
+          },
           {  
             "type": "whereOR", 
             "key": "VrepSemestre", 
@@ -64,6 +68,11 @@ export class RepresentantesService {
           {
             "type" : "where",
             "conditions" : {"VrepPeriodo" : null}
+          }
+        ],"orders": [
+          {
+            "column": "VrepId",
+            "type": "asc"
           }
         ]
       };
@@ -115,6 +124,11 @@ export class RepresentantesService {
                 "VrepPeriodo": null
               }
             }
+          ],"orders": [
+            {
+              "column": "VrepId",
+              "type": "asc"
+            }
           ]
         }
       } else {
@@ -162,6 +176,11 @@ export class RepresentantesService {
               "conditions": {
                 "VplCodigo": `${codPlan}`
               }
+            }
+          ],"orders": [
+            {
+              "column": "VrepId",
+              "type": "asc"
             }
           ]
         };
@@ -214,6 +233,11 @@ export class RepresentantesService {
                 "VrepPeriodo": null
               }
             }
+          ],"orders": [
+            {
+              "column": "VrepId",
+              "type": "asc"
+            }
           ]
         };
       } else {
@@ -261,6 +285,11 @@ export class RepresentantesService {
               "conditions": {
                 "VplCodigo": `${codPlan}`
               }
+            }
+          ],"orders": [
+            {
+              "column": "VrepId",
+              "type": "asc"
             }
           ]
         };
@@ -312,6 +341,11 @@ export class RepresentantesService {
               "VrepPeriodo": null
             }
           }
+        ],"orders": [
+          {
+            "column": "VrepId",
+            "type": "asc"
+          }
         ]
       };
     } 
@@ -319,7 +353,7 @@ export class RepresentantesService {
     console.log("body serviceRepresentantes: ");
     
     console.log(JSON.stringify(this.xmlBody));
-    return this.http.post<ResWsBD>(this.Data_Est, this.xmlBody, {headers: headers});
+    return this.http.post<ResWsBD>(this.data_Est, this.xmlBody, {headers: headers});
   }
 
 }

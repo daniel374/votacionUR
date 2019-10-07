@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Configs } from '../lib/config';
 import { ResWsBD } from '../interfaces/ResWsBD';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class RegisVotoService {
   /* Servicos AWS */
   project: string = "casaur";
   enviroment: string = "dev";
-  Data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/store`;
-
+  //data_Est = `https://serveless.proximateapps-services.com.mx/${this.project}/${this.enviroment}/webadmin/generic/store`;
+  data_Est = Configs.url+'/webadmin/generic/store';
   constructor(private http: HttpClient) { }
 
   regisVoto(numUser: any, vcId: any, formu: any, repre: any){
@@ -42,7 +42,7 @@ export class RegisVotoService {
     console.log("body service Registrar voto: ");
     
     console.log(JSON.stringify(xmlBody));
-    return this.http.post<ResWsBD>(this.Data_Est, xmlBody, {headers: headers});
+    return this.http.post<ResWsBD>(this.data_Est, xmlBody, {headers: headers});
     
   }
 }

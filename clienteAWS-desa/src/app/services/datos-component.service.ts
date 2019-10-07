@@ -50,16 +50,7 @@ export class DatosComponentService {
     } else {
       this.resDatosRepre = datosRepresen;
       this.resDatos = this.resDatos.concat(this.resDatosRepre);
-      /* this.resDatos[10] = datosRepresen[0];
-      this.resDatos[11] = datosRepresen[1];
-      this.resDatos[12] = datosRepresen[2];
-      this.resDatos[13] = datosRepresen[3];
-      this.resDatos[14] = datosRepresen[4];
-      this.resDatos[15] = datosRepresen[5];
-      this.resDatos[16] = datosRepresen[6];
-      this.resDatos[17] = datosRepresen[7];
-      this.resDatos[18] = datosRepresen[8];
-      this.resDatos[19] = datosRepresen[9]; */
+      
     }
 
     //this.resDatos = this.resDatos.concat(datosRepresen);
@@ -68,6 +59,8 @@ export class DatosComponentService {
   }
 
   borrarData(arraDrop: any){
-    this.resDatos = [];
+    //this.resDatos = [];
+    this.resDatos.splice(10,1);
+    this.resDatos.splice(11,1);
   }
 }

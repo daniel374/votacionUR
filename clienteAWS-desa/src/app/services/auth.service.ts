@@ -60,9 +60,11 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    
     hello('msft').logout().then(
-      () => {},
+      () => {
+        localStorage.clear();
+      },
       e => console.error(e.error.message)
     );
 

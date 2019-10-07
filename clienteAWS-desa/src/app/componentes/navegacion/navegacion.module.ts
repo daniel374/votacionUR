@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { NavegacionRoutingModule } from './navegacion-routing.module';
 import { NavegacionComponent } from './navegacion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-    NavegacionRoutingModule
+    NavegacionRoutingModule,
+    NgbModule
   ],
   declarations: [NavegacionComponent],
   exports: [
