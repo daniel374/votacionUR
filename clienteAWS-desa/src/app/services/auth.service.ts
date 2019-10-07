@@ -60,15 +60,7 @@ export class AuthService {
   }
 
   logout() {
-    this.http.post<any>(Configs.url + "webadmin/utils/urlslogout", {}).pipe(map(response => response.json() )).subscribe(response => {
-      console.log(response.data);
-
-      window.open(response.data.url_agendamate);
-      window.open(response.data.url_backend);
-      window.open(response.data.url_videomate);
-
-    });
-
+    localStorage.clear();
     hello('msft').logout().then(
       () => {},
       e => console.error(e.error.message)

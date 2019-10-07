@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         // Check if the session is still valid
-        this.checkSession()
+        //this.checkSession()
     }
 
     /**
@@ -64,8 +64,6 @@ export class LoginComponent implements OnInit {
 
     redirectToBackend(type): void {
         this.spinner.show();
-        console.log('[redirectToBackend]: ' + type);
-        console.log('[redirectToBackend]: Get data info user');
         // Getting info for the user... email
         this.authService.getMe((me) => {
             console.log('[redirectToBackend] token is ok, getting token from Lambda');
@@ -99,6 +97,7 @@ export class LoginComponent implements OnInit {
             this.logout();
         });
     }
+
     // consume servicio de proximate y retorna Token
     getTokenAndRedirect(type): void {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -129,7 +128,7 @@ export class LoginComponent implements OnInit {
                 console.log('Error occured');
             }
         );
-        return respo;
+        //return respo;
     }
 
     // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
