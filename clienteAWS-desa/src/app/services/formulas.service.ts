@@ -27,10 +27,15 @@ export class FormulasService {
 
     }
 
-    if (vfSemestre != '' && codPlan == '') {
+    if (vfSemestre < 4 || vcId == 9 || vcId == 10) {
       this.xmlBody = { 
-        "fields" : "*",
-        "table" : "vot_formula_consejo",
+        "fields":"VfId,Vfnombre_lista,VfPresidenteNombre,VfPresidenteFoto,VfVicepresidenteNombre,VfVicepresidenteFoto,VfSemestre,VfConsejo,VfPlanCode,VcId,VcNombre",
+        "table":"vot_formula_consejo",
+        "joins":[{
+          "table":"vot_consejo",
+          "on":"vot_formula_consejo.VfConsejo = vot_consejo.VcId",
+          "type":"left"
+        }],
         "wheres" : [
           {
             "type" : "where",
@@ -54,10 +59,15 @@ export class FormulasService {
             "conditions" : {"VfConsejo" : `${vcId}`}
           }
         ]};
-    } else if ((codPlan != '' && vfSemestre == '') || (vcId == 8 && vfSemestre > 3)) {
+    } else if (vcId == 8 && vfSemestre > 3) {
       this.xmlBody = { 
-        "fields" : "*",
-        "table" : "vot_formula_consejo",
+        "fields":"VfId,Vfnombre_lista,VfPresidenteNombre,VfPresidenteFoto,VfVicepresidenteNombre,VfVicepresidenteFoto,VfSemestre,VfConsejo,VfPlanCode,VcId,VcNombre",
+        "table":"vot_formula_consejo",
+        "joins":[{
+          "table":"vot_consejo",
+          "on":"vot_formula_consejo.VfConsejo = vot_consejo.VcId",
+          "type":"left"
+        }],
         "wheres" : [
           {
             "type" : "where",
@@ -87,8 +97,13 @@ export class FormulasService {
         ]};
     } else {
       this.xmlBody = { 
-        "fields" : "*",
-        "table" : "vot_formula_consejo",
+        "fields":"VfId,Vfnombre_lista,VfPresidenteNombre,VfPresidenteFoto,VfVicepresidenteNombre,VfVicepresidenteFoto,VfSemestre,VfConsejo,VfPlanCode,VcId,VcNombre",
+        "table":"vot_formula_consejo",
+        "joins":[{
+          "table":"vot_consejo",
+          "on":"vot_formula_consejo.VfConsejo = vot_consejo.VcId",
+          "type":"left"
+        }],
         "wheres" : [
           {
               "type" : "where",

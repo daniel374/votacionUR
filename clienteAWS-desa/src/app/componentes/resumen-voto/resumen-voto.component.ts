@@ -92,17 +92,20 @@ export class ResumenVotoComponent implements OnInit {
 
       console.log('data repre' + JSON.stringify(this.representantes));
 
+    } else if (this.dataForRepre[11]) {
+      this.representantes = [
+		    this.dataForRepre[10],
+	      this.dataForRepre[11]
+	    ];
     } else {
       this.representantes = [
-		  this.dataForRepre[10],
-	      this.dataForRepre[11]
-	  ];
-      
-	  console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
-	  console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
-      console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
+		    this.dataForRepre[10]
+	    ];
     }
     
+    console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
+	  console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
+    console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
     console.log('INFORMACION Representante  ' + JSON.stringify(this.representantes));
 
     this.representantes.forEach(element => {

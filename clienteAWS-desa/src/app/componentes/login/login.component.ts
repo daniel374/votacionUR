@@ -66,9 +66,9 @@ export class LoginComponent implements OnInit {
         this.spinner.show();
         // Getting info for the user... email
         this.authService.getMe((me) => {
-            console.log('[redirectToBackend] token is ok, getting token from Lambda');
+            /* console.log('[redirectToBackend] token is ok, getting token from Lambda');
             console.log(JSON.stringify(me));
-            console.log(me.userPrincipalName);
+            console.log(me.userPrincipalName); */
             localStorage.setItem('datosUsuario', JSON.stringify(me));
             var numDoc = me.mobilePhone;
             var esNom = me.displayName;
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
                 this.getTokenAndRedirect(type);
             }else{
                 this.spinner.hide();
-                console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
+                /* console.log('[redirectToBackend] token is wrong, hide button logout and logout api'); */
                 this.logout();
             }
         }, () => {
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
              * Because that, we must logout and re try login
              */
             this.spinner.hide();
-            console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
+            /* console.log('[redirectToBackend] token is wrong, hide button logout and logout api'); */
             this.logout();
         });
     }
@@ -174,9 +174,9 @@ export class LoginComponent implements OnInit {
                 } else {
                     habilitado = false;
                 }
-                console.log("estado ", habilitado);
+                /* console.log("estado ", habilitado); */
                 if (habilitado == true) { // Se debe cambiar a true
-                    console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+                    /* console.log('El Estudiante se encuentra habilido para el programa ' + programa); */
                     infoPlanes = {
                         codigo: `${programa}`,
 					    semestre: `${semestre}`,
@@ -218,9 +218,9 @@ export class LoginComponent implements OnInit {
             } else {
                 habilitado = false;
             }
-            console.log("estado ", habilitado);
-            if (habilitado == true) { // Se debe cambiar a true
-                console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+            /* console.log("estado ", habilitado); */
+            if (habilitado == true) {
+                /* console.log('El Estudiante se encuentra habilido para el programa ' + programa); */
                 infoPlanes = {
                     codigo: `${programa}`,
                     semestre: `${semestre}`,

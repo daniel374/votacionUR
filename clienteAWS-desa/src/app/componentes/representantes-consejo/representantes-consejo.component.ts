@@ -151,7 +151,7 @@ export class RepresentantesConsejoComponent implements OnInit {
 	  
     }
 	
-	if (this.ponerX.length == 2) {
+	if (this.ponerX.length == 2 || repre.VrepNombre == 'voto en blanco') {
 	  this.isButtonVisible = true;
 	}
 	

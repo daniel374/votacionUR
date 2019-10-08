@@ -39,14 +39,15 @@
     justify-content: center;
     margin-top: 2%;
 }
-.btn-outline-primary {
+.btn {
     border: transparent;
     background-color: #AB2328;
     font-family: 'Nunito-Regular';
     color: white;
+    font-size: 20%;
     margin-bottom: 40%;
     border-radius: 8px;
-    max-width: 200px;    
+    max-width: 35%;   
 }
 
 

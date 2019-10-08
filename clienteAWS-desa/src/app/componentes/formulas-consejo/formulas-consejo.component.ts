@@ -45,7 +45,7 @@ export class FormulasConsejoComponent implements OnInit {
     
       this.vcId = this.datosComponentService.resDatos[0] || 0;
       this.codPlan = this.datosComponentService.resDatos[2];
-
+      /* console.log('consejo ' + JSON.stringify(this.datosComponentService.resDatos[1])); */
       this.noConsejo = String(this.datosComponentService.resDatos[1]);
       this.vfSemestre = String(this.datosComponentService.resDatos[3]);
 
@@ -56,10 +56,7 @@ export class FormulasConsejoComponent implements OnInit {
             // console.log('cod plan' + arrayCodPlan);
             this.codPlan = arrayCodPlan[1];
             // console.log('cod plan' + arrayCodPlan[1]);
-          } else if (this.vcId == 9) {
-            this.vfSemestre = this.vfSemestre;
-            this.codPlan = '';
-          } else if (this.vcId == 10) {
+          } else if (this.vcId == 9 || this.vcId == 10) {
             this.vfSemestre = this.vfSemestre;
             this.codPlan = '';
           } else {
@@ -70,18 +67,10 @@ export class FormulasConsejoComponent implements OnInit {
           // console.log('semestre ' + this.vfSemestre);
 		  this.formulasService.formulasConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
           res=>{
-            /* console.log("status del servicio: "+JSON.stringify(res.success));
-            console.log("data formulas consejo servicio: "+JSON.stringify(res.data)); */
+
             this.formulas = res.data;
-            if(this.formulas!=''){
-              this.forConsejo = res.data[0]['VcNombre'];
-              /* console.log("forconsejo "+this.forConsejo);
-              console.log(res); */
-            }else{
-              this.forConsejo = this.noConsejo;
-              /* console.log(this.forConsejo);
-              console.log(res); */
-            }
+            
+            /* console.log(this.formulas); */
             
         },
         err => console.error(err)

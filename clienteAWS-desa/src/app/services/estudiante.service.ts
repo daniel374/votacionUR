@@ -23,10 +23,10 @@ export class EstudianteService {
     if (meTokens === ''){
 
     }
-    console.log("meToken es  "+meTokens);
+    /* console.log("meToken es  "+meTokens); */
     
     var newToken = meTokens.replace(/['"]+/g, '');
-    console.log("token new "+newToken);
+    /* console.log("token new "+newToken); */
     localStorage.setItem('newToken',newToken);
 
     let headers = new HttpHeaders({
@@ -35,7 +35,7 @@ export class EstudianteService {
     });
     var numDocEstu = localStorage.getItem('numDoc');
     let xmlBody = { "body": `<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wss=\"http://wsservicios.urosario.edu.co\"><soapenv:Header/><soapenv:Body><wss:getProgramas><wss:identification>${numDocEstu}</wss:identification></wss:getProgramas></soapenv:Body></soapenv:Envelope>`};
-    console.log(JSON.stringify(xmlBody));
+    /* console.log(JSON.stringify(xmlBody)); */
     return this.http.post<ResWsEstud>(this.data_Est, xmlBody, {headers: headers});
     
   }
