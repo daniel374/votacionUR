@@ -52,10 +52,11 @@ export class RepresentantesService {
             "type" : "where",
             "conditions" : {"VrepPeriodo !=" : null}
           },
-          {
+          //comentado por juan
+          /*{
             "type" : "where",
             "conditions" : {"VrepSemestre" : `${vfSemestre}`}
-          },
+          },*/
           {  
             "type": "whereOR", 
             "key": "VrepSemestre", 

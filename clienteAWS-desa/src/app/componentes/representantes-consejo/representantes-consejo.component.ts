@@ -60,39 +60,36 @@ export class RepresentantesConsejoComponent implements OnInit {
       this.vfSemestre = String(this.datosComponentService.resDatos[3]);
 
 	  
-      if(this.vcId){
+    if(this.vcId){
 		  
 		if (this.vcId > 4 && this.vcId < 9 ) {
             var arrayCodPlan = this.codPlan.split(/([a-zA-Z]+)/);// colocar -
             console.log('cod plan' + arrayCodPlan);
             this.codPlan = arrayCodPlan[1];
-            
-
-          } else {
+    } else {
             this.codPlan = '';			
-          }
+    }
 		  
-        /* 
-        console.log('plan ' + this.codPlan );
-        console.log('semestre ' + this.vfSemestre);
-         */
-        this.representantesService.representConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
-          res => {
-            /* console.log("status del servicio: "+JSON.stringify(res.success));
-            console.log("data representantes servicio: "+JSON.stringify(res.data)); */
-            this.representantes = res.data;
-            console.log("representantes "+this.representantes)            
-            if(this.representantes!=''){
-              this.repConsejo = res.data[0]['VplNombre'];
-              console.log("repConsejo "+this.repConsejo);
-            }else{
-              this.repConsejo = this.datosComponentService.resDatos[1];
-              console.log(this.repConsejo);
-            }
-          },
-          err => console.error(err)
-          );
+    /* 
+    console.log('plan ' + this.codPlan );
+    console.log('semestre ' + this.vfSemestre);
+    */
+    this.representantesService.representConse(this.vcId, this.vfSemestre, this.codPlan).subscribe(
+    res => {
+        /* console.log("status del servicio: "+JSON.stringify(res.success));
+        console.log("data representantes servicio: "+JSON.stringify(res.data)); */
+        this.representantes = res.data;
+        console.log("representantes "+this.representantes)            
+        if(this.representantes!=''){
+          this.repConsejo = res.data[0]['VplNombre'];
+          console.log("repConsejo "+this.repConsejo);
+        }else{
+          this.repConsejo = this.datosComponentService.resDatos[1];
+          console.log(this.repConsejo);
         }
+      },
+      err => console.error(err)
+    );}
      
   }
 

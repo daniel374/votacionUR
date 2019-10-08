@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
  * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
  * tslint:disable
  */ 
-var styles = ["@media (max-width: 330px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\tmax-width: 100%;\n\t\theight: 100%;\n    }\n    .btn[_ngcontent-%COMP%] {\n        max-width: 210px;\n\t\tmargin-bottom: 50%;\n\t\tmargin-top: 10%;\n    }\n    .tituB[_ngcontent-%COMP%] {\n        font-size: 12px;\n    }\n}\n@media (max-width: 1000px) and (min-width: 330px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\tmax-width: 320px;\n\t\theight: 120px;\n    }\n\t.btn[_ngcontent-%COMP%] {\n\t\tmargin-top: 30%;\n\t\tmargin-bottom: 50%;\n    }\n}\n@media (max-width: 2000px) and (min-width: 1000px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\twidth: 600px;\n\t\theight: 100%;\n    }\n}\n.btn-outline-primary[_ngcontent-%COMP%] {\n    box-shadow: none;\n    border: transparent;\n    background-color: rgba(255, 255, 255, 0.15);\n    font-family: 'Nunito-Regular';\n    color: white;\n    margin-bottom: 50%;\n}\n#cabeza[_ngcontent-%COMP%] {\n    height: 50%;\n    width: 100%;\n }\n.container[_ngcontent-%COMP%] {\n    overflow: hidden;\n}\n.title[_ngcontent-%COMP%] {\n    font-family: 'Nunito-Regular';\n    color: white;\n    font-size: 6.9vw;\n}\n.bg[_ngcontent-%COMP%] {\n    background-image: url('fondo-web.png');\n    background-position: center center;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-attachment: fixed;\n    min-height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50ZXMvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO0VBQ0YsZUFBZTtFQUNmLFlBQVk7SUFDVjtJQUNBO1FBQ0ksZ0JBQWdCO0VBQ3RCLGtCQUFrQjtFQUNsQixlQUFlO0lBQ2I7SUFDQTtRQUNJLGVBQWU7SUFDbkI7QUFDSjtBQUNBO0lBQ0k7RUFDRixnQkFBZ0I7RUFDaEIsYUFBYTtJQUNYO0NBQ0g7RUFDQyxlQUFlO0VBQ2Ysa0JBQWtCO0lBQ2hCO0FBQ0o7QUFDQTtJQUNJO0VBQ0YsWUFBWTtFQUNaLFlBQVk7SUFDVjtBQUNKO0FBR0E7SUFDSSxnQkFBZ0I7SUFDaEIsbUJBQW1CO0lBQ25CLDJDQUEyQztJQUMzQyw2QkFBNkI7SUFDN0IsWUFBWTtJQUNaLGtCQUFrQjtBQUN0QjtBQUNDO0lBQ0csV0FBVztJQUNYLFdBQVc7Q0FDZDtBQUVEO0lBQ0ksZ0JBQWdCO0FBQ3BCO0FBR0E7SUFDSSw2QkFBNkI7SUFDN0IsWUFBWTtJQUNaLGdCQUFnQjtBQUNwQjtBQUVBO0lBQ0ksc0NBQTZEO0lBQzdELGtDQUFrQztJQUNsQyxzQkFBc0I7SUFDdEIsNEJBQTRCO0lBQzVCLDRCQUE0QjtJQUM1QixnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQG1lZGlhIChtYXgtd2lkdGg6IDMzMHB4KXtcbiAgICAuaW1hZ2VuZmVjaCB7XG5cdFx0bWF4LXdpZHRoOiAxMDAlO1xuXHRcdGhlaWdodDogMTAwJTtcbiAgICB9XG4gICAgLmJ0biB7XG4gICAgICAgIG1heC13aWR0aDogMjEwcHg7XG5cdFx0bWFyZ2luLWJvdHRvbTogNTAlO1xuXHRcdG1hcmdpbi10b3A6IDEwJTtcbiAgICB9XG4gICAgLnRpdHVCIHtcbiAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgIH1cbn1cbkBtZWRpYSAobWF4LXdpZHRoOiAxMDAwcHgpIGFuZCAobWluLXdpZHRoOiAzMzBweCl7XG4gICAgLmltYWdlbmZlY2gge1xuXHRcdG1heC13aWR0aDogMzIwcHg7XG5cdFx0aGVpZ2h0OiAxMjBweDtcbiAgICB9XG5cdC5idG4ge1xuXHRcdG1hcmdpbi10b3A6IDMwJTtcblx0XHRtYXJnaW4tYm90dG9tOiA1MCU7XG4gICAgfVxufVxuQG1lZGlhIChtYXgtd2lkdGg6IDIwMDBweCkgYW5kIChtaW4td2lkdGg6IDEwMDBweCl7XG4gICAgLmltYWdlbmZlY2gge1xuXHRcdHdpZHRoOiA2MDBweDtcblx0XHRoZWlnaHQ6IDEwMCU7XG4gICAgfVxufVxuXG5cbi5idG4tb3V0bGluZS1wcmltYXJ5IHtcbiAgICBib3gtc2hhZG93OiBub25lO1xuICAgIGJvcmRlcjogdHJhbnNwYXJlbnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjE1KTtcbiAgICBmb250LWZhbWlseTogJ051bml0by1SZWd1bGFyJztcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgbWFyZ2luLWJvdHRvbTogNTAlO1xufVxuICNjYWJlemEge1xuICAgIGhlaWdodDogNTAlO1xuICAgIHdpZHRoOiAxMDAlO1xuIH1cblxuLmNvbnRhaW5lciB7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuXG4udGl0bGUge1xuICAgIGZvbnQtZmFtaWx5OiAnTnVuaXRvLVJlZ3VsYXInO1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgICBmb250LXNpemU6IDYuOXZ3O1xufVxuXG4uYmcge1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCguLi8uLi8uLi9hc3NldHMvaW1hZ2VuZXMvZm9uZG8td2ViLnBuZyk7XG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyIGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gICAgYmFja2dyb3VuZC1hdHRhY2htZW50OiBmaXhlZDtcbiAgICBtaW4taGVpZ2h0OiAxMDAlO1xufVx0XHRcblxuXG5cbiJdfQ== */"];
+var styles = ["@media (max-width: 330px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\tmax-width: 90%;\n    }\n    .btn[_ngcontent-%COMP%] {\n        max-width: 210px;\n\t\tmargin-bottom: 50%;\n\t\tmargin-top: 10%;\n    }\n    .tituB[_ngcontent-%COMP%] {\n        font-size: 12px;\n    }\n}\n@media (max-width: 1000px) and (min-width: 330px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\tmax-width: 70%;\n    }\n}\n@media (max-width: 2000px) and (min-width: 1000px){\n    .imagenfech[_ngcontent-%COMP%] {\n\t\twidth: 60%;\n    }\n}\n.btn-outline-primary[_ngcontent-%COMP%] {\n    box-shadow: none;\n    border: transparent;\n    background-color: rgba(255, 255, 255, 0.15);\n    font-family: 'Nunito-Regular';\n    color: white;\n    margin-bottom: 50%;\n}\n#cabeza[_ngcontent-%COMP%] {\n    height: 50%;\n    width: 100%;\n }\n.container[_ngcontent-%COMP%] {\n    overflow: hidden;\n}\n.subtitle[_ngcontent-%COMP%] {\n    margin-left: 10%;\n}\n.title[_ngcontent-%COMP%] {\n    font-family: 'Nunito-Regular';\n    color: white;\n    font-size: 6.9vw;\n    margin-left: 10%;\n}\n.bg[_ngcontent-%COMP%] {\n    background-image: url('fondo-web.png');\n    background-position: center center;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-attachment: fixed;\n    min-height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50ZXMvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO0VBQ0YsY0FBYztJQUNaO0lBQ0E7UUFDSSxnQkFBZ0I7RUFDdEIsa0JBQWtCO0VBQ2xCLGVBQWU7SUFDYjtJQUNBO1FBQ0ksZUFBZTtJQUNuQjtBQUNKO0FBQ0E7SUFDSTtFQUNGLGNBQWM7SUFDWjtBQUNKO0FBQ0E7SUFDSTtFQUNGLFVBQVU7SUFDUjtBQUNKO0FBR0E7SUFDSSxnQkFBZ0I7SUFDaEIsbUJBQW1CO0lBQ25CLDJDQUEyQztJQUMzQyw2QkFBNkI7SUFDN0IsWUFBWTtJQUNaLGtCQUFrQjtBQUN0QjtBQUNDO0lBQ0csV0FBVztJQUNYLFdBQVc7Q0FDZDtBQUVEO0lBQ0ksZ0JBQWdCO0FBQ3BCO0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7QUFDQTtJQUNJLDZCQUE2QjtJQUM3QixZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQjtBQUVBO0lBQ0ksc0NBQTZEO0lBQzdELGtDQUFrQztJQUNsQyxzQkFBc0I7SUFDdEIsNEJBQTRCO0lBQzVCLDRCQUE0QjtJQUM1QixnQkFBZ0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQG1lZGlhIChtYXgtd2lkdGg6IDMzMHB4KXtcbiAgICAuaW1hZ2VuZmVjaCB7XG5cdFx0bWF4LXdpZHRoOiA5MCU7XG4gICAgfVxuICAgIC5idG4ge1xuICAgICAgICBtYXgtd2lkdGg6IDIxMHB4O1xuXHRcdG1hcmdpbi1ib3R0b206IDUwJTtcblx0XHRtYXJnaW4tdG9wOiAxMCU7XG4gICAgfVxuICAgIC50aXR1QiB7XG4gICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICB9XG59XG5AbWVkaWEgKG1heC13aWR0aDogMTAwMHB4KSBhbmQgKG1pbi13aWR0aDogMzMwcHgpe1xuICAgIC5pbWFnZW5mZWNoIHtcblx0XHRtYXgtd2lkdGg6IDcwJTtcbiAgICB9XG59XG5AbWVkaWEgKG1heC13aWR0aDogMjAwMHB4KSBhbmQgKG1pbi13aWR0aDogMTAwMHB4KXtcbiAgICAuaW1hZ2VuZmVjaCB7XG5cdFx0d2lkdGg6IDYwJTtcbiAgICB9XG59XG5cblxuLmJ0bi1vdXRsaW5lLXByaW1hcnkge1xuICAgIGJveC1zaGFkb3c6IG5vbmU7XG4gICAgYm9yZGVyOiB0cmFuc3BhcmVudDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMTUpO1xuICAgIGZvbnQtZmFtaWx5OiAnTnVuaXRvLVJlZ3VsYXInO1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgICBtYXJnaW4tYm90dG9tOiA1MCU7XG59XG4gI2NhYmV6YSB7XG4gICAgaGVpZ2h0OiA1MCU7XG4gICAgd2lkdGg6IDEwMCU7XG4gfVxuXG4uY29udGFpbmVyIHtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG4uc3VidGl0bGUge1xuICAgIG1hcmdpbi1sZWZ0OiAxMCU7XG59XG4udGl0bGUge1xuICAgIGZvbnQtZmFtaWx5OiAnTnVuaXRvLVJlZ3VsYXInO1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgICBmb250LXNpemU6IDYuOXZ3O1xuICAgIG1hcmdpbi1sZWZ0OiAxMCU7XG59XG5cbi5iZyB7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKC4uLy4uLy4uL2Fzc2V0cy9pbWFnZW5lcy9mb25kby13ZWIucG5nKTtcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXIgY2VudGVyO1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgICBiYWNrZ3JvdW5kLWF0dGFjaG1lbnQ6IGZpeGVkO1xuICAgIG1pbi1oZWlnaHQ6IDEwMCU7XG59XHRcdFxuXG5cblxuIl19 */"];
 
 
 
@@ -279,9 +279,9 @@ class LoginComponent {
         this.spinner.show();
         // Getting info for the user... email
         this.authService.getMe((me) => {
-            console.log('[redirectToBackend] token is ok, getting token from Lambda');
+            /* console.log('[redirectToBackend] token is ok, getting token from Lambda');
             console.log(JSON.stringify(me));
-            console.log(me.userPrincipalName);
+            console.log(me.userPrincipalName); */
             localStorage.setItem('datosUsuario', JSON.stringify(me));
             var numDoc = me.mobilePhone;
             var esNom = me.displayName;
@@ -298,7 +298,7 @@ class LoginComponent {
             }
             else {
                 this.spinner.hide();
-                console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
+                /* console.log('[redirectToBackend] token is wrong, hide button logout and logout api'); */
                 this.logout();
             }
         }, () => {
@@ -307,7 +307,7 @@ class LoginComponent {
              * Because that, we must logout and re try login
              */
             this.spinner.hide();
-            console.log('[redirectToBackend] token is wrong, hide button logout and logout api');
+            /* console.log('[redirectToBackend] token is wrong, hide button logout and logout api'); */
             this.logout();
         });
     }
@@ -386,9 +386,9 @@ class LoginComponent {
                     else {
                         habilitado = false;
                     }
-                    console.log("estado ", habilitado);
+                    /* console.log("estado ", habilitado); */
                     if (habilitado == true) { // Se debe cambiar a true
-                        console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+                        /* console.log('El Estudiante se encuentra habilido para el programa ' + programa); */
                         infoPlanes = {
                             codigo: `${programa}`,
                             semestre: `${semestre}`,
@@ -432,9 +432,9 @@ class LoginComponent {
                 else {
                     habilitado = false;
                 }
-                console.log("estado ", habilitado);
-                if (habilitado == true) { // Se debe cambiar a true
-                    console.log('El Estudiante se encuentra habilido para el programa ' + programa);
+                /* console.log("estado ", habilitado); */
+                if (habilitado == true) {
+                    /* console.log('El Estudiante se encuentra habilido para el programa ' + programa); */
                     infoPlanes = {
                         codigo: `${programa}`,
                         semestre: `${semestre}`,
