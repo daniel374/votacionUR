@@ -207,7 +207,7 @@ export class RepresentantesService {
             {
               "type": "where",
               "conditions": {
-                "VrepSemestre": `${vfSemestre}`
+                "VrepSemestre < ": 4
               }
             },
             {

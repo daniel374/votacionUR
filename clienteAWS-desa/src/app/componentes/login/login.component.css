@@ -1,7 +1,6 @@
 @media (max-width: 330px){
     .imagenfech {
 		max-width: 90%;
-		height: 90%;
     }
     .btn {
         max-width: 210px;
@@ -14,14 +13,12 @@
 }
 @media (max-width: 1000px) and (min-width: 330px){
     .imagenfech {
-		max-width: 60%;
-		height: 120px;
+		max-width: 70%;
     }
 }
 @media (max-width: 2000px) and (min-width: 1000px){
     .imagenfech {
 		width: 60%;
-		height: 100%;
     }
 }
 

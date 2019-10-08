@@ -35,7 +35,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2%;
+    vertical-align: center;
+    text-align: center;
 }
 .btn-outline-primary {
     border: transparent;
@@ -44,7 +45,8 @@
     color: white;
     margin-bottom: 40%;
     border-radius: 8px;
-    max-width: 60%;    
+    max-width: 60%;
+    text-align: center;   
 }
 /*
 .conteiner-formulas {
@@ -114,4 +116,7 @@ label {
 */
 h4,h6 {
     color: #424242;
+}
+h5 {
+    text-align: left;
 }

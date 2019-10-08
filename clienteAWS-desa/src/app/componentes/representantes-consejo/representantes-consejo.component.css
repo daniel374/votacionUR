@@ -50,7 +50,8 @@
     color: white;
     margin-bottom: 40%;
     border-radius: 8px;
-    max-width: 60%;    
+    max-width: 60%;
+    text-align: center; 
 }
 /*
 .conteiner-represent {
@@ -126,6 +127,9 @@ label {
 */
 h4,h6 {
     color: #424242;
+}
+h5 {
+    text-align: left;
 }
 
 .card {
