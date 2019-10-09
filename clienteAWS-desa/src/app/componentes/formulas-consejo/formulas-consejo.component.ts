@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormulasService } from '../../services/formulas.service';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -30,14 +31,17 @@ export class FormulasConsejoComponent implements OnInit {
     private formulasService: FormulasService,
     private router: Router,
     private route: ActivatedRoute,
-    private datosComponentService: DatosComponentService
+    private datosComponentService: DatosComponentService,
+	private spinner: NgxSpinnerService,
+	private ngZone: NgZone
   ) { }
 
   ngOnInit() {
-    /* trae data consejo */
+    /* trae data formula */
     
-    console.log("datos res WS "+this.datosComponentService.resDatos);
+    //console.log("datos res WS "+this.datosComponentService.resDatos);
     /*  */
+	this.spinner.show();
     this.infoformulas();
   }
 
@@ -69,13 +73,18 @@ export class FormulasConsejoComponent implements OnInit {
           res=>{
 
             this.formulas = res.data;
-            
+            this.spinner.hide();
             /* console.log(this.formulas); */
             
         },
-        err => console.error(err)
-        );
-      }
+        err => {
+        this.spinner.hide();
+        console.error(err);
+        }
+      );
+     } else {
+	   this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
+     }
         
 
         

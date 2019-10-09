@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { RegisVotoService } from '../../services/regis-voto.service';
@@ -52,21 +52,23 @@ export class ResumenVotoComponent implements OnInit {
     private regisVotoService: RegisVotoService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-	config: NgbModalConfig
+	config: NgbModalConfig,
+	private ngZone: NgZone
   ) { 
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
+	this.representantes = [];
     this.resumenVoto();
     this.datosComponentService.cambiaSpinner('Registrando Voto');
   }
 
   resumenVoto(){
     this.dataForRepre = this.datosComponentService.resDatos;
-      console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
-      console.log('longitud del resdData ' + this.dataForRepre.length);
+    console.log('data formula y repre  ' + JSON.stringify(this.dataForRepre));
+    console.log('longitud del resdData ' + this.dataForRepre.length);
     this.vcId = this.dataForRepre[0] || 0;
     this.nomConsejo = this.dataForRepre[1];
      /* data formula */ 
@@ -77,41 +79,44 @@ export class ResumenVotoComponent implements OnInit {
     this.nomforVipre = this.dataForRepre[8];
     this.idFormul = this.dataForRepre[9];
       
+    if (this.vcId) {
+		    /* para el caso de mandar dos representantes */
+       if (this.dataForRepre.length > 12) {
+        this.representantes = [
+          {
+            "VrepFoto": `${this.dataForRepre[10]}`,
+            "VrepNombre": `${this.dataForRepre[11]}`,
+            "VrepSemestre": `${this.dataForRepre[12]}`,
+            "VplNombre": `${this.dataForRepre[13]}`,
+            "VrepId": `${this.dataForRepre[14]}`
+          }
+        ];
 
-    /* para el caso de mandar dos representantes */
-    if (this.dataForRepre.length > 12) {
-      this.representantes = [
-        {
-          "VrepFoto": `${this.dataForRepre[10]}`,
-          "VrepNombre": `${this.dataForRepre[11]}`,
-          "VrepSemestre": `${this.dataForRepre[12]}`,
-          "VplNombre": `${this.dataForRepre[13]}`,
-          "VrepId": `${this.dataForRepre[14]}`
-        }
-      ];
+        console.log('data repre' + JSON.stringify(this.representantes));
 
-      console.log('data repre' + JSON.stringify(this.representantes));
-
-    } else if (this.dataForRepre[11]) {
-      this.representantes = [
+        } else if (this.dataForRepre[11]) {
+          this.representantes = [
 		    this.dataForRepre[10],
-	      this.dataForRepre[11]
-	    ];
-    } else {
-      this.representantes = [
-		    this.dataForRepre[10]
-	    ];
-    }
+	        this.dataForRepre[11]
+	      ];
+        } else {
+           this.representantes = [
+		      this.dataForRepre[10]
+	       ];
+        }
     
-    console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
-	  console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
-    console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
-    console.log('INFORMACION Representante  ' + JSON.stringify(this.representantes));
+        console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
+	    console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
+        console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
+        console.log('INFORMACION Representante  ' + JSON.stringify(this.representantes));
 
-    this.representantes.forEach(element => {
-      this.idRepre.push(element['VrepId']);
-    })    
-    console.log('los Id de repres: .' + JSON.stringify(this.idRepre));
+        this.representantes.forEach(element => {
+          this.idRepre.push(element['VrepId']);
+        })    
+        console.log('los Id de repres: .' + JSON.stringify(this.idRepre));
+	} else {
+	   this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
+   }
     
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { RepresentantesService } from '../../services/representantes.service';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { representante } from 'src/app/interfaces/bodyLbWs';
 import { FormControl, FormGroup} from '@angular/forms';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-representantes-consejo',
@@ -41,11 +42,15 @@ export class RepresentantesConsejoComponent implements OnInit {
     private router: Router, 
     private route: ActivatedRoute,
     private datosComponentService: DatosComponentService,
-    private config: NgSelectConfig
+    private config: NgSelectConfig,
+	private spinner: NgxSpinnerService,
+	private ngZone: NgZone
   ) {  }
 
   ngOnInit() {    
     //console.log("datos res WS "+this.datosComponentService.resDatos);
+	this.dataRepre = [];
+	this.spinner.show();
     this.infoRepre();
   }
 
@@ -79,17 +84,24 @@ export class RepresentantesConsejoComponent implements OnInit {
         /* console.log("status del servicio: "+JSON.stringify(res.success));
         console.log("data representantes servicio: "+JSON.stringify(res.data)); */
         this.representantes = res.data;
-        console.log("representantes "+this.representantes)            
+		this.spinner.hide();
+        // console.log("representantes "+this.representantes)            
         if(this.representantes!=''){
           this.repConsejo = res.data[0]['VplNombre'];
-          console.log("repConsejo "+this.repConsejo);
+          // console.log("repConsejo "+this.repConsejo);
         }else{
           this.repConsejo = this.datosComponentService.resDatos[1];
-          console.log(this.repConsejo);
+          // console.log(this.repConsejo);
         }
       },
-      err => console.error(err)
-    );}
+      err => {
+        this.spinner.hide();
+        console.error(err);
+      }
+    );
+   } else {
+	   this.ngZone.run(() =>this.router.navigate(['votacion/consejo'])).then();
+   }
      
   }
 
@@ -118,12 +130,14 @@ export class RepresentantesConsejoComponent implements OnInit {
     this.ponerX = this.ponerX.filter(function(element, index, array) {
 		return (element != null);  
 	});
+  
     // muestra img X
-    if (this.ponerX.length < 2 ) {
-	  	
-      this.ponerX = this.ponerX.concat(repre.VrepId);
+	if (this.ponerX[0] != repre.VrepId && this.ponerX[1] != repre.VrepId) {
+		if (this.ponerX.length < 2 ) {
+	    console.log('pos 0 ' + this.ponerX[0]);
+        this.ponerX = this.ponerX.concat(repre.VrepId);
  
-      this.dataRepre = this.dataRepre.concat([
+        this.dataRepre = this.dataRepre.concat([
         {
           "VrepFoto": `${repre.VrepFoto}`,
           "VrepNombre": `${repre.VrepNombre}`,
@@ -131,9 +145,13 @@ export class RepresentantesConsejoComponent implements OnInit {
           "VplNombre": `${repre.VplNombre}`,
           "VrepId": `${repre.VrepId}`,
         }
-      ]        
-      );
-	} else {
+        ]        
+        );
+	  } else {
+		
+	  this.ponerX = this.ponerX.filter(function(element, index, array) {
+		return (element == repre.VrepId);  
+	  });
       this.dataRepre.reverse();
       this.ponerX.reverse();
       this.dataRepre.splice(1, 1, {
@@ -146,18 +164,28 @@ export class RepresentantesConsejoComponent implements OnInit {
       );
       this.ponerX.splice(1,1,repre.VrepId);
 	  
-    }
-	
-	if (this.ponerX.length == 2 || repre.VrepNombre == 'voto en blanco') {
-	  this.isButtonVisible = true;
-	}
-	
-    console.log('ponerx ' + JSON.stringify(this.ponerX));
+      }
+	}else {
+		this.ponerX.splice(0,1);
+		this.ponerX.splice(1,1);
+		this.dataRepre.splice(0,1);
+		this.dataRepre.splice(1,1);
+		this.isButtonVisible = false;
+	}  
     
+	
+	if (this.ponerX.length == 2 || this.dataRepre[0]['VrepNombre'] == 'voto en blanco' ) {
+	    this.isButtonVisible = true;
+	} else {
+		this.isButtonVisible = false;
+	}
+	/*
+    console.log('ponerx ' + JSON.stringify(this.ponerX));
+    console.log('pos 0 ' + this.dataRepre[0]['VrepNombre']);
 
     console.log('dataRepre ' + JSON.stringify(this.dataRepre));
     console.log('Id consejo ' + this.vcId);
-    
+    */
 
   }
 
