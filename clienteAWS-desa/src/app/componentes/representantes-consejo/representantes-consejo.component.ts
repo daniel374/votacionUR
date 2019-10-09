@@ -50,6 +50,8 @@ export class RepresentantesConsejoComponent implements OnInit {
   ngOnInit() {    
     //console.log("datos res WS "+this.datosComponentService.resDatos);
 	this.dataRepre = [];
+	this.representantes = [];
+	this.ponerX = [];
 	this.spinner.show();
     this.infoRepre();
   }
@@ -85,14 +87,11 @@ export class RepresentantesConsejoComponent implements OnInit {
         console.log("data representantes servicio: "+JSON.stringify(res.data)); */
         this.representantes = res.data;
 		this.spinner.hide();
-        // console.log("representantes "+this.representantes)            
-        if(this.representantes!=''){
-          this.repConsejo = res.data[0]['VplNombre'];
-          // console.log("repConsejo "+this.repConsejo);
-        }else{
-          this.repConsejo = this.datosComponentService.resDatos[1];
-          // console.log(this.repConsejo);
-        }
+        // console.log('representantes ' + JSON.stringify(this.representantes));            
+        
+        this.repConsejo = this.datosComponentService.resDatos[1];
+        // console.log("repConsejo "+this.repConsejo);
+        
       },
       err => {
         this.spinner.hide();

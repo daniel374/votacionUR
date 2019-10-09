@@ -43,15 +43,29 @@
     justify-content: center;
     margin-top: 2%;
 }
-.btn-outline-primary {
+.btn {
     border: transparent;
     background-color: #AB2328;
     font-family: 'Nunito-Regular';
     color: white;
     margin-bottom: 40%;
-    border-radius: 8px;
+    border-radius:15px;
     max-width: 60%;
-    text-align: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+#nomForm {
+	color: #424242;
+	text-align: left;
+}
+#camForm {
+	height: 80px;
+}
+.dataRepre {
+	width: 250px;
+	height: 160px;
+	max-height: 220px;
 }
 /*
 .conteiner-represent {
@@ -96,9 +110,6 @@ body {
   flex-wrap: wrap;
 }
 
-.dataRepre {
-    max-width: 200px;
-}
 
 /**
   Component
@@ -127,9 +138,11 @@ label {
 */
 h4,h6 {
     color: #424242;
+	text-align: left;
 }
 h5 {
     text-align: left;
+	margin: auto;
 }
 
 .card {

@@ -29,10 +29,10 @@
                         src="../../../assets/imagenes/x.png" alt="imagen x">
 
                     <div class="card-header" style="background: #e8e8e8; border: none;">
-                        <div id="conten-bloque-line-height" style="display: inline-block;">
+                        <!--<div id="conten-bloque-line-height camForm" style="display: inline-block;">
+                             <div><h5 id="nomForm">{{representante.VrepNombreLista}}</h5></div>
 
-                            <!--<div id="bloque-line-height" style="width: 20px; height: 20px; background: #AB2328; vertical-align: text-top; float: right;"></div>-->
-                        </div>
+                        </div>-->
 
                     </div>
                     <div class="card-block" style="background: #e8e8e8; border: none;">
@@ -43,13 +43,18 @@
 
                             <div class="row card card-outline-success m-x-auto"
                                 style="background: #e8e8e8; border: none;">
-                                <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
+                                <div class="col-lg-9 dataRepre text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'" style="border: none;">
                                     <br>
-                                    <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
+                                    <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
 
-                                    <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'">Semestre
+                                    <h6>Semestre
                                         {{representante.VrepSemestre}}</h6>
                                     <h6>{{representante.VplNombre}}</h6>
+                                </div>
+                                <div class="col-lg-9 dataRepreB text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() == 'voto en blanco'" style="border: none;">
+                                    <br>
+                                    <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
+                                    <!--<h6>{{representante.VplNombre}}</h6>-->
                                 </div>
 
                             </div>
@@ -100,13 +105,18 @@
         
                                     <div class="row card card-outline-success m-x-auto"
                                         style="background: #e8e8e8; border: none;">
-                                        <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
-                                            <br>
-                                            <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
-        
-                                            <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'">Semestre
-                                                {{representante.VrepSemestre}}</h6>
-                                            <h6>{{representante.VplNombre}}</h6>
+                                        <div class="col-lg-9 dataRepre text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'" style="border: none;">
+                                          <br>
+                                          <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
+
+                                          <h6>Semestre
+                                              {{representante.VrepSemestre}}</h6>
+                                          <h6>{{representante.VplNombre}}</h6>
+                                        </div>
+                                        <div class="col-lg-9 dataRepreB text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() == 'voto en blanco'" style="border: none;">
+                                          <br>
+                                          <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
+                                          <!--<h6>{{representante.VplNombre}}</h6>-->
                                         </div>
         
                                     </div>
@@ -132,8 +142,8 @@
 
 
 <div class="continuar" *ngIf="this.isButtonVisible" (click)="regisVoto();">
-    <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" routerLink="resumenVoto"
-        routerLinkActive="router-link-active" style="border-radius:15px;">
+    <a class="btn" routerLink="resumenVoto"
+        routerLinkActive="router-link-active">
         <h5 style="color: white;">Continuar</h5>
     </a>
 </div>

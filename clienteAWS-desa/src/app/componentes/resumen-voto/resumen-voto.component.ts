@@ -61,6 +61,7 @@ export class ResumenVotoComponent implements OnInit {
 
   ngOnInit() {
 	this.representantes = [];
+	this.dataForRepre = [];
     this.resumenVoto();
     this.datosComponentService.cambiaSpinner('Registrando Voto');
   }

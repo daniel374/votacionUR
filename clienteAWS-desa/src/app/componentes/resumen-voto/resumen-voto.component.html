@@ -28,7 +28,7 @@
                                             <!--  -->
                                                 <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;" *ngIf="this.nomFormula !='voto en blanco'">
                                                     <div class="text-xs-left" style="border: none;">
-                                                        <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforPresi}}</h5>
+                                                        <h6 style="color: #AB2328; max-width: 250px;">{{this.nomforPresi}}</h6>
                                                         <h6>Presidente</h6>
                                                     </div>
                                                     
@@ -43,7 +43,7 @@
                                             </div>
                                                 <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
                                                     <div class="text-xs-left" style="border: none;">
-                                                        <h5 style="color: #AB2328; max-width: 250px;">{{this.nomforVipre}}</h5>
+                                                        <h6 style="color: #AB2328; max-width: 250px;">{{this.nomforVipre}}</h6>
                                                         <h6>VicePresidente</h6>
                                                     </div>
                                                     
@@ -70,15 +70,18 @@
                                                     <img src='{{representante.VrepFoto}}' class="card-img-top" alt="foto Presidente">
                                             </div>
                                             
-                                                <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
-                                                    <div class="col-lg-9 dataRepre text-xs-left text-justify" style="border: none;">
-                                                        <br>
-                                                        <h5 style="color: #AB2328">{{representante.VrepNombre}}</h5>
-                                                        <h6 *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco' ">Semestre: {{representante.VrepSemestre}}</h6>
-                                                        <h6>{{representante.VplNombre}}</h6>
-                                                    </div>
-                                                    
-                                                </div>
+                                                <div class="col-lg-9 dataRepre text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() != 'voto en blanco'" style="border: none;">
+                                                  <br>
+                                                  <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
+
+                                                  <h6>Semestre {{representante.VrepSemestre}}</h6>
+                                                  <h6>{{representante.VplNombre}}</h6>
+                                               </div>
+                                               <div class="col-lg-9 dataRepreB text-xs-left text-justify" *ngIf="representante.VrepNombre.toLowerCase() == 'voto en blanco'" style="border: none;">
+                                                  <br>
+                                                  <h6 style="color: #AB2328">{{representante.VrepNombre}}</h6>
+                                                  <!--<h6>{{representante.VplNombre}}</h6>-->
+                                               </div>
                                                 
                                         </div>
                                     </div>
@@ -89,13 +92,12 @@
 
                         </div>
                         <div class="continuar">
-                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="limpiaDatos();" routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="margin-right: 2%; border-radius:15px;">
-                                <h6 style="color: white;">Borrar</h6>
+                            <a class="btn" (click)="limpiaDatos();" href='/votacion/consejo' routerLinkActive="router-link-active">
+                                <h6 id="bor" style="color: white;">Borrar</h6>
                             </a>
                             <span> </span>
-                            <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" (click)="votar(votoModal);" 
-                             routerLinkActive="router-link-active" style="margin-left: 2%; border-radius:15px;">
-                                <h6 style="color: white;">Votar</h6>
+                            <a class="btn" (click)="votar(votoModal);" routerLinkActive="router-link-active">
+                                <h6 id="vot" style="color: white;">Votar</h6>
                             </a>
                         </div>
 
@@ -112,7 +114,7 @@
        <div class="container-fluid">
          <div class="row">
 			 <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-9">
             <h6 class="modh5">Hemos recibido tu voto.</h6>
             <h6 class="modh5">El ID de tu transacción</h6>
             <h6 class="modh5">es # {{this.idVoto}}</h6>
@@ -122,9 +124,9 @@
     </div>
 
     <div class="modal-footer continuar">
-         <a class="btnd btn-outline-primary btn-danger center-block btnHomeImg" 
-            routerLink='/votacion/consejo' routerLinkActive="router-link-active" style="border-radius:15px; border: none;" (click)="modal.close('Close click')">
-           <h4 class="modh1" style="color: white; font-size: 8px;">Continuar</h4>
+         <a class="btn"
+            routerLink='/votacion/consejo' routerLinkActive="router-link-active" (click)="modal.close('Close click')">
+           <h4 id="modh1" style="color: white; font-size: 8px;">Continuar</h4>
        </a>
     </div>
 </ng-template>

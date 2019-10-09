@@ -23,8 +23,8 @@
                        <div class="card">
                          <img *ngIf="this.valuId === formula.VfId" class="imagenX" src="../../../assets/imagenes/x.png" alt="imagen x">
                             <div class="card-header" style="background: #e8e8e8; border: none;">
-                                <div id="conten-bloque-line-height" style="display: inline-block;">
-                                    <div><h4>{{formula.Vfnombre_lista}}</h4></div>
+                                <div id="conten-bloque-line-height camForm" style="display: inline-block;">
+                                    <div><h5 id="nomForm">{{formula.Vfnombre_lista}}</h5></div>
 
                                 </div>
 
@@ -37,7 +37,7 @@
                                     <!--  -->
                                         <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;" *ngIf="formula.Vfnombre_lista !='voto en blanco'">
                                             <div class="text-xs-left" style="border: none;">
-                                                <h5 style="color: #AB2328; max-width: 250px;">{{formula.VfPresidenteNombre}}</h5>
+                                                <h6 style="color: #AB2328; max-width: 250px;">{{formula.VfPresidenteNombre}}</h6>
                                                 <h6>Presidente</h6>
                                             </div>
 
@@ -52,7 +52,7 @@
                                     <!--  -->
                                         <div class="row card card-outline-success m-x-auto" style="background: #e8e8e8; border: none;">
                                             <div class="text-xs-left" style="border: none;">
-                                                <h5 style="color: #AB2328; max-width: 250px;">{{formula.VfVicepresidenteNombre}}</h5>
+                                                <h6 style="color: #AB2328; max-width: 250px;">{{formula.VfVicepresidenteNombre}}</h6>
                                                 <h6>VicePresidente</h6>
                                             </div>
 
@@ -73,7 +73,7 @@
 
                     </div>
                     <div class="continuar" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
-                        <a class="btn btn-outline-primary btn-danger center-block btnHomeImg" routerLink="representantes" routerLinkActive="router-link-active" style="border-radius:15px;">
-                            <h5 style="color: white;">Continuar</h5>
+                        <a class="btn" routerLink="representantes" routerLinkActive="router-link-active">
+                            <h5 class="align-middle" style="color: white;">Continuar</h5>
                         </a>
                     </div>

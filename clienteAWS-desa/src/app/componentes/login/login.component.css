@@ -30,6 +30,7 @@
     font-family: 'Nunito-Regular';
     color: white;
     margin-bottom: 50%;
+	border-radius:15px;
 }
  #cabeza {
     height: 50%;
@@ -57,7 +58,10 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100%;
-}		
+}
+h1 {
+	margin: auto;
+}
 
 
 

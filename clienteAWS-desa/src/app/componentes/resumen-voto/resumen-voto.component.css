@@ -46,8 +46,14 @@
     color: white;
     font-size: 20%;
     margin-bottom: 40%;
-    border-radius: 8px;
-    max-width: 35%;   
+    border-radius:15px;
+	border-color: #AB2328;
+    max-width: 35%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	margin-right: 2%;
+	margin-left: 2%;
 }
 
 
@@ -113,6 +119,13 @@ h4,h6 {
 }
 h5 {
     text-align: left;
+	margin: auto;
+}
+#bor {
+	margin: auto;
+}
+#vot {
+	margin: auto;
 }
 .modal-footer {
 	border: none;
@@ -129,16 +142,7 @@ h5 {
     border-radius: 10px !important;
 	height: 50%;
 }
-.modh1 {
+#modh1 {
     font-size: 12px;
-}
-.btnd {
-    border: transparent;
-    background-color: #AB2328;
-    font-family: 'Nunito-Regular';
-    color: white;
-    font-size: 10%;
-    border-radius: 5px;
-    max-width: 120%;
-    border-color: #AB2328;
+	margin: auto;
 }

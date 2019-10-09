@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ConsejosService } from '../../services/consejos.service';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -27,7 +27,8 @@ export class ConsejosComponent implements OnInit {
     private consejosService: ConsejosService,
     private datosComponentService: DatosComponentService,
     private spinner: NgxSpinnerService,
-    private router: Router  
+    private router: Router,
+	private ngZone: NgZone
   ) {
     
   }
@@ -59,12 +60,13 @@ export class ConsejosComponent implements OnInit {
       res => {
         this.consejos = res.data;
         this.spinner.hide();
-        console.log('El response del servicio lambda ');
-        console.log(res.data);
+        /* console.log('El response del servicio lambda ');
+        console.log(res.data);*/
       },
       err => {
         this.spinner.hide();
         console.error(err);
+		  this.ngZone.run(() =>this.router.navigate(['votacion'])).then();
       }
     );
   }
