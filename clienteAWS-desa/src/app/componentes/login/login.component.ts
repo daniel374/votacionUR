@@ -242,9 +242,9 @@ export class LoginComponent implements OnInit {
 
 
     logout(): void {
-        this.authService.logout()
+        /*this.authService.logout()
         this.session = false;
-        this.ref.detectChanges();
+        this.ref.detectChanges();*/
     }
 
     checkSession(): void {

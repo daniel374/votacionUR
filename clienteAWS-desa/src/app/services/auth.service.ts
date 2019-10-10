@@ -20,19 +20,21 @@ import { ResponseWs } from '../interfaces/ResponseWs';
 
 import * as hello from 'hellojs/dist/hello.all.js';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
   url = 'https://graph.microsoft.com/v1.0';
   file = 'demo.xlsx';
-  table = 'Table1';
+  table = 'Table';
   results: [];
 
   constructor(
     private http: HttpClient,
     private httpService: HttpService,
     private zone: NgZone,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
     ) {
   }
 
@@ -42,10 +44,12 @@ export class AuthService {
           id: Configs.appId,
           oauth: {
             version: 2,
-            auth: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
+            auth: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+            logout: 'https://login.microsoftonline.com/common/oauth2/v2.0/logout'
           },
           scope_delim: ' ',
-          form: false
+          form: false, 
+          refresh :true
         },
       },
       { redirect_uri: window.location.href }
@@ -53,21 +57,21 @@ export class AuthService {
   }
 
   login(callback) {
-    hello('msft').login({ scope: Configs.scope }).then(
+    hello('msft').login({scope: Configs.scope, force : true}).then(
       callback,
       e => console.error(e.error.message)
     );
   }
 
-  logout() {
-    
-    hello('msft').logout().then(
-      () => {
-        localStorage.clear();
-      },
+  logout(callback) {
+    const msft = hello('msft').getAuthResponse();
+    hello('msft').logout({
+      force : true
+    }).then(
+      callback(msft.access_token),
+      //callback("Hola"),
       e => console.error(e.error.message)
     );
-
   }
 
   hasSessiontoken() {
@@ -89,6 +93,11 @@ export class AuthService {
       }
     });
     return client;
+  }
+
+  getToken(){
+    const msft = hello('msft').getAuthResponse();
+    return msft.access_token;
   }
 
   getMe(callbackSuccess, callbackFail) {

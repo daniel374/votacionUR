@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatosComponentService } from './services/datos-component.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private spinner: NgxSpinnerService,
-    private datosComponentService: DatosComponentService
+    private datosComponentService: DatosComponentService,
+    private cookieService: CookieService
     ) {}
 
   ngOnInit() {

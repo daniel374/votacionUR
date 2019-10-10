@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router'
 
 import { AuthService } from '../../services/auth.service';
+import { Configs } from '../../lib/config';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class NavegacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkSession()
+    //this.checkSession()
   }
 
   checkSession(): void {
@@ -43,12 +44,17 @@ export class NavegacionComponent implements OnInit {
 
   logout(): void {
     //Call api msal
-    this.authService.logout()
+    this.authService.logout( (idToken) => {
+      sessionStorage.clear();
+      localStorage.clear();
+      this.session = false;
+      this.ref.detectChanges();
+      //window.location.href = "https://appname.auth0.com/v2/logout?federated"
+      //window.location.href = "https://login.microsoftonline.com/common/oauth2/v2/logout?p=" + Configs.appId + "&id_token_hint=" + idToken + "&post_logout_redirect_uri=http://localhost:8887/";
+      var pageName = '/';
+      this.router.navigate([`${pageName}`])
+    });
     //Change visual state
-    this.session = false;
-    this.ref.detectChanges();
-    localStorage.clear();
-    this.pageName = '/';
-    this.router.navigate([`${this.pageName}`])
+    
   }
 }

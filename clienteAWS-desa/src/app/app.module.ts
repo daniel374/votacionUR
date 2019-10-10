@@ -20,6 +20,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule } from '@angular/forms';
 import { MDBBootstrapModule, DropdownModule } from 'angular-bootstrap-md';
 import { NavegacionModule } from './componentes/navegacion/navegacion.module';
+import { CookieService } from 'ngx-cookie-service'
 
 
 export function tokenGetter() {
@@ -55,7 +56,8 @@ export function tokenGetter() {
     ConsejosService,
     RepresentantesService,
     FormulasService,
-    DatosComponentService
+    DatosComponentService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
