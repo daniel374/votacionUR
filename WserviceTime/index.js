@@ -16,5 +16,6 @@ exports.handler = async function (event){
 		habilitado = false;
 	}
 	console.log('Habilitado ', habilitado);
-  	return current_hour
+		habilitado = false;
+  	return {current_hour, habilitado}
 };
