@@ -1,0 +1,31 @@
+hr {
+    background: linear-gradient(to right, rgb(38, 14, 157), rgb(2, 2, 2));
+    box-shadow: 0 1px 5px 1px rgb(117, 114, 117);
+    height: 35px;
+    border: 0px;
+}
+.navbar{
+    border-bottom: none;
+    /* max-height: 100px; */
+}
+@media (max-width: 330px){
+    .logo {
+		max-width: auto;
+		height: 80px;
+    }
+}
+@media (max-width: 1000px) and (min-width: 330px){
+    .logo {
+		max-width: auto;
+		height: 85px;
+    }
+}
+@media (max-width: 2000px) and (min-width: 1000px){
+    .logo {
+		max-width: auto;
+		height: 85px;
+    }
+}
+.btn {
+  border-color: aquamarine;
+}

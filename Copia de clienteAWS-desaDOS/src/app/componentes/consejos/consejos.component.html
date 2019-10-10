@@ -1,0 +1,42 @@
+<app-navegacion></app-navegacion>
+<!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner> -->
+<div class="conteiner-consejos">
+    <br> 
+    <h4 class="titulo display-6">SELECCIONA EL CONSEJO PARA INICIAR LA VOTACIÓN</h4>
+</div>    
+        
+        <div class="row">
+                  
+            <div class="col-md-6 col-lg-6 col-sm-6" *ngFor="let consejo of consejos">
+                      
+                <label>
+                    <input *ngIf="consejo.VlgFechaVotacion == null" type="radio" name="product" class="card-input-element" routerLink="formulas" (click)="serGuarConsejo(consejo.VcId, consejo.VcNombre, consejo.VplCodigo, consejo.VepSemestre)"/>
+                    
+                
+                <div class="panel panel-default card-input">
+                    <div>
+                        <img src='{{consejo.VcFoto}}' class="card-img-top" alt="foto consejo">
+                    </div>
+                    <div class="panel-heading"><br><h5 style="color: #424242; align-items: center">Consejo Estudiantil</h5></div>
+                <div class="panel-body">                                    
+                        
+                        
+                    <h6 style="color: #424242">{{consejo.VcNombre}}</h6>
+                    <div style="flex: content;">
+                        <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">Fecha del voto:</h6>
+                        <h6 style="align-self: right;" *ngIf="consejo.VlgFechaVotacion != null">{{consejo.VlgFechaVotacion}}</h6>
+                        <h5 style="align-self: right; color: #AB2328" *ngIf="consejo.VlgFechaVotacion == null">Pendiente de votación</h5>
+                    </div>
+                    
+                </div>
+                </div>
+              
+                    </label>
+                      
+                </div>
+                
+                </div>
+
+

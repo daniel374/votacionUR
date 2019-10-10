@@ -1,0 +1,151 @@
+@media (max-width: 700px){
+	.titulo {
+		font-size: 16px;
+	}
+}
+@media (max-width: 1000px) and (min-width: 700px){
+	.titulo {
+		font-size: 20px;
+	}
+}
+@media (max-width: 2000px) and (min-width: 1000px){
+	.titulo {
+		font-size: 20px;
+	}
+}
+
+.card .imagenX{
+    position: absolute;
+    z-index: 1;
+    margin: 0% auto;
+	width: 100%;
+	height: 100%;
+    vertical-align: middle;
+	background-position: center center;
+	opacity: 0.5;
+}
+
+.card-group {
+	width: auto; 
+	height: auto;
+	display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+	text-align:justify;
+	z-index: -1;
+}
+.card-block {
+    width: 100%;
+}
+.continuar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+.btn {
+    border: transparent;
+    background-color: #AB2328;
+    font-family: 'Nunito-Regular';
+    color: white;
+    margin-bottom: 40%;
+    border-radius:15px;
+    max-width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+#nomForm {
+	color: #424242;
+	text-align: left;
+}
+#camForm {
+	height: 80px;
+}
+.dataRepre {
+	width: 250px;
+	height: 160px;
+	max-height: 220px;
+}
+/*
+.conteiner-represent {
+    background-color: white;
+    height: 55%;
+    width: 100%;
+}
+*/
+.titulo {
+    font-family: 'Nunito-Regular';
+    color: #424242;
+    margin-left: 3%;
+}
+
+.subtitulo {
+    font-family: 'Nunito-Regular';
+    color: #424242;
+    margin-left: 3%;
+}
+
+hr {
+    border-color: blue;
+    display: block;
+    margin-top: 2.5%;
+    border-style: inset;
+    border-width: 15px;
+}
+
+/**
+  Default Markup
+**/
+
+body {
+  background: #F0E5E1 ;
+}
+
+.row {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+/**
+  Component
+**/
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+/*
+.card-input-element:checked + .card-input {
+    box-shadow: 0 0 1px 1px #2ecc71;
+}
+*/
+h4,h6 {
+    color: #424242;
+	text-align: left;
+}
+h5 {
+    text-align: left;
+	margin: auto;
+}
+
+.card {
+   text-align: justifcy;
+   vertical-align: middle;
+}
