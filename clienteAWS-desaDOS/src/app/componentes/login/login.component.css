@@ -1,0 +1,67 @@
+@media (max-width: 330px){
+    .imagenfech {
+		max-width: 90%;
+    }
+    .btn {
+        max-width: 210px;
+		margin-bottom: 50%;
+		margin-top: 10%;
+    }
+    .tituB {
+        font-size: 12px;
+    }
+}
+@media (max-width: 1000px) and (min-width: 330px){
+    .imagenfech {
+		max-width: 70%;
+    }
+}
+@media (max-width: 2000px) and (min-width: 1000px){
+    .imagenfech {
+		width: 60%;
+    }
+}
+
+
+.btn-outline-primary {
+    box-shadow: none;
+    border: transparent;
+    background-color: rgba(255, 255, 255, 0.15);
+    font-family: 'Nunito-Regular';
+    color: white;
+    margin-bottom: 50%;
+	border-radius:15px;
+}
+ #cabeza {
+    height: 50%;
+    width: 100%;
+ }
+
+.container {
+    overflow: hidden;
+}
+
+.subtitle {
+    margin-left: 10%;
+}
+.title {
+    font-family: 'Nunito-Regular';
+    color: white;
+    font-size: 6.9vw;
+    margin-left: 10%;
+}
+
+.bg {
+    background-image: url(../../../assets/imagenes/fondo-web.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100%;
+}
+h1 {
+	margin: auto;
+}
+
+
+
