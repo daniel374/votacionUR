@@ -19,6 +19,13 @@ class VotacionController {
             }
         );
     }
+	
+	public async time_zone_act (req: Request, res: Response): Promise<void> {
+		var date = new Date();
+        var current_hour = date.getHours();
+		res.json(current_hour);
+		console.log('time ', current_hour);
+	}
 
     public async list_representantes (req: Request, res: Response) {
         await pool.query(

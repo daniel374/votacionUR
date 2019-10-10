@@ -11,6 +11,7 @@ class VotacionesRoutes {
         this.config();
     }
     config() {
+        this.router.get('/TimeFech', votacionController_1.default.time_zone_act);
         this.router.get('/Consejos', votacionController_1.default.list_consejos);
         this.router.get('/Consejos/Formulas', votacionController_1.default.list_formulas);
         this.router.get('/Consejos/Formulas/:VcId', votacionController_1.default.list_formulasConsejo);

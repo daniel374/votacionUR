@@ -29,6 +29,14 @@ class VotacionController {
             });
         });
     }
+    time_zone_act(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var date = new Date();
+            var current_hour = date.getHours();
+            res.json(current_hour);
+            console.log('time ', current_hour);
+        });
+    }
     list_representantes(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('SELECT * FROM vot_representantes left join vot_plan on VrepPlan = VplId left join vot_consejo on VplConsejo = VcId', (err, represent) => {

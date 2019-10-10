@@ -1,0 +1,24 @@
+{
+  "name": "requestPaymentReedem",
+  "version": "1.0.0",
+  "description": "requestPaymentReedem microservices",
+  "private": "true",
+  "dependencies": {
+    "mysql": "2.11.*",
+    "mysql-qb": "0.7.*",
+    "request": "2.81.*",
+    "xml2js": "0.4.*"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.7.*",
+    "grunt": "0.4.*",
+    "grunt-aws-lambda": "^0.13.0"
+  },
+  "author": "Alejandro Oropeza",
+  "license": "BSD",
+  "scripts": {},
+  "_shasum": "f17502c4e7e72c3227105c25dd108c2eefd0788e",
+  "_from": ".",
+  "main": "index.js",
+  "keywords": []
+}
