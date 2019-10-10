@@ -12,3 +12,8 @@ export interface representante {
     VplNombre: string,
     VrepId: any
 }
+export interface habilvoto {
+    success: boolean;
+    error: boolean;
+    message: string;
+}

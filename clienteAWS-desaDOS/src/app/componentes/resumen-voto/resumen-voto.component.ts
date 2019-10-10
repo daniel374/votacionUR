@@ -52,16 +52,16 @@ export class ResumenVotoComponent implements OnInit {
     private regisVotoService: RegisVotoService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-	config: NgbModalConfig,
-	private ngZone: NgZone
+	  config: NgbModalConfig,
+	  private ngZone: NgZone
   ) { 
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
-	this.representantes = [];
-	this.dataForRepre = [];
+	  this.representantes = [];
+	  this.dataForRepre = [];
     this.resumenVoto();
     this.datosComponentService.cambiaSpinner('Registrando Voto');
   }
@@ -107,7 +107,7 @@ export class ResumenVotoComponent implements OnInit {
         }
     
         console.log('this.dataForRepre[10] ' + JSON.stringify(this.dataForRepre[10]));
-	    console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
+	      console.log('this.dataForRepre[11] ' + JSON.stringify(this.dataForRepre[11]));
         console.log('data repre <= 12 ' + JSON.stringify(this.representantes));
         console.log('INFORMACION Representante  ' + JSON.stringify(this.representantes));
 

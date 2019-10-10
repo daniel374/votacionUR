@@ -11,8 +11,10 @@ import { Configs } from '../../lib/config';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 import { DatosComponentService } from '../../services/datos-component.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { TimeVotoService } from '../../services/time-voto.service';
 import { infoPlanesWs } from '../../interfaces/infoPlanesWs';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,8 @@ import { infoPlanesWs } from '../../interfaces/infoPlanesWs';
 export class LoginComponent implements OnInit {
 
     titulo: string;
+    mensaje: string;
+    hvoto: boolean;
     session = false;
     public pageName: string;
     public modToken: string;
@@ -33,32 +37,36 @@ export class LoginComponent implements OnInit {
         private ref: ChangeDetectorRef,
         private http: HttpClient,
         private estudianteService: EstudianteService,
-		private ngZone: NgZone,
+        private ngZone: NgZone,
         private router: Router,
         private spinner: NgxSpinnerService,
-        private ngxXml2jsonService: NgxXml2jsonService
+        private ngxXml2jsonService: NgxXml2jsonService,
+        private tiempoVoto: TimeVotoService
         ) { this.titulo = 'VOTACIONES';
         }
 
     ngOnInit() {
         // Check if the session is still valid
         //this.checkSession();
-		//this.deleteAllCookies();
+        this.habilTiempo();
     }
-    /*
-    deleteAllCookies() {
-      var cookies = document.cookie.split(";");
 
-      for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i];
-          var eqPos = cookie.indexOf("=");
-          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
-    }*/
     /**
      * @param type Could be: requests or agendamate
      */
+    habilTiempo() {
+      this.tiempoVoto.habilVoto().subscribe(
+        res => {
+          this.mensaje = res.message;
+          this.hvoto = res.error;
+          console.log('mensaje habil voto ' + this.mensaje);
+          console.log('error habil voto ' + this.hvoto);
+        }
+      );
+      /*if(this.hvoto == true) {
+        Swal.fire(this.mensaje);
+      }*/
+    }
     goToBackend(type): void {
         // if has session, only got to redirect
         if( this.authService.hasSessiontoken() ){
@@ -81,11 +89,11 @@ export class LoginComponent implements OnInit {
             console.log(JSON.stringify(me));
             console.log(me.userPrincipalName); */
             localStorage.setItem('datosUsuario', JSON.stringify(me));
-            var numDoc = me.mobilePhone;
-            var esNom = me.displayName;
-            var email = me.userPrincipalName;
+            let numDoc = me.mobilePhone;
+            let esNom = me.displayName;
+            let email = me.userPrincipalName;
             if (numDoc){
-                var arrayIdent = numDoc.split("&");
+                let arrayIdent = numDoc.split("&");
                 numDoc = arrayIdent[1];
                 localStorage.setItem('email', email);
                 localStorage.setItem('esNom', esNom);
@@ -144,29 +152,29 @@ export class LoginComponent implements OnInit {
 
     // Emplea el servicio de Estudiante para EXtraer la info. DEL Estudiante
     infoEstudiante() {
-        var habilitado = true;
-        var infoPlanes: infoPlanesWs;
-		var arrayinfoPlanes: any = [];
+        let habilitado = true;
+        let infoPlanes: infoPlanesWs;
+        let arrayinfoPlanes: any = [];
         this.estudianteService.dataEstudiante().subscribe(d => {
-            
-        //console.log('data estudiante servicio: ' + JSON.stringify(d.body)); 
-        var parserXML = new DOMParser();
-        var xmlDocEs = parserXML.parseFromString(d.body, 'text/xml'); 
+
+        //console.log('data estudiante servicio: ' + JSON.stringify(d.body));
+        let parserXML = new DOMParser();
+        let xmlDocEs = parserXML.parseFromString(d.body, 'text/xml');
             /* ************* JSON ARRAY ************** */
-        var obj = this.ngxXml2jsonService.xmlToJson(xmlDocEs);
-        var objArray = obj['soapenv:Envelope']['S:Body']['wss:getProgramasResponse']['wss:return'];
+        let obj = this.ngxXml2jsonService.xmlToJson(xmlDocEs);
+        let objArray = obj['soapenv:Envelope']['S:Body']['wss:getProgramasResponse']['wss:return'];
         //console.log(JSON.stringify(objArray));
-        
+
         if (objArray.length) {
             /* *************** Valida los Datos *************** */
             objArray.forEach(function(elemt) {
                 /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
-                var tipoest = elemt["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
-                var bloqueado = elemt["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
-                var cerrado = elemt["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
-                var retirado = elemt["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
-                var programa = elemt["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
-                var semestre = elemt["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
+                let tipoest = elemt["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
+                let bloqueado = elemt["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
+                let cerrado = elemt["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
+                let retirado = elemt["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
+                let programa = elemt["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
+                let semestre = elemt["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
 
                 if (tipoest === "PRE") {
                     if (bloqueado === "N") {
@@ -190,28 +198,28 @@ export class LoginComponent implements OnInit {
                     /* console.log('El Estudiante se encuentra habilido para el programa ' + programa); */
                     infoPlanes = {
                         codigo: `${programa}`,
-					    semestre: `${semestre}`,
+                        semestre: `${semestre}`,
                     }
-					arrayinfoPlanes.push(infoPlanes);
-					localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
+					          arrayinfoPlanes.push(infoPlanes);
+					          localStorage.setItem('infoPlanes', JSON.stringify(arrayinfoPlanes));
                 }
             });
         } else {
             /* ************ ***** DATOS DEL ESTUDIANTE desde el XML **** ************ */
-            var tipoest = objArray["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
-            var bloqueado = objArray["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
-            var cerrado = objArray["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
-            var retirado = objArray["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
-            var programa = objArray["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
-            var semestre = objArray["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
+            let tipoest = objArray["xsd:tipoest"]; //xmlDocEs.getElementsByTagName('xsd:tipoest')[ind].childNodes[0].nodeValue;
+            let bloqueado = objArray["xsd:bloqueado"]; //xmlDocEs.getElementsByTagName('xsd:bloqueado')[ind].childNodes[0].nodeValue;
+            let cerrado = objArray["xsd:cerrado"]; //xmlDocEs.getElementsByTagName('xsd:cerrado')[ind].childNodes[0].nodeValue;
+            let retirado = objArray["xsd:retirado"]; //xmlDocEs.getElementsByTagName('xsd:retirado')[ind].childNodes[0].nodeValue;
+            let programa = objArray["xsd:programa"]; //xmlDocEs.getElementsByTagName('xsd:programa')[ind].childNodes[0].nodeValue;
+            let semestre = objArray["xsd:semestre"]; //xmlDocEs.getElementsByTagName('xsd:semestre')[ind].childNodes[0].nodeValue;
 
             if (!semestre) {
                 this.spinner.hide();
                 this.ngZone.run(() =>this.router.navigate(['/'])).then();
                 console.log('No tiene permiso, no cuenta con semestre ');
             }
-            
-            
+
+
             if (tipoest === "PRE") {
                 if (bloqueado === "N") {
                     if (cerrado === "N") {
@@ -248,7 +256,7 @@ export class LoginComponent implements OnInit {
             console.log('El Estudiante no se encuentra habilitado para votar comuniquese con el encargado');
         }
         });
-        
+
     }
 
 
@@ -270,7 +278,7 @@ export class LoginComponent implements OnInit {
             this.session = false;
             this.ref.detectChanges();
         }
-        
+
     }
 
 }

@@ -20,7 +20,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule } from '@angular/forms';
 import { MDBBootstrapModule, DropdownModule } from 'angular-bootstrap-md';
 import { NavegacionModule } from './componentes/navegacion/navegacion.module';
-
+import { TimeVotoService } from './services/time-voto.service';
 
 export function tokenGetter() {
   return localStorage.getItem("meToken");
@@ -55,7 +55,8 @@ export function tokenGetter() {
     ConsejosService,
     RepresentantesService,
     FormulasService,
-    DatosComponentService
+    DatosComponentService,
+    TimeVotoService
   ],
   bootstrap: [AppComponent]
 })
