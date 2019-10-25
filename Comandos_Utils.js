@@ -61,3 +61,18 @@ npm i hellojs
 npm i @microsoft/microsoft-graph-client
 //
 sudo npm install -g npm
+//**********************************    GIT  *************************
+//clonar repo
+git clone repositorio
+// CREA RAMA
+git checkout -b rama
+// hacer seguimiento y posicionarse en rama
+git fetch && git checkout miSalud
+// pull rama
+git pull origin miSalud
+// status
+git status
+//commit
+git commit -m “comentario“
+// push rama
+git push origin master/rama
